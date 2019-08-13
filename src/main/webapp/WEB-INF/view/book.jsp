@@ -11,22 +11,16 @@
     <title>Title</title>
 </head>
 <body>
+
 <h3>Raamatute detailvaade</h3>
 
-
-<table>
-    <tr>
-        <th>Nimi</th>
-        <th>Autor</th>
-        <th>Pilt</th>
-        <th>-</th>
-    </tr>
-    <tr>
-        <td>${book.name}</td>
-        <td>${book.author}</td>
-        <td><img src="https://media.istockphoto.com/photos/open-book-picture-id495477978" height="200" width="200"></td>
-        <td><a href="/">Broneeri</a></td>
-    </tr>
-</table>
+<p>Title: ${book.title}</p>
+<p>ISBNcode: ${book.barCode}</p>
+<p>Genre: ${book.genre}</p>
+<p>Language: ${book.language}</p>
+<p>Year: ${book.year}</p>
+<p>Status: ${book.status}</p>
+<img src="https://media.istockphoto.com/photos/open-book-picture-id495477978" height="200" width="200">
+<p></p><a href="/app/updateBook/${book.id}">Laenuta</a> || <a href="/">Broneeri</a> || <a href="/">Tagasta</a></p>
 </body>
 </html>

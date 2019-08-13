@@ -8,7 +8,6 @@
 <div>
     <h4>
        <!-- <a href="/app/person/load">Isikud</a>-->
-        <a href="/app/book/load">Laenuta</a>
     </h4>
     <h4>
         <a href="app/books">Raamatud</a>
