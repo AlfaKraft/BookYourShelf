@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.nio.CharBuffer;
 import org.springframework.stereotype.Repository;
 
-@Repository
+/*@Repository
 public class FileDriver implements PersonDao {
     private static String TEXT_FILE_PATH = "/dev/test/test.txt";
 
@@ -34,3 +34,5 @@ public class FileDriver implements PersonDao {
         fileWriter.close();
     }
 }
+
+ */

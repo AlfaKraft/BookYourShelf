@@ -5,35 +5,19 @@
   Time: 15:44
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
     <title>Books</title>
 </head>
 <body>
 <h3>Raamatute nimekiri</h3>
-<table>
-    <tr>
-        <th>Nimi</th>
-        <th>Autor</th>
-        <th>Pilt</th>
-        <th>Staatus</th>
-        <th>-</th>
-    </tr>
-    <tr>
-        <td>Example 1</td>
-        <td>Author 1</td>
-        <td><img src="https://media.istockphoto.com/photos/open-book-picture-id495477978" height="200" width="200"></td>
-        <td>true</td>
-        <td><a href="/app/book">Detailvaade</a></td>
-    </tr>
-    <tr>
-        <td>${books.name}</td>
-        <td>${books.author}</td>
-        <td><img src="https://media.istockphoto.com/photos/open-book-picture-id495477978" height="200" width="200"></td>
-        <td>${books.status}</td>
-        <td><a href="/app/book">Detailvaade</a></td>
-    </tr>
-</table>
+<ul>
+    <c:forEach var="book" items="${books}">
+        <li>${book.title}</li>
+    </c:forEach>
+</ul>
+
+
 </body>
 </html>

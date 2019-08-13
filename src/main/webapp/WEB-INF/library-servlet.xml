@@ -3,13 +3,20 @@
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd
         http://www.springframework.org/schema/context
-        http://www.springframework.org/schema/context/spring-context.xsd">
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/data/jpa
+        https://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+
 
   <mvc:annotation-driven/>
   <context:component-scan base-package="com.tieto.bookyourshelf.library"/>
@@ -35,6 +42,17 @@
     <property name="username" value="alfa"/>
     <property name="password" value="bys1"/>
   </bean>
+  <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+    <property name="entityManagerFactory" ref="entityManagerFactory" />
+  </bean>
+  <tx:annotation-driven />
+
+  <bean id="persistenceExceptionTranslationPostProcessor" class=
+          "org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+
+  <jpa:repositories base-package="com.tieto.bookyourshelf.library.dao"/>
+
+
 
 
 </beans>
