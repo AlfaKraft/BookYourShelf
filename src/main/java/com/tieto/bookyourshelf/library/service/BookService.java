@@ -9,6 +9,6 @@ import java.util.List;
 @Service
 public interface BookService {
     List<BookDto> loadBooks();
-    void saveBook(BookDto book);
+    void addBook(BookDto book);
     BookDto loadById(Long id);
 }

@@ -29,7 +29,7 @@
   <bean id="entityManagerFactory"
         class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
     <property name="dataSource" ref="dataSource"/>
-    <property name="packagesToScan" value="com.tieto.bookyourshelf.library.dao.entityes"/>
+    <property name="packagesToScan" value="com.tieto.bookyourshelf.library.dao.entities"/>
     <property name="jpaVendorAdapter">
       <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
     </property>
@@ -41,10 +41,13 @@
               value="jdbc:mysql://192.168.1.201:3306/bys_db"/>
     <property name="username" value="alfa"/>
     <property name="password" value="bys1"/>
+
   </bean>
   <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
     <property name="entityManagerFactory" ref="entityManagerFactory" />
   </bean>
+
+
   <tx:annotation-driven />
 
   <bean id="persistenceExceptionTranslationPostProcessor" class=

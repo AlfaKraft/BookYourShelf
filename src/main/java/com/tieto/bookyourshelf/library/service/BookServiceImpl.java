@@ -2,11 +2,9 @@ package com.tieto.bookyourshelf.library.service;
 
 import com.tieto.bookyourshelf.library.LibraryException;
 import com.tieto.bookyourshelf.library.dao.BookDao;
-import com.tieto.bookyourshelf.library.dao.entityes.BookEnt;
-import com.tieto.bookyourshelf.library.frontend.models.Book;
+import com.tieto.bookyourshelf.library.dao.entities.BookEnt;
 import com.tieto.bookyourshelf.library.service.dto.BookDto;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,7 +30,16 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void saveBook(BookDto book) {
+    public void addBook(BookDto book) {
+        BookEnt ent;
+        try{
+            ent = new BookEnt();
+            ent = dtoToEnt(book, ent);
+            bookDao.save(ent);
+
+        } catch (Exception e){
+            throw new LibraryException(e.getMessage(), e);
+        }
 
     }
 
@@ -52,7 +59,6 @@ public class BookServiceImpl implements BookService {
         ent.setGenre(dto.getGenre());
         ent.setLanguage(dto.getLanguage());
         ent.setTitle(dto.getTitle());
-        ent.setCover(dto.getCover());
         ent.setYear(dto.getYear());
 
         return ent;

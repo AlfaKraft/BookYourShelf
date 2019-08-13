@@ -1,4 +1,4 @@
-package com.tieto.bookyourshelf.library.dao.entityes;
+package com.tieto.bookyourshelf.library.dao.entities;
 
 import javax.persistence.*;
 
@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Table(name = "books", schema = "bys_db")
 public class BookEnt {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
     @Column(name = "title")

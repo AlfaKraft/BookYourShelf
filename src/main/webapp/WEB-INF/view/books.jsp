@@ -17,6 +17,8 @@
         <li>${book.title}</li>
     </c:forEach>
 </ul>
+<a href="/index.jsp">Back</a>
+
 
 
 </body>

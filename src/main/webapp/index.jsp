@@ -13,7 +13,7 @@
         <a href="app/books">Raamatud</a>
     </h4>
     <h4>
-        <a href="app/lend">Laenuta</a>
+        <a href="app/book/add">Lisa</a>
     </h4>
     <h4>
         <a href="app/return">Tagasta</a>

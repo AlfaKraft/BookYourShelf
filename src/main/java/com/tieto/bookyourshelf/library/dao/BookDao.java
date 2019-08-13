@@ -1,6 +1,6 @@
 package com.tieto.bookyourshelf.library.dao;
 
-import com.tieto.bookyourshelf.library.dao.entityes.BookEnt;
+import com.tieto.bookyourshelf.library.dao.entities.BookEnt;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
