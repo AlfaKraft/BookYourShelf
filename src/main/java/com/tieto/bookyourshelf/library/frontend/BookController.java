@@ -9,7 +9,7 @@ import org.springframework.web.servlet.View;
 
 @Controller
 public class BookController {
-    Book book =new Book("Test book", "K. Reree", "true");
+    /*Book book =new Book("Test book", "K. Reree", "true");
 
     @RequestMapping(value="/books", method = RequestMethod.GET)
     public ModelAndView loadBooks(){
@@ -32,6 +32,8 @@ public class BookController {
         this.book.setStatus("true");
         return new ModelAndView("returnBook");
     }
+
+     */
 
 
 }

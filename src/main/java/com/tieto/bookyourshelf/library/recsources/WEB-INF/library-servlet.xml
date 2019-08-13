@@ -14,6 +14,26 @@
   <mvc:annotation-driven />
   <context:component-scan base-package="com.tieto.bookyourshelf.library" />
 
+  <bean id="entityManagerFactory"
+        class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+    <property name="dataSource" ref="dataSource" />
+    <property name="packagesToScan" value="com.tieto.bookyourshelf.library.frontend" />
+    <property name="jpaVendorAdapter">
+      <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
+    </property>
+  </bean>
+  <bean id="dataSource"
+        class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+    <property name="url"
+              value="jdbc:mysql://192.168.1.201:3306/bys_db"/>
+    <property name="username" value="alfa" />
+    <property name="password" value="bys1" />
+  </bean>
+
+
+
+
   <bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
     <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
     <property name="prefix" value="/WEB-INF/view/" />

@@ -1,38 +1,43 @@
 package com.tieto.bookyourshelf.library.frontend.models;
 
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "books")
 public class Book {
 
-    private String name;
-    private String author;
-    private String status;
 
-    public Book(String name, String author, String status) {
-        this.name=name;
-        this.author=author;
-        this.status=status;
+    @Id
+    @GeneratedValue
+    @Column(name = "id")
+    private Integer id;
+    @Column(name = "title")
+    private String title;
+    @Column(name = "ISBNcode")
+    private Long isbnCode;
+    @Column(name = "genre")
+    private String genre;
+    @Column(name = "language")
+    private String language;
+    @Column(name = "year")
+    private Integer year;
+    @Column(name = "picture")
+    private String cover;
+
+    public Book() {
     }
 
-    public String getStatus() {
-        return status;
+    public Book(Integer id, String title, Long isbnCode, String genre, String language, Integer year, String cover) {
+        this.id = id;
+        this.title = title;
+        this.isbnCode = isbnCode;
+        this.genre = genre;
+        this.language = language;
+        this.year = year;
+        this.cover = cover;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
 
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 }
