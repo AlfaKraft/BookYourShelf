@@ -29,12 +29,16 @@
 <div id="scanner-container"></div>
 <input type="button" id="btn" value="Start/Stop the scanner" />
 <br />
-Triipkood:
-<input type="text" id="barcode">
-<!--<a href="/app/book/{barcode}">Laenuta</a>-->
-<a href="/app//lend/{barCode}">Laenuta</a>
+
+<!--<input type="text" id="barcode">
+<a href="/app/book/{barcode}">Laenuta</a>
+<a href="/app//lend/{barCode}">Laenuta</a>-->
 
 
+<form action="/app/search" method="post">
+    Triipkood: <input type="text" name="barcode" id="barcode"><br>
+    <input type="submit" value="Edasi">
+</form>
 
 <!-- Include the image-diff library -->
 <!--<script src="quagga.min.js"></script>-->

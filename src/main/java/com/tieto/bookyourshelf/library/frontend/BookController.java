@@ -5,10 +5,7 @@ import com.tieto.bookyourshelf.library.frontend.models.Book;
 import com.tieto.bookyourshelf.library.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -31,8 +28,8 @@ public class BookController {
         return new ModelAndView("book", "book", book);
     }
 
-    @RequestMapping(value = "/lend/{barCode}", method = RequestMethod.POST)
-    public ModelAndView getBook(@PathVariable String barCode, @ModelAttribute("book") BookEnt model) {
+    @RequestMapping(value = "/search", method = RequestMethod.POST)
+    public ModelAndView getBook( @RequestParam("barcode") String barCode) {
         BookEnt book = bookService.getBookByBarcode(barCode);
         return new ModelAndView("book", "book", book);
     }
