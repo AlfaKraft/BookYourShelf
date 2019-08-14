@@ -13,10 +13,10 @@
         <a href="app/books">Raamatud</a>
     </h4>
     <h4>
-        <a href="app/lend">Laenuta</a>
+        <a href="app/scanBook">Laenuta</a>
     </h4>
     <h4>
-        <a href="app/return">Tagasta</a>
+        <a href="app/scanBook">Tagasta</a>
     </h4>
 </div>
 </body>

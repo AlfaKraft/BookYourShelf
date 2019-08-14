@@ -19,8 +19,8 @@
 <p>Genre: ${book.genre}</p>
 <p>Language: ${book.language}</p>
 <p>Year: ${book.year}</p>
-<p>Status: </p>
+<p>Status: ${book.status}</p>
 <img src="https://media.istockphoto.com/photos/open-book-picture-id495477978" height="200" width="200">
-<p></p><a href="/app/updateBook/${book.id}">Laenuta</a> || <a href="/">Broneeri</a> || <a href="/">Tagasta</a></p>
+<p></p><a href="/app/lendBook/${book.id}">Laenuta</a> || <a href="/">Broneeri</a> || <a href="/app/returnBook/${book.id}">Tagasta</a></p>
 </body>
 </html>

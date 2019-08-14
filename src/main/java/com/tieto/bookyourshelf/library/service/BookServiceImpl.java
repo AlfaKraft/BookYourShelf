@@ -56,7 +56,7 @@ public class BookServiceImpl implements BookService {
         ent.setLanguage(dto.getLanguage());
         ent.setTitle(dto.getTitle());
         ent.setYear(dto.getYear());
-
+        ent.setStatus(dto.getStatus());
         return ent;
 
     }
@@ -75,23 +75,23 @@ public class BookServiceImpl implements BookService {
         dto.setTitle(ent.getTitle());
         dto.setCover(ent.getCover());
         dto.setYear(ent.getYear());
+        dto.setStatus(ent.getStatus());
         return dto;
     }
 
 
-/*
-    public void updateBook(int id) {
+
+    public void updateBookStatus(Long id, boolean status) {
         try {
-           // bookDao.getBook(id);
-           // book.setStatus(false);
-            bookDao.updateBook( id);
+            BookEnt book=bookDao.findById(id).get();
+            book.setStatus(status);
+            bookDao.save(book);
         } catch (Exception e) {
             throw new LibraryException(e.getMessage(), e);
         }
-      //  return book;
     }
 
-    */
+
 
 }
 

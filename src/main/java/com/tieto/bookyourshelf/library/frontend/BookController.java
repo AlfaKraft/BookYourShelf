@@ -34,17 +34,23 @@ public class BookController {
         return new ModelAndView("book", "book", book);
     }
 
-/*
-    @RequestMapping(value = "/updateBook/{id}", method = RequestMethod.GET)
-    public String updateBook(@PathVariable int id) {
-        bookService.updateBook(id);
+
+    @RequestMapping(value = "/lendBook/{id}", method = RequestMethod.GET)
+    public String lendBook(@PathVariable Long id) {
+        bookService.updateBookStatus(id, false);
         return "redirect:/app/books";
-    }*/
+    }
+
+    @RequestMapping(value = "/returnBook/{id}", method = RequestMethod.GET)
+    public String returnBook(@PathVariable Long id) {
+        bookService.updateBookStatus(id, true);
+        return "redirect:/app/books";
+    }
 
 
-    @RequestMapping(value = "/lend", method = RequestMethod.GET)
+    @RequestMapping(value = "/scanBook", method = RequestMethod.GET)
     public ModelAndView lendBook() {
-        return new ModelAndView("lend");
+        return new ModelAndView("scanBook");
     }
 }
 

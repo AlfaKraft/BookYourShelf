@@ -22,7 +22,7 @@
     <script src="https://cdn.rawgit.com/serratus/quaggaJS/0420d5e0/dist/quagga.min.js"></script>
 </head>
 <body>
-<h3>Raamatu laenutamine</h3>
+<h3>Raamatu tuvastamine</h3>
 
 
 <!-- Div to show the scanner-->

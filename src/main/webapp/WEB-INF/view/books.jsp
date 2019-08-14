@@ -22,6 +22,7 @@
             <th>Year</th>
             <th>Status</th>
             <th>Picture</th>
+            <th></th>
         </tr>
     </thead>
     <tr>
@@ -33,7 +34,7 @@
                 <td>${book.genre}</td>
                 <td>${book.language}</td>
                 <td>${book.year}</td>
-                <td>-</td>
+                <td>${book.status}</td>
                 <td><img src="https://media.istockphoto.com/photos/open-book-picture-id495477978" height="200" width="200"></td>
                 <td><a href="/app/book/${book.id}">Details</a></td>
             </tr>

@@ -12,11 +12,11 @@ public interface BookService {
      BookDto getBookById(Long Id);
 
      BookDto getBookByBarcode(Long barCode);
-/*
-     void updateBook(int id);*/
 
+     void updateBookStatus(Long id, boolean status);
+/*
     //String loadBook();
 
-    //void saveBook(String book);
+    //void saveBook(String book);*/
 
 }
