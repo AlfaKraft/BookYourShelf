@@ -18,6 +18,9 @@
     <h4>
         <a href="app/return">Tagasta</a>
     </h4>
+    <h4>
+        <a href="app/users/load">Kasutajad</a>
+    </h4>
 </div>
 </body>
 </html>
