@@ -15,11 +15,11 @@
 <h3>Raamatute detailvaade</h3>
 
 <p>Title: ${book.title}</p>
-<p>ISBNcode: ${book.barCode}</p>
+<p>ISBNcode: ${book.isbnCode}</p>
 <p>Genre: ${book.genre}</p>
 <p>Language: ${book.language}</p>
 <p>Year: ${book.year}</p>
-<p>Status: ${book.status}</p>
+<p>Status: </p>
 <img src="https://media.istockphoto.com/photos/open-book-picture-id495477978" height="200" width="200">
 <p></p><a href="/app/updateBook/${book.id}">Laenuta</a> || <a href="/">Broneeri</a> || <a href="/">Tagasta</a></p>
 </body>

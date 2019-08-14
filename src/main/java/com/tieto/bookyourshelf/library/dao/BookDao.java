@@ -1,22 +1,20 @@
 package com.tieto.bookyourshelf.library.dao;
 import com.tieto.bookyourshelf.library.dao.entityes.BookEnt;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.io.IOException;
 
 
-public interface BookDao {
+@Repository
+public interface BookDao extends JpaRepository<BookEnt, Long> {
 
+    List<BookEnt> findAll();
+    BookEnt save(BookEnt book);
 
-    public List<BookEnt> getAllBooks();
+    BookEnt findBookEntByIsbnCode(Long isbnCode);
 
-    public BookEnt getBook(int id);
-
-    public BookEnt getBookByBarcode(String barCode);
-
-    public void updateBook( int id);
-
-    public void deleteBook(BookEnt book);
 }
 
 

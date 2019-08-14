@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class PersonServiceImpl implements PersonService {
 
-   @Autowired
+   //@Autowired
    private PersonDao personDao;
 
    public String loadPerson() {

@@ -25,7 +25,7 @@
 <h3>Raamatu laenutamine</h3>
 
 
-<!-- Div to show the scanner -->
+<!-- Div to show the scanner-->
 <div id="scanner-container"></div>
 <input type="button" id="btn" value="Start/Stop the scanner" />
 <br />
@@ -52,8 +52,8 @@
                 type: "LiveStream",
                 target: document.querySelector('#scanner-container'),
                 constraints: {
-                    width: 480,
-                    height: 320,
+                    width: 880,
+                    height: 640,
                     facingMode: "environment"
                 },
             },

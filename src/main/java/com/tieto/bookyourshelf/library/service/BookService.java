@@ -1,18 +1,19 @@
 package com.tieto.bookyourshelf.library.service;
 
 import com.tieto.bookyourshelf.library.dao.entityes.BookEnt;
+import com.tieto.bookyourshelf.library.service.dto.BookDto;
 
 import java.util.List;
 
 public interface BookService {
 
-     List<BookEnt> getAllBooks();
+     List<BookDto> getAllBooks();
 
-     BookEnt getBook(int Id);
+     BookDto getBookById(Long Id);
 
-     BookEnt getBookByBarcode(String barCode);
-
-     void updateBook(int id);
+     BookDto getBookByBarcode(Long barCode);
+/*
+     void updateBook(int id);*/
 
     //String loadBook();
 

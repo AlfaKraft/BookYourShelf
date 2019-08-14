@@ -4,10 +4,13 @@ import com.tieto.bookyourshelf.library.LibraryException;
 import com.tieto.bookyourshelf.library.dao.BookDao;
 import com.tieto.bookyourshelf.library.dao.entityes.BookEnt;
 import com.tieto.bookyourshelf.library.frontend.models.Book;
+import com.tieto.bookyourshelf.library.service.dto.BookDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class BookServiceImpl implements BookService {
@@ -15,36 +18,68 @@ public class BookServiceImpl implements BookService {
     @Autowired
     private BookDao bookDao;
 
-    public List<BookEnt> getAllBooks() {
-        List<BookEnt> ret;
+    public List<BookDto> getAllBooks() {
+        List<BookDto> ret;
         try {
-            ret = bookDao.getAllBooks();
+            List<BookEnt> ent = bookDao.findAll();
+             ret = ent.stream().map(e -> entToDto(e, null)).collect(Collectors.toList());
         } catch (Exception e) {
             throw new LibraryException(e.getMessage(), e);
         }
         return ret;
     }
 
-    public BookEnt getBook(int id) {
-        BookEnt book;
-        try {
-            book = bookDao.getBook(id);
-        } catch (Exception e) {
-            throw new LibraryException(e.getMessage(), e);
+
+    public BookDto getBookById(Long id) {
+        Optional<BookEnt> book=bookDao.findById(id);
+        if (book.isEmpty()) {
+            return null;
         }
-        return book;
+        return entToDto(book.get(), null);
     }
 
-    public BookEnt getBookByBarcode(String barCode) {
-        BookEnt book;
-        try {
-            book = bookDao.getBookByBarcode(barCode);
-        } catch (Exception e) {
-            throw new LibraryException(e.getMessage(), e);
-        }
-        return book;
+    public BookDto getBookByBarcode(Long barCode) {
+        BookEnt book= bookDao.findBookEntByIsbnCode(barCode);
+        return entToDto(book, null);
     }
 
+    private BookEnt dtoToEnt(BookDto dto, BookEnt ent) {
+        if (dto == null) {
+            return null;
+        }
+        if (ent == null) {
+            throw new IllegalArgumentException("Argument ent can not be null");
+        }
+        ent.setId(dto.getId());
+        ent.setIsbnCode(dto.getIsbnCode());
+        ent.setGenre(dto.getGenre());
+        ent.setLanguage(dto.getLanguage());
+        ent.setTitle(dto.getTitle());
+        ent.setYear(dto.getYear());
+
+        return ent;
+
+    }
+    private BookDto entToDto(BookEnt ent, BookDto dto) {
+        if (ent == null) {
+            return null;
+        }
+        if (dto == null) {
+            dto = new BookDto();
+        }
+
+        dto.setId(ent.getId());
+        dto.setIsbnCode(ent.getIsbnCode());
+        dto.setGenre(ent.getGenre());
+        dto.setLanguage(ent.getLanguage());
+        dto.setTitle(ent.getTitle());
+        dto.setCover(ent.getCover());
+        dto.setYear(ent.getYear());
+        return dto;
+    }
+
+
+/*
     public void updateBook(int id) {
         try {
            // bookDao.getBook(id);
@@ -55,6 +90,9 @@ public class BookServiceImpl implements BookService {
         }
       //  return book;
     }
+
+    */
+
 }
 
     /*public String loadBook() {
