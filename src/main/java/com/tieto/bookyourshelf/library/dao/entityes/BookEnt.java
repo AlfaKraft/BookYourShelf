@@ -1,23 +1,44 @@
 package com.tieto.bookyourshelf.library.dao.entityes;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "books", schema = "bys_db")
 public class BookEnt {
-    private int id;
+    @Id
+    @GeneratedValue
+    @Column(name = "id")
+    private Long id;
+    @Column(name = "title")
     private String title;
-    private String barCode;
+    @Column(name = "ISBNcode")
+    private Long isbnCode;
+    @Column(name = "genre")
     private String genre;
+    @Column(name = "language")
     private String language;
-    private int year;
-    private Boolean status;
+    @Column(name = "year")
+    private Integer year;
+    @Column(name = "cover")
+    private String cover;
 
-
-    public BookEnt(int id, String title, String barCode, String genre, String language, int year, Boolean status){
-        this.id = id;
+    public BookEnt(String title, Long isbnCode, String genre, String language, Integer year, String cover) {
         this.title = title;
-        this.barCode = barCode;
+        this.isbnCode = isbnCode;
         this.genre = genre;
         this.language = language;
         this.year = year;
-        this.status = status;
+        this.cover = cover;
+    }
+
+    public BookEnt() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -28,20 +49,12 @@ public class BookEnt {
         this.title = title;
     }
 
-    public int getId() {
-        return id;
+    public Long getIsbnCode() {
+        return isbnCode;
     }
 
-    public void setId(int rollNo) {
-        this.id = id;
-    }
-
-    public String getBarCode() {
-        return barCode;
-    }
-
-    public void setBarCode(String barCode) {
-        this.barCode = barCode;
+    public void setIsbnCode(Long isbnCode) {
+        this.isbnCode = isbnCode;
     }
 
     public String getGenre() {
@@ -60,23 +73,20 @@ public class BookEnt {
         this.language = language;
     }
 
-    public int getYear() {
+    public Integer getYear() {
         return year;
     }
 
-    public void setYear(int year) {
+    public void setYear(Integer year) {
         this.year = year;
     }
 
-    public Boolean getStatus() {
-        return status;
+    public String getCover() {
+        return cover;
     }
 
-    public void setStatus(boolean status) { this.status = status; }
-
-    /*public enum Status(){
-        AVAILABLE, BORROWED;
-    }*/
-
+    public void setCover(String cover) {
+        this.cover = cover;
+    }
 }
 
