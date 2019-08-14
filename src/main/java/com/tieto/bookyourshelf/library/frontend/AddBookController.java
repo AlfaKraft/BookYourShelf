@@ -7,10 +7,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,11 +24,19 @@ public class AddBookController {
     public ModelAndView loadAddBooksform(){
         BookDto book;
         book = new BookDto();
-
-
-
         return new ModelAndView("addbooksview", "addbook", book);
     }
+    @ModelAttribute
+    public void addAttributes(Model model){
+        try{
+            List<BookDto> list = bookService.loadBooks();
+            model.addAttribute("list", list);
+
+        } catch (RuntimeException e){
+            throw e;
+        }
+    }
+
 
 
 
@@ -53,6 +59,7 @@ public class AddBookController {
 
 
     }
+
     private static int getRandomNumberInRange(int min, int max) {
 
         if (min >= max) {

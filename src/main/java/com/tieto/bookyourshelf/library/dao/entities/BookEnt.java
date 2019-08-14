@@ -19,7 +19,7 @@ public class BookEnt {
     private String language;
     @Column(name = "year")
     private Integer year;
-    @Column(name = "picture")
+    @Column(name = "cover")
     private String cover;
 
     public BookEnt(String title, Long isbnCode, String genre, String language, Integer year, String cover) {

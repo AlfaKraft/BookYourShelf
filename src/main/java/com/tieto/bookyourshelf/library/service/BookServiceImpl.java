@@ -5,14 +5,18 @@ import com.tieto.bookyourshelf.library.dao.BookDao;
 import com.tieto.bookyourshelf.library.dao.entities.BookEnt;
 import com.tieto.bookyourshelf.library.service.dto.BookDto;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class BookServiceImpl implements BookService {
-
+    private static final Logger log = LoggerFactory.getLogger(BookServiceImpl.class);
     @Autowired
     private BookDao bookDao;
 
@@ -44,9 +48,23 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public BookDto loadById(Long id) {
-        return null;
+    @Transactional(readOnly = true)
+    public BookDto loadById(Integer id) {
+        Optional<BookEnt> loaded = bookDao.findById(id);
+        if(loaded.isEmpty()) {
+            return null;
+        }
+        return entToDto(loaded.get(), null);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public void deleteById(Integer id) {
+        log.info("ID: " + id + " Made it to Service ------------------------------------------------------------------------------------------------------------------------------------------->");
+        bookDao.deleteById(id);
+    }
+
+
     private BookEnt dtoToEnt(BookDto dto, BookEnt ent) {
         if (dto == null) {
             return null;

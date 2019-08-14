@@ -45,6 +45,12 @@
 
 
         </table>
+        <h3>Raamatute nimekiri</h3>
+        <ul>
+            <c:forEach var="book" items="${list}">
+                    <li>${book.title}</li>
+            </c:forEach>
+        </ul>
 
     </form:form>
 

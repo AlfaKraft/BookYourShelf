@@ -10,5 +10,7 @@ import java.util.List;
 public interface BookService {
     List<BookDto> loadBooks();
     void addBook(BookDto book);
-    BookDto loadById(Long id);
+    BookDto loadById(Integer id);
+    void deleteById(Integer id);
+
 }
