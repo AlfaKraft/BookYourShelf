@@ -1,15 +1,39 @@
-package com.tieto.bookyourshelf.library.service.dto;
+package com.tieto.bookyourshelf.library.dao.entities;
 
-public class BookDto {
+import javax.persistence.*;
+
+@Entity
+@Table(name = "books", schema = "bys_db")
+public class BookEnt {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
+    @Column(name = "title")
     private String title;
+    @Column(name = "ISBNcode")
     private Long isbnCode;
+    @Column(name = "genre")
     private String genre;
+    @Column(name = "language")
     private String language;
+    @Column(name = "year")
     private Integer year;
+    @Column(name = "cover")
     private String cover;
 
-    private boolean status;
+    public BookEnt(String title, Long isbnCode, String genre, String language, Integer year, String cover) {
+        this.title = title;
+        this.isbnCode = isbnCode;
+        this.genre = genre;
+        this.language = language;
+        this.year = year;
+        this.cover = cover;
+    }
+
+    public BookEnt() {
+    }
+
     public Long getId() {
         return id;
     }
@@ -65,14 +89,4 @@ public class BookDto {
     public void setCover(String cover) {
         this.cover = cover;
     }
-
-    public boolean getStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
-    }
-
-
 }

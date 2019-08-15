@@ -5,12 +5,16 @@ import com.tieto.bookyourshelf.library.dao.BookDao;
 import com.tieto.bookyourshelf.library.dao.entityes.BookEnt;
 import com.tieto.bookyourshelf.library.frontend.models.Book;
 import com.tieto.bookyourshelf.library.service.dto.BookDto;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
 
 @Service
 public class BookServiceImpl implements BookService {
@@ -43,9 +47,54 @@ public class BookServiceImpl implements BookService {
         return entToDto(book, null);
     }
 
-    public void deleteBook(Long id){
+    public void deleteBook(Long id) {
         bookDao.deleteById(id);
     }
+
+
+
+    private static final Logger log = LoggerFactory.getLogger(BookServiceImpl.class);
+
+
+    @Transactional
+    @Override
+    public List<BookDto> loadBooks() {
+        try {
+            List<BookEnt> ent = bookDao.findAll();
+            List<BookDto> ret = ent.stream().map(e -> entToDto(e, null)).collect(Collectors.toList());
+            return ret;
+
+        } catch (Exception e){
+            throw new LibraryException(e.getMessage(), e);
+        }
+    }
+
+    @Override
+    public void addBook(BookDto book) {
+        BookEnt ent;
+        try{
+            ent = new BookEnt();
+            ent = dtoToEnt(book, ent);
+            bookDao.save(ent);
+
+        } catch (Exception e){
+            throw new LibraryException(e.getMessage(), e);
+        }
+
+    }
+
+    @Override
+    @Transactional
+    public BookDto loadById(Integer id) {
+        Optional<BookEnt> loaded = bookDao.findById(id);
+        if(loaded.isEmpty()) {
+            return null;
+        }
+        return entToDto(loaded.get(), null);
+    }
+
+
+
 
     private BookEnt dtoToEnt(BookDto dto, BookEnt ent) {
         if (dto == null) {
@@ -60,6 +109,7 @@ public class BookServiceImpl implements BookService {
         ent.setLanguage(dto.getLanguage());
         ent.setTitle(dto.getTitle());
         ent.setYear(dto.getYear());
+
         ent.setStatus(dto.getStatus());
         return ent;
 
@@ -79,7 +129,9 @@ public class BookServiceImpl implements BookService {
         dto.setTitle(ent.getTitle());
         dto.setCover(ent.getCover());
         dto.setYear(ent.getYear());
+
         dto.setStatus(ent.getStatus());
+
         return dto;
     }
 
@@ -116,4 +168,5 @@ public class BookServiceImpl implements BookService {
             throw new LibraryException(e.getMessage(), e);
         }
     }*/
+
 
