@@ -6,7 +6,7 @@
 <br>
 <jsp:include page="WEB-INF/view/include/header.jsp"/>
 
-<h2>Raamatukogu</h2>
+<h2>Library - Tieto</h2>
 
 
 

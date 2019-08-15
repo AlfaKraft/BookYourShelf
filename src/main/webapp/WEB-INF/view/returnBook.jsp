@@ -12,10 +12,10 @@
 </head>
 <body>
 <jsp:include page="include/header.jsp"/>
-<h3>Raamatu tagastamine</h3>
-Triipkood:
+<h3>Return a book</h3>
+Barcode:
 <input type="text">
-<a href="/app/books">Tagasta</a>
-<a class="btn btn-primary" href="/index.jsp">Avalehele</a>
+<a href="/app/books">Return</a>
+<a class="btn btn-primary" href="/index.jsp">Home</a>
 </body>
 </html>

@@ -13,7 +13,7 @@
 <body>
 <jsp:include page="include/header.jsp"/>
     <div class="container">
-        <h3>Raamatute detailvaade</h3>
+        <h3>About your chosen book</h3>
         <div class="row">
             <div class="col-md-8">
                 <p>Title: <b>${book.title}</b></p>
@@ -28,15 +28,15 @@
             </div>
         </div>
             <div class="book-btn-page">
-                <li><a class="btn btn-outline-primary" href="/app/lendBook/${book.id}">Laenuta</a></li>
-                <li><a class="btn btn-outline-primary space-btw" href="/">Broneeri</a></li>
-                <li><a class="btn btn-outline-primary" href="/app/returnBook/${book.id}">Tagasta</a></li>
+                <li><a class="btn btn-outline-primary" href="/app/lendBook/${book.id}">Borrow</a></li>
+                <li><a class="btn btn-outline-primary space-btw" href="/">Book a book</a></li>
+                <li><a class="btn btn-outline-primary" href="/app/returnBook/${book.id}">Return</a></li>
                 <li></li>
             </div>
 
             <br>
-                <a class="btn btn-primary" href="/index.jsp">Avalehele</a>
-                <a class="btn btn-primary" href="/app/books">Raamatud</a>
+                <a class="btn btn-primary" href="/index.jsp">Home</a>
+                <a class="btn btn-primary" href="/app/books">All books</a>
 
 
     </div>

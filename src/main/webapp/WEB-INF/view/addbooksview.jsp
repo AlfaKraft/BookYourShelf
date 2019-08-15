@@ -13,6 +13,8 @@
     <title>Add and Remove Books</title>
 </head>
 <body>
+<jsp:include page="include/header.jsp"/>
+<div class="container">
     <h1>Add and Remove Books</h1>
 
     <form:form method="post" modelAttribute="addbook">
@@ -45,7 +47,7 @@
 
 
         </table>
-        <h3>Raamatute nimekiri</h3>
+        <h3>Books list</h3>
         <ul>
             <c:forEach var="book" items="${list}">
                     <li>${book.title}</li>
@@ -54,7 +56,7 @@
 
     </form:form>
 
-
+</div>
 
 </body>
 </html>

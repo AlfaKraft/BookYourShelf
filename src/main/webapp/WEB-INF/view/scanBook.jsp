@@ -8,24 +8,31 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-
-    </style>
     <script src="https://cdn.rawgit.com/serratus/quaggaJS/0420d5e0/dist/quagga.min.js"></script>
 </head>
 <body>
 
 <jsp:include page="include/header.jsp"/>
-
-<h3>Raamatu tuvastamine</h3>
-
 <div class="container">
-<!-- Div to show the scanner-->
-<div id="scanner-container"></div>
-<input type="button" id="btn" value="Start/Stop the scanner" />
+
+<h3>Identify book - show the barcode</h3>
+
+
+<div class="row">
+
+    <div class="col-md-8" id="scanner-container">
+        <!-- Div to show the scanner-->
+    </div>
+    <div class="col-md-4">
+        <input type="button" id="btn" value="Start/Stop the scanner" />
+        <form action="/app/search" method="post">
+            Triipkood: <input type="text" name="barcode" id="barcode"><br>
+            <input type="submit" value="Edasi">
+        </form>
+        <a class="btn btn-primary" href="/index.jsp">Avalehele</a>
+    </div>
+</div>
 <br />
 
 <!--<input type="text" id="barcode">
@@ -33,10 +40,7 @@
 <a href="/app//lend/{barCode}">Laenuta</a>-->
 
 
-<form action="/app/search" method="post">
-    Triipkood: <input type="text" name="barcode" id="barcode"><br>
-    <input type="submit" value="Edasi">
-</form>
+
 
 <!-- Include the image-diff library -->
 <!--<script src="quagga.min.js"></script>-->
@@ -127,7 +131,7 @@
     }, false);
     startScanner();
 </script>
-    <a class="btn btn-primary" href="/index.jsp">Avalehele</a>
+
 </div>
 </body>
 </html>

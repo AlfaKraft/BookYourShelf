@@ -8,7 +8,7 @@
 --%>
 <html>
 <head>
-
+<meta charset="UTF-8">
 </head>
 <body>
 <jsp:include page="include/header.jsp"/>
@@ -39,8 +39,8 @@
             </div>
         </c:forEach>
 
-    <a class="btn btn-primary books-btn-page" href="/index.jsp">Avalehele</a>
-    <a class="btn btn-primary books-btn-page" href="/app/lend">Skäneeri raamat</a>
+    <a class="btn btn-primary books-btn-page" href="/index.jsp">Home</a>
+    <a class="btn btn-primary books-btn-page" href="/app/scanBook">Scan book</a>
 
 </div>
 

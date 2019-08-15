@@ -13,11 +13,13 @@
     <title>Remove Books</title>
 </head>
 <body>
+<jsp:include page="include/header.jsp"/>
+<div class="container">
 <ul>
     <c:forEach var="book" items="${list}">
             <li>${book.title} <a href="/app/delete/${book.id}">Remove</a></li>
     </c:forEach>
 </ul>
-
+</div>
 </body>
 </html>
