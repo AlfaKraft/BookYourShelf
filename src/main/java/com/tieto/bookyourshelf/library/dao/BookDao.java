@@ -13,7 +13,8 @@ public interface BookDao extends JpaRepository<BookEnt, Long> {
     List<BookEnt> findAll();
     BookEnt save(BookEnt book);
     Optional<BookEnt> findById(Integer id);
-    void removeById(Integer along);
+    void removeById(Integer id);
     void deleteById(Integer id);
+
 
 }
