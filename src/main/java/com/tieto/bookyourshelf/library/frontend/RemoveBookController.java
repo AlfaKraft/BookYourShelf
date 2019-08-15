@@ -35,10 +35,10 @@ public class RemoveBookController {
 
     @RequestMapping(value = "book/remove", method = RequestMethod.POST)
     public ModelAndView removeBook(@ModelAttribute BookDto bookRemove) throws Exception {
+
         log.info("Entering to removeBook");
-
-        bookService.deleteById(bookRemove.getId());
-
+        Long id = bookRemove.getId().longValue();
+        bookService.deleteBook(id);
         try {
             List<BookDto> model = bookService.loadBooks();
             return new ModelAndView("books", "books", model);

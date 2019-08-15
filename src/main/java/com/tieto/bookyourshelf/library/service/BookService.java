@@ -11,6 +11,6 @@ public interface BookService {
     List<BookDto> loadBooks();
     void addBook(BookDto book);
     BookDto loadById(Integer id);
-    void deleteById(Integer id);
+    void deleteBook(Long id);
 
 }

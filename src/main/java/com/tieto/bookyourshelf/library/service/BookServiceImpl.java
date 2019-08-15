@@ -59,8 +59,9 @@ public class BookServiceImpl implements BookService {
 
     @Override
     @Transactional(readOnly = true)
-    public void deleteById(Integer id) {
+    public void deleteBook(Long id) {
         log.info("ID: " + id + " Made it to Service ------------------------------------------------------------------------------------------------------------------------------------------->");
+
         bookDao.deleteById(id);
     }
 
