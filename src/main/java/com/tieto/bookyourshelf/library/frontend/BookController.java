@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -74,6 +75,11 @@ public class BookController {
         try{
             List<BookDto> list = bookService.loadBooks();
             model.addAttribute("list", list);
+            List<String> languages = new ArrayList<>();
+            languages.add("EN");
+            languages.add("EST");
+            languages.add("ESP");
+            model.addAttribute("languageList", languages);
 
         } catch (RuntimeException e){
             throw e;
@@ -85,7 +91,7 @@ public class BookController {
     public ModelAndView addBook(@ModelAttribute BookDto book) {
         log.info("Entering to addBook");
         try {
-            book.setLanguage("EN");
+            book.setStatus(true);
             bookService.addBook(book);
         } catch (RuntimeException e) {
             log.error(e.getMessage(), e);
@@ -109,6 +115,7 @@ public class BookController {
             throw e;
         }
     }
+
 }
 
 
