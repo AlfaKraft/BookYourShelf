@@ -5,7 +5,7 @@ import javax.persistence.*;
 @Table(name = "books", schema = "bys_db")
 public class BookEnt {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
     @Column(name = "title")

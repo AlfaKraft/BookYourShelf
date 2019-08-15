@@ -8,8 +8,8 @@ public class BookDto {
     private String language;
     private Integer year;
     private String cover;
-    private boolean status;
 
+    private boolean status;
     public Long getId() {
         return id;
     }
@@ -74,8 +74,5 @@ public class BookDto {
         this.status = status;
     }
 
-    @Override
-    public String toString(){
-        return "BookDto{" + "id=" + id +", title=" + title;
-    }
+
 }

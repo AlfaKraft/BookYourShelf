@@ -26,10 +26,16 @@
             <a href="/app/books">Raamatud</a>
         </li>
         <li>
+            <a href="/app/book/add">Lisa</a>
+        </li>
+        <li>
             <a href="/app/scanBook">Laenuta</a>
         </li>
         <li>
             <a href="/app/scanBook">Tagasta</a>
+        </li>
+        <li>
+            <a href="/app/books/remove">Eemalda</a>
         </li>
     </div>
 </nav>

@@ -6,7 +6,6 @@
   Time: 11:16
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
 
@@ -37,13 +36,13 @@
                 <div class="col-md-1">${book.status}</div>
                 <div class="col-md-2"><img class="cover-photo" src="https://media.istockphoto.com/photos/open-book-picture-id495477978" height="200" width="125"></div>
                 <div class="col-md-1"><a class="btn btn-outline-primary" href="/app/book/${book.id}">Details</a></div>
-
-
             </div>
         </c:forEach>
-    <a class="btn btn-primary books-btn-page" href="/index.jsp">Avalehele</a>
-</div>
 
+    <a class="btn btn-primary books-btn-page" href="/index.jsp">Avalehele</a>
+    <a class="btn btn-primary books-btn-page" href="/app/lend">Skäneeri raamat</a>
+
+</div>
 
 </body>
 </html>
