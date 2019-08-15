@@ -39,6 +39,7 @@
             </tr>
         </c:forEach>
         <tr><a href="/app/lend">Skäneeri raamat</a></tr>
+        <p><a href="/index.jsp">Homepage</a></p>
     </tbody>
 </table>
 
