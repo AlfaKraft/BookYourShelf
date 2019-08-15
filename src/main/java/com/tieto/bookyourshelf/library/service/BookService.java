@@ -14,6 +14,8 @@ public interface BookService {
      BookDto getBookByBarcode(Long barCode);
 
      void updateBookStatus(Long id, boolean status);
+
+     void deleteBook(Long id);
 /*
     //String loadBook();
 

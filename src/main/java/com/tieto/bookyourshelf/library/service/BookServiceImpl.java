@@ -43,6 +43,10 @@ public class BookServiceImpl implements BookService {
         return entToDto(book, null);
     }
 
+    public void deleteBook(Long id){
+        bookDao.deleteById(id);
+    }
+
     private BookEnt dtoToEnt(BookDto dto, BookEnt ent) {
         if (dto == null) {
             return null;
