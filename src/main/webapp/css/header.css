@@ -1,0 +1,7 @@
+.menu-bar {
+    display: flex;
+    justify-content: space-evenly;
+    font-size: 18px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}

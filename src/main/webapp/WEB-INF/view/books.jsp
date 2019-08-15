@@ -9,39 +9,41 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+
 </head>
 <body>
-<table>
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>ISBNcode</th>
-            <th>Genre</th>
-            <th>Language</th>
-            <th>Year</th>
-            <th>Status</th>
-            <th>Picture</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tr>
-    <tbody>
+<jsp:include page="include/header.jsp"/>
+<div class="container">
+    <div class="row border border-primary">
+
+            <div class="col-md-3">Title</div>
+            <div class="col-md-2">ISBNcode</div>
+            <div class="col-md-1">Genre</div>
+            <div class="col-md-1">Language</div>
+            <div class="col-md-1">Year</div>
+            <div class="col-md-1">Status</div>
+            <div class="col-md-2">Picture</div>
+            <div class="col-md-1">About</div>
+    </div>
+
+
         <c:forEach var="book" items="${books}" >
-            <tr>
-                <td>${book.title}</td>
-                <td>${book.isbnCode}</td>
-                <td>${book.genre}</td>
-                <td>${book.language}</td>
-                <td>${book.year}</td>
-                <td>${book.status}</td>
-                <td><img src="https://media.istockphoto.com/photos/open-book-picture-id495477978" height="200" width="200"></td>
-                <td><a href="/app/book/${book.id}">Details</a></td>
-            </tr>
+            <div class="row border border-primary">
+                <div class="col-md-3">${book.title}</div>
+                <div class="col-md-2">${book.isbnCode}</div>
+                <div class="col-md-1">${book.genre}</div>
+                <div class="col-md-1">${book.language}</div>
+                <div class="col-md-1">${book.year}</div>
+                <div class="col-md-1">${book.status}</div>
+                <div class="col-md-2"><img class="cover-photo" src="https://media.istockphoto.com/photos/open-book-picture-id495477978" height="200" width="125"></div>
+                <div class="col-md-1"><a class="btn btn-outline-primary" href="/app/book/${book.id}">Details</a></div>
+
+
+            </div>
         </c:forEach>
-        <tr><a href="/app/lend">Skäneeri raamat</a></tr>
-    </tbody>
-</table>
+    <a class="btn btn-primary books-btn-page" href="/index.jsp">Avalehele</a>
+</div>
+
 
 </body>
 </html>

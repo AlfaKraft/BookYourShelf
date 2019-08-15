@@ -1,4 +1,4 @@
-<%--
+<%@ page import="java.sql.Connection" %><%--
   Created by IntelliJ IDEA.
   User: kasutaja
   Date: 9.08.2019
@@ -8,19 +8,37 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+
 </head>
 <body>
+<jsp:include page="include/header.jsp"/>
+    <div class="container">
+        <h3>Raamatute detailvaade</h3>
+        <div class="row">
+            <div class="col-md-8">
+                <p>Title: <b>${book.title}</b></p>
+                <p>ISBNcode: ${book.isbnCode}</p>
+                <p>Genre: ${book.genre}</p>
+                <p>Language: ${book.language}</p>
+                <p>Year: ${book.year}</p>
+                <p>Status: ${book.status}</p>
+            </div>
+            <div class="col-md-4">
+            <img src="https://media.istockphoto.com/photos/open-book-picture-id495477978" height="200" width="200">
+            </div>
+        </div>
+            <div class="book-btn-page">
+                <li><a class="btn btn-outline-primary" href="/app/lendBook/${book.id}">Laenuta</a></li>
+                <li><a class="btn btn-outline-primary space-btw" href="/">Broneeri</a></li>
+                <li><a class="btn btn-outline-primary" href="/app/returnBook/${book.id}">Tagasta</a></li>
+                <li></li>
+            </div>
 
-<h3>Raamatute detailvaade</h3>
+            <br>
+                <a class="btn btn-primary" href="/index.jsp">Avalehele</a>
+                <a class="btn btn-primary" href="/app/books">Raamatud</a>
 
-<p>Title: ${book.title}</p>
-<p>ISBNcode: ${book.isbnCode}</p>
-<p>Genre: ${book.genre}</p>
-<p>Language: ${book.language}</p>
-<p>Year: ${book.year}</p>
-<p>Status: ${book.status}</p>
-<img src="https://media.istockphoto.com/photos/open-book-picture-id495477978" height="200" width="200">
-<p></p><a href="/app/lendBook/${book.id}">Laenuta</a> || <a href="/">Broneeri</a> || <a href="/app/returnBook/${book.id}">Tagasta</a></p>
+
+    </div>
 </body>
 </html>

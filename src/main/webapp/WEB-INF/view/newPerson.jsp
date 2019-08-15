@@ -2,6 +2,7 @@
 <html>
     <head></head>
     <body>
+    <jsp:include page="include/header.jsp"/>
          <h3>Nimekiri</h3>
          <p>${person.firstName}</p>
          <h3>Uus isik</h3>

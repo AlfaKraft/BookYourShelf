@@ -8,23 +8,21 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        /* In order to place the tracking correctly */
-        canvas.drawing, canvas.drawingBuffer {
-            position: absolute;
-            left: 0;
-            top: 0;
-        }
+
     </style>
     <script src="https://cdn.rawgit.com/serratus/quaggaJS/0420d5e0/dist/quagga.min.js"></script>
 </head>
 <body>
+
+<jsp:include page="include/header.jsp"/>
+
 <h3>Raamatu tuvastamine</h3>
 
-
+<div class="container">
 <!-- Div to show the scanner-->
 <div id="scanner-container"></div>
 <input type="button" id="btn" value="Start/Stop the scanner" />
@@ -52,7 +50,7 @@
                 type: "LiveStream",
                 target: document.querySelector('#scanner-container'),
                 constraints: {
-                    width: 880,
+                    width: 640,
                     height: 640,
                     facingMode: "environment"
                 },
@@ -129,7 +127,7 @@
     }, false);
     startScanner();
 </script>
-
-
+    <a class="btn btn-primary" href="/index.jsp">Avalehele</a>
+</div>
 </body>
 </html>
