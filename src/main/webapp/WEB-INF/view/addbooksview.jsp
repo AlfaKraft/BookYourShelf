@@ -41,6 +41,7 @@
                 <td><form:label path="year">Year</form:label></td>
                 <td><form:input path="year"/></td>
             </tr>
+
             <tr>
                 <td><input class="btn btn-primary" type="submit" value="Add"></td>
             </tr>

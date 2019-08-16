@@ -8,8 +8,8 @@ public class BookDto {
     private String language;
     private Integer year;
     private String cover;
-
     private boolean status;
+
     public Long getId() {
         return id;
     }
