@@ -9,9 +9,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
 </head>
 <body>
 <jsp:include page="include/header.jsp"/>
+
+
+<div class="search-container"><input type="text" id="searchInput" onkeyup="searchfunction()" placeholder="Search books..."></div>
 <div class="container">
     <div class="row border border-primary">
 
@@ -28,7 +32,7 @@
 
         <c:forEach var="book" items="${books}" >
             <div class="row border border-primary">
-                <div class="col-md-3">${book.title}</div>
+                <div class="col-md-3" id="title">${book.title}</div>
                 <div class="col-md-2">${book.isbnCode}</div>
                 <div class="col-md-1">${book.genre}</div>
                 <div class="col-md-1">${book.language}</div>
@@ -44,6 +48,32 @@
     <a class="btn btn-primary books-btn-page" href="/app/scanBook">Scan book</a>
 
 </div>
+<script>
+   function searchfunction() {
+        console.log("Ready")
+       // Declare variables
+       var input, filter, table, tr, td, i, txtValue;
+       input = document.getElementById("searchInput");
+       filter = input.value.toUpperCase();
+       tr = document.getElementsByClassName("row border border-primary")
+       console.log(tr)
+
+
+       // Loop through all table rows, and hide those who don't match the search query
+       for (i = 0; i < tr.length; i++) {
+           console.log(td)
+           if (td) {
+               txtValue = td.innerText;
+               console.log(txtValue)
+               if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                   tr[i].style.display = "";
+               } else {
+                   tr[i].style.display = "none";
+               }
+           }
+       }
+    }
+</script>
 
 </body>
 </html>
