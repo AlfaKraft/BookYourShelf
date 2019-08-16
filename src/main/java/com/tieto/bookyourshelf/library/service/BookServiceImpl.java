@@ -5,18 +5,56 @@ import com.tieto.bookyourshelf.library.dao.BookDao;
 import com.tieto.bookyourshelf.library.dao.entityes.BookEnt;
 import com.tieto.bookyourshelf.library.frontend.models.Book;
 import com.tieto.bookyourshelf.library.service.dto.BookDto;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
 
 @Service
 public class BookServiceImpl implements BookService {
 
     @Autowired
     private BookDao bookDao;
+
+    public List<BookDto> getAllBooks() {
+        List<BookDto> ret;
+        try {
+            List<BookEnt> ent = bookDao.findAll();
+             ret = ent.stream().map(e -> entToDto(e, null)).collect(Collectors.toList());
+        } catch (Exception e) {
+            throw new LibraryException(e.getMessage(), e);
+        }
+        return ret;
+    }
+
+
+    public BookDto getBookById(Long id) {
+        Optional<BookEnt> book=bookDao.findById(id);
+        if (book.isEmpty()) {
+            return null;
+        }
+        return entToDto(book.get(), null);
+    }
+
+    public BookDto getBookByBarcode(Long barCode) {
+        BookEnt book= bookDao.findBookEntByIsbnCode(barCode);
+        return entToDto(book, null);
+    }
+
+    public void deleteBook(Long id) {
+        bookDao.deleteById(id);
+    }
+
+
+
+    private static final Logger log = LoggerFactory.getLogger(BookServiceImpl.class);
+
 
     @Transactional
     @Override
@@ -32,14 +70,32 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void saveBook(BookDto book) {
+    public void addBook(BookDto book) {
+        BookEnt ent;
+        try{
+            ent = new BookEnt();
+            ent = dtoToEnt(book, ent);
+            bookDao.save(ent);
+
+        } catch (Exception e){
+            throw new LibraryException(e.getMessage(), e);
+        }
 
     }
 
     @Override
-    public BookDto loadById(Long id) {
-        return null;
+    @Transactional
+    public BookDto loadById(Integer id) {
+        Optional<BookEnt> loaded = bookDao.findById(id);
+        if(loaded.isEmpty()) {
+            return null;
+        }
+        return entToDto(loaded.get(), null);
     }
+
+
+
+
     private BookEnt dtoToEnt(BookDto dto, BookEnt ent) {
         if (dto == null) {
             return null;
@@ -52,9 +108,9 @@ public class BookServiceImpl implements BookService {
         ent.setGenre(dto.getGenre());
         ent.setLanguage(dto.getLanguage());
         ent.setTitle(dto.getTitle());
-        ent.setCover(dto.getCover());
         ent.setYear(dto.getYear());
 
+        ent.setStatus(dto.getStatus());
         return ent;
 
     }
@@ -65,6 +121,7 @@ public class BookServiceImpl implements BookService {
         if (dto == null) {
             dto = new BookDto();
         }
+
         dto.setId(ent.getId());
         dto.setIsbnCode(ent.getIsbnCode());
         dto.setGenre(ent.getGenre());
@@ -72,8 +129,44 @@ public class BookServiceImpl implements BookService {
         dto.setTitle(ent.getTitle());
         dto.setCover(ent.getCover());
         dto.setYear(ent.getYear());
+
+        dto.setStatus(ent.getStatus());
+
         return dto;
     }
 
 
+
+    public void updateBookStatus(Long id, boolean status) {
+        try {
+            BookEnt book=bookDao.findById(id).get();
+            book.setStatus(status);
+            bookDao.save(book);
+        } catch (Exception e) {
+            throw new LibraryException(e.getMessage(), e);
+        }
+    }
+
+
+
 }
+
+    /*public String loadBook() {
+        String ret;
+        try {
+            ret = bookDao.loadBook();
+        } catch (Exception e) {
+            throw new LibraryException(e.getMessage(), e);
+        }
+        return ret;
+    }
+
+    public void saveBook(String book) {
+        try {
+            bookDao.saveBook(book, true);
+        } catch (Exception e) {
+            throw new LibraryException(e.getMessage(), e);
+        }
+    }*/
+
+

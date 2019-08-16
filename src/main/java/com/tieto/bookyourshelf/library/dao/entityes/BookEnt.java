@@ -1,14 +1,13 @@
 package com.tieto.bookyourshelf.library.dao.entityes;
-
 import javax.persistence.*;
 
 @Entity
 @Table(name = "books", schema = "bys_db")
 public class BookEnt {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer id;
+    private Long id;
     @Column(name = "title")
     private String title;
     @Column(name = "ISBNcode")
@@ -19,8 +18,12 @@ public class BookEnt {
     private String language;
     @Column(name = "year")
     private Integer year;
-    @Column(name = "picture")
+    @Column(name = "cover")
     private String cover;
+    @Column(name = "status")
+    private boolean status;
+
+
 
     public BookEnt(String title, Long isbnCode, String genre, String language, Integer year, String cover) {
         this.title = title;
@@ -34,11 +37,11 @@ public class BookEnt {
     public BookEnt() {
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -89,4 +92,13 @@ public class BookEnt {
     public void setCover(String cover) {
         this.cover = cover;
     }
+
+    public boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
 }
+
