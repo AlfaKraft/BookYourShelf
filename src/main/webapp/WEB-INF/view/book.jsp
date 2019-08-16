@@ -28,14 +28,14 @@
             </div>
         </div>
             <div class="book-btn-page">
-                <li><a class="btn btn-outline-primary" href="/app/lendBook/${book.id}">Borrow</a></li>
-                <li><a class="btn btn-outline-primary space-btw" href="/">Book a book</a></li>
+                <li><a class="btn btn-outline-primary space-right" href="/app/lendBook/${book.id}">Borrow</a></li>
+                <!-- <li><a class="btn btn-outline-primary space-btw" href="/">Book a book</a></li> -->
                 <li><a class="btn btn-outline-primary" href="/app/returnBook/${book.id}">Return</a></li>
                 <li></li>
             </div>
 
             <br>
-                <a class="btn btn-primary" href="/index.jsp">Home</a>
+
                 <a class="btn btn-primary" href="/app/books">All books</a>
 
 

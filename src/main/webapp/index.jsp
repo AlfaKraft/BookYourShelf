@@ -5,16 +5,16 @@
 <body>
 <br>
 <jsp:include page="WEB-INF/view/include/header.jsp"/>
+<div class="container">
 
-<h2>Library - Tieto</h2>
+    <h3>Library - Tieto</h3>
 
+</div>
 
 
 
 
 <jsp:include page="WEB-INF/view/include/footer.jsp"/>
-
-
 </body>
 
 

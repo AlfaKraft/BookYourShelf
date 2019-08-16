@@ -15,7 +15,7 @@
 <body>
 <jsp:include page="include/header.jsp"/>
 <div class="container">
-    <h1>Add and Remove Books</h1>
+    <h3>Add and Remove Books</h3>
 
     <form:form method="post" modelAttribute="addbook">
         <table>
@@ -42,7 +42,7 @@
                 <td><form:input path="year"/></td>
             </tr>
             <tr>
-                <td><input type="submit" value="Add"></td>
+                <td><input class="btn btn-primary" type="submit" value="Add"></td>
             </tr>
 
 

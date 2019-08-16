@@ -15,11 +15,18 @@
 <body>
 <jsp:include page="include/header.jsp"/>
 <div class="container">
-<ul>
+<h3>Remove books</h3>
     <c:forEach var="book" items="${list}">
-            <li>${book.title} <a href="/app/delete/${book.id}">Remove</a></li>
+        <div class="row border border-primary remove-space">
+        <div class="col-md-10">
+            ${book.title}
+        </div>
+        <div class="col-md-2">
+            <a class="btn btn-danger" href="/app/delete/${book.id}">Remove</a>
+        </div>
+        </div>
     </c:forEach>
-</ul>
+
 </div>
 </body>
 </html>

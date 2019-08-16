@@ -14,7 +14,9 @@ a:hover {
 li {
     list-style-type: none;
 }
-
+input#barcode {
+    margin: 20px 0;
+}
 .cover-photo {
     margin: 5px 0;
 }
@@ -22,8 +24,8 @@ li {
 .book-btn-page {
     display: flex;
 }
-.space-btw {
-    margin: 0 25px;
+.space-right {
+    margin: 0 25px 0 0;
 }
 .row.border.border-primary{
     display: flex;
@@ -33,3 +35,11 @@ li {
 .books-btn-page {
     margin-top: 20px;
 }
+
+.remove-space {
+    padding: 5px 0;
+}
+.remove-space:hover{
+    background-color: #ffffff;
+}
+

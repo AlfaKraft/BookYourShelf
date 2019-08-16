@@ -24,6 +24,9 @@
           </li>
          -->
         <li>
+            <a href="/index.jsp">Home</a>
+        </li>
+        <li>
             <a href="/app/books">Books</a>
         </li>
         <li>
