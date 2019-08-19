@@ -26,7 +26,6 @@
     <property name="prefix" value="/WEB-INF/view/"/>
     <property name="suffix" value=".jsp"/>
   </bean>
-  <mvc:view-controller path="/login" view-name="login"/>
 
   <bean id="entityManagerFactory"
         class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">

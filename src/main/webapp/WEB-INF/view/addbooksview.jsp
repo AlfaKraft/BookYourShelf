@@ -7,6 +7,7 @@
 --%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -14,6 +15,9 @@
 </head>
 <body>
 <jsp:include page="include/header.jsp"/>
+<sec:authorize access="hasRole('ADMIN')">
+
+
 <div class="container">
     <h1>Add and Remove Books</h1>
 
@@ -58,6 +62,6 @@
     </form:form>
 
 </div>
-
+</sec:authorize>
 </body>
 </html>

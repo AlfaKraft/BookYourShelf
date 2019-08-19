@@ -19,7 +19,7 @@
     </c:forEach>
 </ul>
 
-<a href="/app/user/edit/">Lisa kasutja</a>
+<a href="/app/user/edit/">Lisa kasutaja</a>
 
 </body>
 </html>
