@@ -1,5 +1,7 @@
 package com.tieto.bookyourshelf.library.dao.entityes;
 
+import com.tieto.bookyourshelf.library.service.BorrowService;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -79,4 +81,5 @@ public class BorrowEnt {
     public void setDateBrought(Date dateBrought) {
         this.dateBrought = dateBrought;
     }
+
 }

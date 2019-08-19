@@ -42,4 +42,8 @@ input#barcode {
 .remove-space:hover{
     background-color: #ffffff;
 }
+.main-img-cntr {
+    display: flex;
+    justify-content: center;
+}
 

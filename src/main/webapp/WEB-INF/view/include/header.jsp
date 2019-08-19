@@ -18,11 +18,6 @@
 <body>
 <nav>
     <div class="container menu-bar">
-        <!--
-          <li>
-              <a href="/app/person/load">Isikud</a>
-          </li>
-         -->
         <li>
             <a href="/index.jsp">Home</a>
         </li>
@@ -40,6 +35,9 @@
         </li>
         <li>
             <a href="/app/books/remove">Remove</a>
+        </li>
+        <li>
+            <a href="/app/borrows">Borrowed books</a>
         </li>
     </div>
 </nav>
