@@ -1,14 +1,31 @@
 package com.tieto.bookyourshelf.library.service;
 
-import com.tieto.bookyourshelf.library.dao.BookDao;
+
+import com.tieto.bookyourshelf.library.dao.entityes.BookEnt;
 import com.tieto.bookyourshelf.library.service.dto.BookDto;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
 public interface BookService {
+
+     List<BookDto> getAllBooks();
+
+     BookDto getBookById(Long Id);
+
+     BookDto getBookByBarcode(Long barCode);
+
+     void updateBookStatus(Long id, boolean status);
+
+     void deleteBook(Long id);
+/*
+    //String loadBook();
+
+    //void saveBook(String book);*/
+
     List<BookDto> loadBooks();
-    void saveBook(BookDto book);
-    BookDto loadById(Long id);
+    void addBook(BookDto book);
+    BookDto loadById(Integer id);
+
+
+
 }

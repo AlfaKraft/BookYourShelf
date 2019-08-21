@@ -11,14 +11,15 @@ public class User {
     private String password;
     private String role;
 
-    /*public User(Long id, String firstName, String lastName, String picture, String email) {
+    public User(Long id, String firstName, String lastName, String picture, String email) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.picture = picture;
         this.email = email;
+        this.password = password;
+        this.role = role;
     }
-    */
 
     public String getEmail() {
         return email;

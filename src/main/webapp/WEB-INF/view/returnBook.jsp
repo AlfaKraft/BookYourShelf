@@ -8,12 +8,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+
 </head>
 <body>
-<h3>Raamatu tagastamine</h3>
-Triipkood:
+<jsp:include page="include/header.jsp"/>
+<h3>Return a book</h3>
+Barcode:
 <input type="text">
-<a href="/app/books">Tagasta</a>
+<a href="/app/books">Return</a>
+<a class="btn btn-primary" href="/index.jsp">Home</a>
 </body>
 </html>

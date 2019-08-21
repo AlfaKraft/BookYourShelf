@@ -1,6 +1,5 @@
 package com.tieto.bookyourshelf.library.service;
 
-import com.tieto.bookyourshelf.library.LibraryException;
 import com.tieto.bookyourshelf.library.dao.UserDao;
 import com.tieto.bookyourshelf.library.dao.entityes.UserEnt;
 import com.tieto.bookyourshelf.library.service.dto.UserDto;
@@ -18,47 +17,37 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao userDao;
 
-    @Transactional (readOnly = true)
     @Override
-    public List<UserDto> loadUsers() {
-        try {
-            List<UserEnt> ent = userDao.findAll();
-            List<UserDto> ret = ent.stream().map(e -> entToDto(e, null)).collect(Collectors.toList());
-            return ret;
+    public List<UserDto> getAllUsers() {
+        List<UserEnt> userEntities=userDao.findAll();
+        List<UserDto> users = userEntities.stream().map(e -> entToDto(e, null)).collect(Collectors.toList());
+        return users;
+    }
 
-        } catch (Exception e){
-            throw new LibraryException(e.getMessage(), e);
-        }
+    @Override
+    public UserDto getUserById(Long id) {
+        Optional<UserEnt> user=userDao.findById(id);
+        return entToDto(user.get(), null);
+    }
+
+    @Override
+    public void deleteUser(Long id) {
+        userDao.deleteById(id);
     }
 
     @Override
     public void saveUser(UserDto user) {
-        UserEnt ent;
-        try {
-            if (user.getId() == null) {
-                ent = new UserEnt();
-            } else {
-                Optional<UserEnt> loaded = userDao.findById(user.getId());
-                if (loaded.isEmpty()) {
-                    throw new Exception("Person(ID=" + user.getId() + ") not found");
-                }
-                ent = loaded.get();
-            }
-            ent = dtoToEnt(user, ent);
-            userDao.save(ent);
-        } catch (Exception e) {
-            throw new LibraryException(e.getMessage(), e);
-        }
-    }
 
-    @Override
-    public UserDto loadById(Long id) {
-
-        Optional<UserEnt> loaded = userDao.findById(id);
-        if (loaded.isEmpty()) {
-            return null;
+        UserEnt userEntity;
+        if(user.getId()==null){
+            userEntity=new UserEnt();
         }
-        return entToDto(loaded.get(), null);
+        else{
+            userEntity=userDao.findById(user.getId()).get();
+        }
+        userEntity=dtoToEnt(user, userEntity);
+        userDao.save(userEntity);
+
     }
 
 
@@ -69,17 +58,17 @@ public class UserServiceImpl implements UserService {
         if (ent == null) {
             throw new IllegalArgumentException("Argument ent can not be null");
         }
-        ent.setId(dto.getId());
+        //ent.setId(dto.getId());
         ent.setFirstName(dto.getFirstName());
         ent.setLastName(dto.getLastName());
-        ent.setPicture(dto.getPicture());
         ent.setEmail(dto.getEmail());
         ent.setPassword(dto.getPassword());
+        ent.setPicture(dto.getPicture());
         ent.setRole(dto.getRole());
-
         return ent;
 
     }
+
     private UserDto entToDto(UserEnt ent, UserDto dto) {
         if (ent == null) {
             return null;
@@ -94,6 +83,9 @@ public class UserServiceImpl implements UserService {
         dto.setEmail(ent.getEmail());
         dto.setPassword(ent.getPassword());
         dto.setRole(ent.getRole());
+
         return dto;
     }
+
+
 }
