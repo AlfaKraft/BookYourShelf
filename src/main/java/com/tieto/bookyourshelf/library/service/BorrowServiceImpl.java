@@ -7,6 +7,7 @@ import com.tieto.bookyourshelf.library.service.dto.BorrowDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.Id;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -42,13 +43,24 @@ public class BorrowServiceImpl implements BorrowService {
         }
         return entToDto(borrow.get(), null);
     }
-
+    /*
+    @Override
+    public BorrowDto getBorrowsByIdUser(Long idUser){
+        Optional<BorrowEnt> borrow=borrowDao.findById(idUser);
+        if(borrow.isEmpty()){
+            return null;
+        }
+        return entToDto(borrow.get(), null);
+    }
+*/
 
     @Override
     public BorrowDto getBorrowsByIdUser(Long idUser) {
         BorrowEnt borrow = borrowDao.findBorrowEntByIdUser(idUser);
         return entToDto(borrow, null);
     }
+
+
 
     @Override
     public BorrowDto getBorrowsByIdBook(Long idBook) {

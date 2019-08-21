@@ -1,9 +1,14 @@
 package com.tieto.bookyourshelf.library.dao.entityes;
 
 import com.tieto.bookyourshelf.library.service.BorrowService;
+import org.hibernate.mapping.Set;
 
 import javax.persistence.*;
+import java.awt.print.Book;
+import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.OneToMany;
+
 
 @Entity
 @Table(name =  "borrows" , schema = "bys_db")
@@ -22,6 +27,7 @@ public class BorrowEnt {
     private Date dateToBring;
     @Column(name = "dateBrought")
     private Date dateBrought;
+
 
     public BorrowEnt() {
     }
