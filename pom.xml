@@ -19,6 +19,13 @@
           <target>11</target>
         </configuration>
       </plugin>
+
+        <plugin>
+          <groupId>org.eclipse.jetty</groupId>
+          <artifactId>jetty-maven-plugin</artifactId>
+          <version>9.2.2.v20140723</version>
+        </plugin>
+
     </plugins>
   </build>
 
@@ -62,9 +69,29 @@
       <version>1.2.3</version>
     </dependency>
 
+  <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-core</artifactId>
+      <version>5.1.6.RELEASE</version>
+    </dependency>
 
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-config</artifactId>
+      <version>5.1.6.RELEASE</version>
+    </dependency>
 
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-web</artifactId>
+      <version>5.1.6.RELEASE</version>
+    </dependency>
 
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-taglibs</artifactId>
+      <version>5.1.6.RELEASE</version>
+    </dependency>
 
 
 

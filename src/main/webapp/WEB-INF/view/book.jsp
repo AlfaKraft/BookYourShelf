@@ -1,3 +1,4 @@
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page import="java.sql.Connection" %><%--
   Created by IntelliJ IDEA.
   User: kasutaja
@@ -28,12 +29,14 @@
             <img src="https://media.istockphoto.com/photos/open-book-picture-id495477978" height="200" width="200">
             </div>
         </div>
+        <sec:authorize access="hasRole('USER')">
             <div class="book-btn-page">
                 <li><a class="btn btn-outline-primary" href="/app/lendBook/${book.id}">Borrow</a></li>
                 <li><a class="btn btn-outline-primary space-btw" href="/">Queue</a></li>
                 <li><a class="btn btn-outline-primary" href="/app/returnBook/${book.id}">Return</a></li>
                 <li></li>
             </div>
+        </sec:authorize>
 
             <br>
                 <a class="btn btn-primary" href="/index.jsp">Home</a>

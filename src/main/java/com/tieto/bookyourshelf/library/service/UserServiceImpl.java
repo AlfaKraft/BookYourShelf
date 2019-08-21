@@ -4,6 +4,7 @@ import com.tieto.bookyourshelf.library.dao.UserDao;
 import com.tieto.bookyourshelf.library.dao.entityes.UserEnt;
 import com.tieto.bookyourshelf.library.service.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +17,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserDao userDao;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public List<UserDto> getAllUsers() {
@@ -62,7 +66,8 @@ public class UserServiceImpl implements UserService {
         ent.setFirstName(dto.getFirstName());
         ent.setLastName(dto.getLastName());
         ent.setEmail(dto.getEmail());
-        ent.setPassword(dto.getPassword());
+       // ent.setPassword(dto.getPassword());
+        ent.setPassword(passwordEncoder.encode(dto.getPassword()));
         ent.setPicture(dto.getPicture());
         ent.setRole(dto.getRole());
         return ent;
