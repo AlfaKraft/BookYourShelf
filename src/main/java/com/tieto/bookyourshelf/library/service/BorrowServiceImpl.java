@@ -99,29 +99,25 @@ public class BorrowServiceImpl implements BorrowService {
     }
 
     @Override
-    public void addBorrow(BorrowEnt borrow) {
-
+    public void addBorrow(BorrowEnt borrow){
         try{
-
             borrowDao.save(borrow);
-
         } catch (Exception e){
             throw new LibraryException(e.getMessage(), e);
         }
     }
-/*
+
     @Override
-    public void addBrought(BorrowEnt borrow) {
-        try {
+    public void returnDate(BorrowEnt borrow) {
+        try{
             borrowDao.save(borrow);
-        }   catch (Exception e) {
-            throw new LibraryException(e.getMessage(),e);
+        } catch (Exception e){
+            throw new LibraryException(e.getMessage(), e);
         }
     }
 
- */
 
-    private BorrowEnt dtoToEnt(BorrowDto dto, BorrowEnt ent){
+    private BorrowEnt dtoToEnt(BorrowEnt dto, BorrowEnt ent){
         if (dto == null) {
             return null;
         }

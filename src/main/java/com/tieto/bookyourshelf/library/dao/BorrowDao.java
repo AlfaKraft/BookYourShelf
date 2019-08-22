@@ -1,6 +1,7 @@
 package com.tieto.bookyourshelf.library.dao;
 
 import com.tieto.bookyourshelf.library.dao.entityes.BorrowEnt;
+import com.tieto.bookyourshelf.library.service.dto.BorrowDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -22,5 +23,7 @@ public interface BorrowDao extends JpaRepository<BorrowEnt, Long> {
     BorrowEnt findBorrowEntByDateToBring(Date dateToBring);
     BorrowEnt findBorrowEntByDateBrought(LocalDate dateBrought);
 
+
+    BorrowEnt save(BorrowDto borrow);
 
 }

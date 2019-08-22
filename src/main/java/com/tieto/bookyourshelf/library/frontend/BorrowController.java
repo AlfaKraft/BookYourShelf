@@ -32,7 +32,5 @@ public class BorrowController {
         return "redirect:/app/borrows";
     }
 
-
-
 }
 

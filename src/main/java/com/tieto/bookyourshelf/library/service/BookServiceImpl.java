@@ -3,8 +3,10 @@ package com.tieto.bookyourshelf.library.service;
 import com.tieto.bookyourshelf.library.LibraryException;
 import com.tieto.bookyourshelf.library.dao.AuthorDao;
 import com.tieto.bookyourshelf.library.dao.BookDao;
+import com.tieto.bookyourshelf.library.dao.BorrowDao;
 import com.tieto.bookyourshelf.library.dao.entityes.AuthorEnt;
 import com.tieto.bookyourshelf.library.dao.entityes.BookEnt;
+import com.tieto.bookyourshelf.library.dao.entityes.BorrowEnt;
 import com.tieto.bookyourshelf.library.frontend.models.Book;
 import com.tieto.bookyourshelf.library.service.dto.BookDto;
 import org.slf4j.Logger;
@@ -13,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -28,12 +31,14 @@ public class BookServiceImpl implements BookService {
     private BookDao bookDao;
     @Autowired
     private AuthorDao autDao;
+    @Autowired
+    private BorrowDao borrowDao;
 
     public List<BookDto> getAllBooks() {
         List<BookDto> ret;
         try {
             List<BookEnt> ent = bookDao.findAll();
-             ret = ent.stream().map(e -> entToDto(e, null)).collect(Collectors.toList());
+            ret = ent.stream().map(e -> entToDto(e, null)).collect(Collectors.toList());
         } catch (Exception e) {
             throw new LibraryException(e.getMessage(), e);
         }
@@ -42,7 +47,7 @@ public class BookServiceImpl implements BookService {
 
 
     public BookDto getBookById(Long id) {
-        Optional<BookEnt> book=bookDao.findById(id);
+        Optional<BookEnt> book = bookDao.findById(id);
         if (book.isEmpty()) {
             return null;
         }
@@ -50,14 +55,13 @@ public class BookServiceImpl implements BookService {
     }
 
     public BookDto getBookByBarcode(Long barCode) {
-        BookEnt book= bookDao.findBookEntByIsbnCode(barCode);
+        BookEnt book = bookDao.findBookEntByIsbnCode(barCode);
         return entToDto(book, null);
     }
 
     public void deleteBook(Long id) {
         bookDao.deleteById(id);
     }
-
 
 
     private static final Logger log = LoggerFactory.getLogger(BookServiceImpl.class);
@@ -71,7 +75,7 @@ public class BookServiceImpl implements BookService {
             List<BookDto> ret = ent.stream().map(e -> entToDto(e, null)).collect(Collectors.toList());
             return ret;
 
-        } catch (Exception e){
+        } catch (Exception e) {
             throw new LibraryException(e.getMessage(), e);
         }
     }
@@ -79,13 +83,13 @@ public class BookServiceImpl implements BookService {
     @Override
     public void addBook(BookDto book) {
         BookEnt ent;
-        try{
+        try {
             ent = new BookEnt();
             ent = dtoToEnt(book, ent);
             bookDao.save(ent);
             //ent.getAuthors().stream().forEach(a -> autDao.save(a));
 
-        } catch (Exception e){
+        } catch (Exception e) {
             throw new LibraryException(e.getMessage(), e);
         }
 
@@ -95,13 +99,11 @@ public class BookServiceImpl implements BookService {
     @Transactional
     public BookDto loadById(Integer id) {
         Optional<BookEnt> loaded = bookDao.findById(id);
-        if(loaded.isEmpty()) {
+        if (loaded.isEmpty()) {
             return null;
         }
         return entToDto(loaded.get(), null);
     }
-
-
 
 
     private BookEnt dtoToEnt(BookDto dto, BookEnt ent) {
@@ -130,6 +132,7 @@ public class BookServiceImpl implements BookService {
         return ent;
 
     }
+
     private BookDto entToDto(BookEnt ent, BookDto dto) {
         if (ent == null) {
             return null;
@@ -152,10 +155,9 @@ public class BookServiceImpl implements BookService {
     }
 
 
-
     public void updateBookStatus(Long id, boolean status) {
         try {
-            BookEnt book=bookDao.findById(id).get();
+            BookEnt book = bookDao.findById(id).get();
             book.setStatus(status);
             bookDao.save(book);
         } catch (Exception e) {
@@ -163,8 +165,17 @@ public class BookServiceImpl implements BookService {
         }
     }
 
+    public void returnDate(Long id, LocalDate date) {
+        try {
+            BorrowEnt borrowEnt = borrowDao.findBorrowEntByIdBook(id);
+            borrowEnt.setDateBrought(date);
+            borrowDao.save(borrowEnt);
+        } catch (Exception e) {
+            throw new LibraryException(e.getMessage(), e);
+        }
 
 
+    }
 }
 
     /*public String loadBook() {

@@ -71,16 +71,15 @@ public class BookController {
         String email = auth.getName();
         borrowEnt.setIdUser(userService.getUserByEmail(email).getId());
         borrowService.addBorrow(borrowEnt);
-
         return "redirect:/app/books";
     }
 
     @RequestMapping(value = "/returnBook/{id}", method = RequestMethod.GET)
     public String returnBook(@PathVariable Long id) {
         bookService.updateBookStatus(id, true);
-        BorrowDto borrowDto = new BorrowDto();
         LocalDate returnDate = LocalDate.now();
-        borrowDto.setDateBrought(returnDate);
+        bookService.returnDate(id, returnDate);
+
         return "redirect:/app/books";
     }
 

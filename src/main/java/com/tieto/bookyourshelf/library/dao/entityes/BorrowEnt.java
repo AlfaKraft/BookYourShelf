@@ -46,9 +46,7 @@ public class BorrowEnt {
         this.id = id;
     }
 
-    public Long getIdUser() {
-        return idUser;
-    }
+    public Long getIdUser() { return idUser; }
 
     public void setIdUser(Long idUser) {
         this.idUser = idUser;
