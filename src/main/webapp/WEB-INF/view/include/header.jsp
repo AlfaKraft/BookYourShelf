@@ -43,9 +43,7 @@
         <li>
             <a href="/app/scanBook">Return</a>
         </li>
-            <li>
-            <a href="/app/borrows">Borrows list</a>
-            </li>
+
         <li>
             <a href="/app/account">Account</a>
         </li>
@@ -58,9 +56,9 @@
         <li>
             <a href="/app/user/edit">Add Users</a>
         </li>
-        <li>
-            <a href="/app/users">//Eitööta//Remove Users</a>
-        </li>
+            <li>
+                <a href="/app/borrows">Borrows list</a>
+            </li>
         <li>
             <a href="/app/account">Account</a>
         </li>
