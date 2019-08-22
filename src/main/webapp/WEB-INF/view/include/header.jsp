@@ -42,12 +42,7 @@
         </li>
         </sec:authorize>
         <sec:authorize access="hasRole('ADMIN')">
-        <li>
-            <a href="/app/book/add">Add Books</a>
-        </li>
-        <li>
-            <a href="/app/books/remove">Remove Books</a>
-        </li>
+
         <li>
              <a href="/app/users">Users</a>
         </li>
