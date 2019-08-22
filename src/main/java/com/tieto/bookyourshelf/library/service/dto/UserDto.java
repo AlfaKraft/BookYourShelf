@@ -1,13 +1,26 @@
 package com.tieto.bookyourshelf.library.service.dto;
 
+import com.tieto.bookyourshelf.library.validation.PasswordsEqualConstraint;
+import com.tieto.bookyourshelf.library.validation.ValidEmail;
+
+import javax.validation.constraints.NotEmpty;
+
+@PasswordsEqualConstraint(baseField = "password", matchField = "matchingPassword", message = "Passwords have to match")
 public class UserDto {
 
     private Long id;
+    @NotEmpty
     private String firstName;
+    @NotEmpty
     private String lastName;
     private String picture;
+
+    @ValidEmail
     private String email;
+    @NotEmpty
     private String password;
+    @NotEmpty
+    private String matchingPassword;
     private String role;
 
     public Long getId() {
@@ -61,6 +74,13 @@ public class UserDto {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public String getMatchingPassword() {
+        return matchingPassword;
+    }
+
+    public void setMatchingPassword(String matchingPassword) {
+        this.matchingPassword = matchingPassword;}
 
     public void setRole(String role) {
         this.role = role;

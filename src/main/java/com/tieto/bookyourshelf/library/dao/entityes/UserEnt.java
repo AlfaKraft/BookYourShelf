@@ -1,5 +1,7 @@
 package com.tieto.bookyourshelf.library.dao.entityes;
 
+import com.tieto.bookyourshelf.library.validation.ValidEmail;
+
 import javax.persistence.*;
 
 @Entity
@@ -16,6 +18,7 @@ public class UserEnt {
     @Column(name = "picture")
     private String picture;
     @Column(name = "email")
+    @ValidEmail
     private String email;
     @Column(name = "password")
     private String password;

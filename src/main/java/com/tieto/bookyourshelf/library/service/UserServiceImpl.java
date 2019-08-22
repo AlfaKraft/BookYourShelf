@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -59,7 +60,6 @@ public class UserServiceImpl implements UserService {
         ent.setFirstName(dto.getFirstName());
         ent.setLastName(dto.getLastName());
         ent.setEmail(dto.getEmail());
-       // ent.setPassword(dto.getPassword());
         ent.setPassword(passwordEncoder.encode(dto.getPassword()));
         ent.setPicture(dto.getPicture());
         ent.setRole(dto.getRole());

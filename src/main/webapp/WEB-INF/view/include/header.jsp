@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css">
     <sec:authorize access="!isAuthenticated()">
         <a href="<c:url value="/app/login"/>">Login</a>
+        <a href="<c:url value="/app/user/registration"/>">Sign-Up</a>
     </sec:authorize>
 
     <sec:authorize access="isAuthenticated()">
