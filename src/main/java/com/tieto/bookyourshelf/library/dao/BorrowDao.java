@@ -16,6 +16,7 @@ public interface BorrowDao extends JpaRepository<BorrowEnt, Long> {
 
     BorrowEnt save(BorrowEnt borrow);
     Optional<BorrowEnt> findById(Long id);
+    List<BorrowEnt> findAllByIdUser(Long id);
     BorrowEnt findBorrowEntByIdUser(Long idUser);
     BorrowEnt findBorrowEntByIdBook(Long idBook);
     BorrowEnt findBorrowEntByDateTaken(LocalDate dateTaken);

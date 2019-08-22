@@ -59,12 +59,17 @@ public class BorrowServiceImpl implements BorrowService {
     }
 
     @Override
-    public BorrowDto getBorrowsByIdUser(Long idUser){
-        Optional<BorrowEnt> borrow=borrowDao.findById(idUser);
-        if(borrow.isEmpty()){
-            return null;
+    public List<BorrowDto> getBorrowsByIdUser(Long idUser){
+        List<BorrowDto> ret;
+
+        try{
+            List<BorrowEnt> borrows = borrowDao.findAllByIdUser(idUser);
+            ret = borrows.stream().map(e -> entToDto(e, null)).collect(Collectors.toList());
+        } catch (Exception e){
+            throw new LibraryException(e.getMessage(), e);
         }
-        return entToDto(borrow.get(), null);
+
+        return ret;
     }
 
     @Override

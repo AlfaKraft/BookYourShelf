@@ -1,9 +1,11 @@
  package com.tieto.bookyourshelf.library.frontend;
 import com.tieto.bookyourshelf.library.service.BorrowService;
+import com.tieto.bookyourshelf.library.service.UserService;
 import com.tieto.bookyourshelf.library.service.dto.BorrowDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -16,6 +18,8 @@ public class BorrowController {
 
     @Autowired
     private BorrowService borrowService;
+    @Autowired
+    private UserService userService;
 
     @RequestMapping(value = "/borrows", method = RequestMethod.GET)
     public ModelAndView getAllBorrows() {
@@ -26,10 +30,13 @@ public class BorrowController {
 
 
 
-    @RequestMapping(value = "/borrows/{id}", method = RequestMethod.GET)
-        public String borrowBook(@PathVariable Long id){
-        borrowService.getBorrowsById(id);
-        return "redirect:/app/borrows";
+    @RequestMapping(value = "/history", method = RequestMethod.GET)
+        public ModelAndView getUserBorrowsHistory(){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String email = auth.getName();
+        List<BorrowDto> borrowDtos = borrowService.getBorrowsByIdUser(userService.getUserByEmail(email).getId());
+
+        return new ModelAndView("history", "borrows", borrowDtos);
     }
 
 

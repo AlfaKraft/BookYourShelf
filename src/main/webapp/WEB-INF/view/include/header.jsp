@@ -43,6 +43,9 @@
         <li>
             <a href="/app/scanBook">Return</a>
         </li>
+            <li>
+                <a href="/app/history">History</a>
+            </li>
 
         <li>
             <a href="/app/account">Account</a>
