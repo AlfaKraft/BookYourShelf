@@ -13,6 +13,7 @@ public interface BookDao extends JpaRepository<BookEnt, Long> {
     BookEnt save(BookEnt book);
     Optional<BookEnt> findById(Integer id);
     BookEnt findBookEntByIsbnCode(Long isbnCode);
+    BookEnt findBookEntById(Long id);
 
 }
 

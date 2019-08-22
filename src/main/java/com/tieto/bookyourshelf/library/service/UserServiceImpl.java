@@ -54,6 +54,14 @@ public class UserServiceImpl implements UserService {
 
     }
 
+    @Override
+    public UserDto getUserByEmail(String email) {
+        UserDto dto = new UserDto();
+        UserEnt ent = userDao.findUserEntByEmail(email);
+        dto = entToDto(ent, dto);
+        return dto;
+    }
+
 
     private UserEnt dtoToEnt(UserDto dto, UserEnt ent) {
         if (dto == null) {

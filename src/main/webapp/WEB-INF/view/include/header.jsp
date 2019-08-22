@@ -27,6 +27,10 @@
 <body>
 <nav>
     <div class="container menu-bar">
+
+        <li>
+            <a href="/index.jsp">Home</a>
+        </li>
         <li>
             <a href="/app/books">Books</a>
         </li>
@@ -37,6 +41,9 @@
         <li>
             <a href="/app/scanBook">Return</a>
         </li>
+            <li>
+            <a href="/app/borrows">Borrows list</a>
+            </li>
         <li>
             <a href="/app/account">Account</a>
         </li>
@@ -59,6 +66,7 @@
         <sec:authorize access="isAuthenticated()">
             Welcome back, <sec:authentication property="name"/>
         </sec:authorize>
+
     </div>
 </nav>
 </body>
