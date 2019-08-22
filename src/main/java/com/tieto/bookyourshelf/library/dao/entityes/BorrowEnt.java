@@ -1,13 +1,8 @@
 package com.tieto.bookyourshelf.library.dao.entityes;
 
-import com.tieto.bookyourshelf.library.service.BorrowService;
-import org.hibernate.mapping.Set;
-
 import javax.persistence.*;
-import java.awt.print.Book;
-import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
-import javax.persistence.OneToMany;
 
 
 @Entity
@@ -22,17 +17,20 @@ public class BorrowEnt {
     @Column(name = "idBook")
     private Long idBook;
     @Column(name = "dateTaken")
-    private Date dateTaken;
+    private LocalDate dateTaken;
     @Column(name = "dateToBring")
     private Date dateToBring;
     @Column(name = "dateBrought")
-    private Date dateBrought;
+    private LocalDate dateBrought;
+
+
+
 
 
     public BorrowEnt() {
     }
 
-    public BorrowEnt(Long idUser, Long idBook, Date dateTaken, Date dateToBring, Date dateBrought) {
+    public BorrowEnt(Long idUser, Long idBook, LocalDate dateTaken, Date dateToBring, LocalDate dateBrought) {
         this.idUser = idUser;
         this.idBook = idBook;
         this.dateTaken = dateTaken;
@@ -64,13 +62,11 @@ public class BorrowEnt {
         this.idBook = idBook;
     }
 
-    public Date getDateTaken() {
+    public LocalDate getDateTaken() {
         return dateTaken;
     }
 
-    public void setDateTaken(Date dateTaken) {
-        this.dateTaken = dateTaken;
-    }
+    public void setDateTaken(LocalDate dateTaken) { this.dateTaken = dateTaken; }
 
     public Date getDateToBring() {
         return dateToBring;
@@ -80,12 +76,13 @@ public class BorrowEnt {
         this.dateToBring = dateToBring;
     }
 
-    public Date getDateBrought() {
+    public LocalDate getDateBrought() {
         return dateBrought;
     }
 
-    public void setDateBrought(Date dateBrought) {
+    public void setDateBrought(LocalDate dateBrought) {
         this.dateBrought = dateBrought;
     }
+
 
 }

@@ -1,14 +1,15 @@
 package com.tieto.bookyourshelf.library.service.dto;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class BorrowDto {
     private Long id;
-    private Long idUser;
-    private Long idBook;
-    private Date dateTaken;
+    private String name;
+    private String title;
+    private LocalDate dateTaken;
     private Date dateToBring;
-    private Date dateBrought;
+    private LocalDate dateBrought;
 
     public Long getId() {
         return id;
@@ -18,27 +19,27 @@ public class BorrowDto {
         this.id = id;
     }
 
-    public Long getIdUser() {
-        return idUser;
+    public String getName() {
+        return name;
     }
 
-    public void setIdUser(Long idUser) {
-        this.idUser = idUser;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Long getIdBook() {
-        return idBook;
+    public String getTitle() {
+        return title;
     }
 
-    public void setIdBook(Long idBook) {
-        this.idBook = idBook;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public Date getDateTaken() {
+    public LocalDate getDateTaken() {
         return dateTaken;
     }
 
-    public void setDateTaken(Date dateTaken) {
+    public void setDateTaken(LocalDate dateTaken) {
         this.dateTaken = dateTaken;
     }
 
@@ -50,11 +51,9 @@ public class BorrowDto {
         this.dateToBring = dateToBring;
     }
 
-    public Date getDateBrought() {
+    public LocalDate getDateBrought() {
         return dateBrought;
     }
 
-    public void setDateBrought(Date dateBrought) {
-        this.dateBrought = dateBrought;
-    }
+    public void setDateBrought(LocalDate dateBrought) { this.dateBrought = dateBrought; }
 }

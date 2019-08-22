@@ -1,13 +1,19 @@
 package com.tieto.bookyourshelf.library.service;
 
 import com.tieto.bookyourshelf.library.LibraryException;
+import com.tieto.bookyourshelf.library.dao.BookDao;
 import com.tieto.bookyourshelf.library.dao.BorrowDao;
+import com.tieto.bookyourshelf.library.dao.UserDao;
+import com.tieto.bookyourshelf.library.dao.entityes.BookEnt;
 import com.tieto.bookyourshelf.library.dao.entityes.BorrowEnt;
+import com.tieto.bookyourshelf.library.dao.entityes.UserEnt;
+import com.tieto.bookyourshelf.library.service.dto.BookDto;
 import com.tieto.bookyourshelf.library.service.dto.BorrowDto;
+import com.tieto.bookyourshelf.library.service.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.Id;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -21,12 +27,20 @@ public class BorrowServiceImpl implements BorrowService {
 
     private BorrowDao borrowDao;
 
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private BookService bookService;
+
 
     @Override
     public List<BorrowDto> getAllBorrows() {
         List<BorrowDto> ret;
+        System.out.println("1----------------------------------------------------------------------------------------------------------");
         try {
             List<BorrowEnt> ent = borrowDao.findAll();
+            System.out.println("2----------------------------------------------------------------------------------------------------------");
             ret = ent.stream().map(e -> entToDto(e, null)).collect(Collectors.toList());
         } catch (Exception e) {
             throw new LibraryException(e.getMessage(), e);
@@ -43,7 +57,7 @@ public class BorrowServiceImpl implements BorrowService {
         }
         return entToDto(borrow.get(), null);
     }
-    /*
+
     @Override
     public BorrowDto getBorrowsByIdUser(Long idUser){
         Optional<BorrowEnt> borrow=borrowDao.findById(idUser);
@@ -52,15 +66,6 @@ public class BorrowServiceImpl implements BorrowService {
         }
         return entToDto(borrow.get(), null);
     }
-*/
-
-    @Override
-    public BorrowDto getBorrowsByIdUser(Long idUser) {
-        BorrowEnt borrow = borrowDao.findBorrowEntByIdUser(idUser);
-        return entToDto(borrow, null);
-    }
-
-
 
     @Override
     public BorrowDto getBorrowsByIdBook(Long idBook) {
@@ -68,24 +73,19 @@ public class BorrowServiceImpl implements BorrowService {
         return entToDto(borrow, null);
     }
 
-
     @Override
-    public BorrowDto getBorrowsByDateTaken(Date dateTaken) {
-        BorrowEnt borrow = borrowDao.findBorrowEntByDateTaken(dateTaken);
-        return entToDto(borrow, null);
+    public BorrowDto getBorrowsByDateTaken(LocalDate dateTaken) {
+        return null;
     }
-
 
     @Override
     public BorrowDto getBorrowsByDateToBring(Date dateToBring) {
-        BorrowEnt borrow = borrowDao.findBorrowEntByDateTaken(dateToBring);
-        return entToDto(borrow, null);
+        return null;
     }
 
     @Override
-    public BorrowDto getBorrowsByDateBrought(Date dateBrought) {
-        BorrowEnt borrow = borrowDao.findBorrowEntByDateTaken(dateBrought);
-        return entToDto(borrow, null);
+    public BorrowDto getBorrowsByDateBrought(LocalDate dateBrought) {
+        return null;
     }
 
     @Override
@@ -99,18 +99,27 @@ public class BorrowServiceImpl implements BorrowService {
     }
 
     @Override
-    public void addBorrow(BorrowDto borrow) {
-        BorrowEnt ent;
+    public void addBorrow(BorrowEnt borrow) {
+
         try{
-            ent = new BorrowEnt();
-            ent = dtoToEnt(borrow, ent);
-            borrowDao.save(ent);
+
+            borrowDao.save(borrow);
 
         } catch (Exception e){
             throw new LibraryException(e.getMessage(), e);
         }
     }
+/*
+    @Override
+    public void addBrought(BorrowEnt borrow) {
+        try {
+            borrowDao.save(borrow);
+        }   catch (Exception e) {
+            throw new LibraryException(e.getMessage(),e);
+        }
+    }
 
+ */
 
     private BorrowEnt dtoToEnt(BorrowDto dto, BorrowEnt ent){
         if (dto == null) {
@@ -120,8 +129,6 @@ public class BorrowServiceImpl implements BorrowService {
             throw new IllegalArgumentException("Argument ent can not be null");
         }
         ent.setId(dto.getId());
-        ent.setIdUser(dto.getIdUser());
-        ent.setIdBook(dto.getIdBook());
         ent.setDateTaken(dto.getDateTaken());
         ent.setDateToBring(dto.getDateToBring());
         ent.setDateBrought(dto.getDateBrought());
@@ -129,6 +136,7 @@ public class BorrowServiceImpl implements BorrowService {
         return ent;
     }
     private BorrowDto entToDto(BorrowEnt ent, BorrowDto dto) {
+        System.out.println("3----------------------------------------------------------------------------------------------------------");
         if (ent == null) {
             return null;
         }
@@ -137,8 +145,20 @@ public class BorrowServiceImpl implements BorrowService {
         }
 
         dto.setId(ent.getId());
-        dto.setIdUser(ent.getIdUser());
-        dto.setIdBook(ent.getIdBook());
+        try{
+            UserDto userDto = userService.getUserById(ent.getIdUser());
+            dto.setName(userDto.getFirstName() + " " + userDto.getLastName());
+
+        }catch (Exception e){
+            dto.setName("");
+        }
+        try{
+            BookDto bookDto = bookService.getBookById(ent.getIdBook());
+            dto.setTitle(bookDto.getTitle());
+        }catch (Exception e){
+            dto.setTitle("");
+        }
+
         dto.setDateTaken(ent.getDateTaken());
         dto.setDateToBring(ent.getDateToBring());
         dto.setDateBrought(ent.getDateBrought());

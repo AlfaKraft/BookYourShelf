@@ -1,16 +1,26 @@
 package com.tieto.bookyourshelf.library.frontend;
 
+import com.tieto.bookyourshelf.library.dao.entityes.BorrowEnt;
+import com.tieto.bookyourshelf.library.frontend.models.User;
 import com.tieto.bookyourshelf.library.service.BookService;
+import com.tieto.bookyourshelf.library.service.BorrowService;
+import com.tieto.bookyourshelf.library.service.UserService;
 import com.tieto.bookyourshelf.library.service.dto.BookDto;
+import com.tieto.bookyourshelf.library.service.dto.BorrowDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.security.Principal;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -19,6 +29,12 @@ public class BookController {
 
     @Autowired
     private BookService bookService;
+
+    @Autowired
+    private BorrowService borrowService;
+
+    @Autowired
+    private UserService userService;
 
     @RequestMapping(value = "/books", method = RequestMethod.GET)
     public ModelAndView getAllBooks() {
@@ -43,6 +59,27 @@ public class BookController {
     @RequestMapping(value = "/lendBook/{id}", method = RequestMethod.GET)
     public String lendBook(@PathVariable Long id) {
         bookService.updateBookStatus(id, false);
+        BorrowEnt borrowEnt = new BorrowEnt();
+        LocalDate borrowedDate = LocalDate.now();
+        borrowEnt.setDateTaken(borrowedDate);
+        LocalDate dateToBring = borrowedDate.plusDays(14);
+        Date dateBring = java.sql.Date.valueOf(dateToBring);
+        borrowEnt.setDateToBring(dateBring);
+        borrowEnt.setIdBook(id);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String email = auth.getName();
+        borrowEnt.setIdUser(userService.getUserByEmail(email).getId());
+        borrowService.addBorrow(borrowEnt);
+
+        return "redirect:/app/books";
+    }
+
+    @RequestMapping(value = "/returnBook/{id}", method = RequestMethod.GET)
+    public String returnBook(@PathVariable Long id) {
+        bookService.updateBookStatus(id, true);
+        BorrowDto borrowDto = new BorrowDto();
+        LocalDate returnDate = LocalDate.now();
+        borrowDto.setDateBrought(returnDate);
         return "redirect:/app/books";
     }
 
@@ -51,13 +88,6 @@ public class BookController {
         bookService.deleteBook(id);
         return "redirect:/app/books";
     }
-
-    @RequestMapping(value = "/returnBook/{id}", method = RequestMethod.GET)
-    public String returnBook(@PathVariable Long id) {
-        bookService.updateBookStatus(id, true);
-        return "redirect:/app/books";
-    }
-
 
     @RequestMapping(value = "/scanBook", method = RequestMethod.GET)
     public ModelAndView lendBook() {
@@ -115,6 +145,13 @@ public class BookController {
             throw e;
         }
     }
+
+    @RequestMapping(value = "/username", method = RequestMethod.GET)
+    @ResponseBody
+    public String currentUserName(Principal principal){
+        return principal.getName();
+    }
+
 
 }
 

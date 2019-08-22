@@ -12,5 +12,6 @@ public interface UserDao extends JpaRepository<UserEnt,Long> {
 
     List<UserEnt> findAll();
     UserEnt save(UserEnt user);
-    Optional<UserEnt> findById(Integer id);
+    UserEnt findUserEntById(Long id);
+    UserEnt findUserEntByEmail(String email);
 }

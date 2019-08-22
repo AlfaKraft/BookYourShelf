@@ -11,4 +11,5 @@ public interface UserService {
     List<UserDto> getAllUsers();
     UserDto getUserById(Long id);
     void saveUser(UserDto user);
+    UserDto getUserByEmail(String email);
 }

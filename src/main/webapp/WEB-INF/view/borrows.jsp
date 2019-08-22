@@ -21,14 +21,14 @@
         <div class="col-md-4">Books title</div>
         <div class="col-md-2">Book taken date</div>
         <div class="col-md-2">Book brought date</div>
-        <div class="col-md-2">Book date to bring date</div>
+        <div class="col-md-2">Book to bring date</div>
 
     </div>
 
 <c:forEach var="borrows"  items="${borrows}" >
     <div class="row border border-primary">
-        <div class="col-md-2">${borrows.idUser}</div>
-        <div class="col-md-4">${borrows.idBook}</div>
+        <div class="col-md-2">${borrows.name}</div>
+        <div class="col-md-4">${borrows.title}</div>
         <div class="col-md-2">${borrows.dateTaken}</div>
         <div class="col-md-2">${borrows.dateBrought}</div>
         <div class="col-md-2">${borrows.dateToBring}</div>

@@ -29,6 +29,9 @@
     <div class="container menu-bar">
 
         <li>
+            <a href="/index.jsp">Home</a>
+        </li>
+        <li>
             <a href="/app/books">Books</a>
         </li>
         <sec:authorize access="hasRole('USER')">
@@ -38,6 +41,9 @@
         <li>
             <a href="/app/scanBook">Return</a>
         </li>
+            <li>
+            <a href="/app/borrows">Borrows list</a>
+            </li>
         <li>
             <a href="/app/account">Account</a>
         </li>
