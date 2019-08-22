@@ -26,7 +26,6 @@ public class BookController {
 
     @RequestMapping(value = "/books", method = RequestMethod.GET)
     public ModelAndView getAllBooks() {
-        //List<BookEnt> books = bookService.getAllBooks();
         List<BookDto> books=bookService.getAllBooks();
         return new ModelAndView("books", "books", books);
     }
@@ -69,15 +68,6 @@ public class BookController {
     }
 
 
-
-    @RequestMapping(value = "book/add", method = RequestMethod.GET)
-    public ModelAndView addBooks(@ModelAttribute BookDto book){
-        BookDto model=new BookDto();
-        return new ModelAndView("addbooksview", "addbooks", model);
-    }
-
-
-
     @ModelAttribute
     public void addAttributes(Model model){
         try{
@@ -87,6 +77,9 @@ public class BookController {
             languages.add("EN");
             languages.add("EST");
             languages.add("ESP");
+            BookDto book;
+            book = new BookDto();
+            model.addAttribute("addbook", book);
             model.addAttribute("languageList", languages);
 
         } catch (RuntimeException e){
@@ -95,7 +88,7 @@ public class BookController {
     }
 
 
-    @RequestMapping(value = "book/add", method = RequestMethod.POST)
+    @RequestMapping(value = "/books", method = RequestMethod.POST)
     public ModelAndView addBook(@ModelAttribute BookDto book) {
         log.info("Entering to addBook");
         try {
@@ -114,15 +107,7 @@ public class BookController {
 
 
     }
-    @RequestMapping(value = "books/remove", method = RequestMethod.GET)
-    public ModelAndView loadRemoveBooksView(Model model){
-        try{
-            return new ModelAndView("removeBooksView", "list", bookService.loadBooks());
 
-        } catch (RuntimeException e){
-            throw e;
-        }
-    }
 
 }
 

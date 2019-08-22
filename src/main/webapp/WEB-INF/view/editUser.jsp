@@ -13,6 +13,7 @@
     <title>Edit uset</title>
 </head>
 <body>
+<jsp:include page="include/header.jsp"/>
 <h3>Kasutaja muutmine/lisamine</h3>
 <c:choose>
 <c:when test="${user.firstName != null}">
@@ -27,11 +28,11 @@
    <form:hidden path="id" />
     <table>
         <tr>
-            <td><form:label path="firstName">Eesnimi</form:label></td>
+            <td><form:label path="firstName">First name</form:label></td>
             <td><form:input path="firstName"/></td>
         </tr>
         <tr>
-            <td><form:label path="lastName">Perenimi</form:label></td>
+            <td><form:label path="lastName">Last name</form:label></td>
             <td><form:input path="lastName"/></td>
         </tr>
         <tr>
@@ -39,23 +40,22 @@
         <td><form:input path="email"/></td>
         </tr>
         <tr>
-        <td><form:label path="role">Roll</form:label></td>
+        <td><form:label path="role">Role</form:label></td>
         <td><form:input path="role"/></td>
         </tr>
         <tr>
-            <td><form:label path="picture">Pilt</form:label></td>
+            <td><form:label path="picture">Picture</form:label></td>
             <td><form:input path="picture"/></td>
         </tr>
         <tr>
-        <td><form:label path="password">Salasõna</form:label></td>
+        <td><form:label path="password">Password</form:label></td>
         <td><form:input path="password"/></td>
         </tr>
         <tr>
-            <td><input type="submit" value="Salvesta"/></td>
-            <td><a href="/app/users">Katkesta</a></td>
+            <td><input type="submit" value="Save"/></td>
+            <td><a href="/app/users">Cancel</a></td>
         </tr>
     </table>
 </form:form>
-
 </body>
 </html>

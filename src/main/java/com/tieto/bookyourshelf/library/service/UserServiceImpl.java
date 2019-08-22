@@ -4,7 +4,9 @@ import com.tieto.bookyourshelf.library.dao.UserDao;
 import com.tieto.bookyourshelf.library.dao.entityes.UserEnt;
 import com.tieto.bookyourshelf.library.service.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,6 +17,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserDao userDao;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public List<UserDto> getAllUsers() {
@@ -27,6 +32,11 @@ public class UserServiceImpl implements UserService {
     public UserDto getUserById(Long id) {
         Optional<UserEnt> user=userDao.findById(id);
         return entToDto(user.get(), null);
+    }
+
+    @Override
+    public void deleteUser(Long id) {
+        userDao.deleteById(id);
     }
 
     @Override
@@ -44,6 +54,7 @@ public class UserServiceImpl implements UserService {
 
     }
 
+
     private UserEnt dtoToEnt(UserDto dto, UserEnt ent) {
         if (dto == null) {
             return null;
@@ -55,13 +66,13 @@ public class UserServiceImpl implements UserService {
         ent.setFirstName(dto.getFirstName());
         ent.setLastName(dto.getLastName());
         ent.setEmail(dto.getEmail());
-        ent.setPassword(dto.getPassword());
+       // ent.setPassword(dto.getPassword());
+        ent.setPassword(passwordEncoder.encode(dto.getPassword()));
         ent.setPicture(dto.getPicture());
         ent.setRole(dto.getRole());
         return ent;
 
     }
-
 
     private UserDto entToDto(UserEnt ent, UserDto dto) {
         if (ent == null) {
@@ -70,7 +81,6 @@ public class UserServiceImpl implements UserService {
         if (dto == null) {
             dto = new UserDto();
         }
-
         dto.setId(ent.getId());
         dto.setFirstName(ent.getFirstName());
         dto.setLastName(ent.getLastName());

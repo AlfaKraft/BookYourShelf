@@ -4,6 +4,7 @@ import com.tieto.bookyourshelf.library.service.UserService;
 import com.tieto.bookyourshelf.library.service.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,6 +43,21 @@ public class UserController {
         return new ModelAndView("users","users", userService.getAllUsers());
     }
 
+    @RequestMapping(value = "user/delete/{id}", method = RequestMethod.GET)
+    public String deleteUser(@PathVariable Long id) {
+        userService.deleteUser(id);
+        return "redirect:/app/users/remove";
+    }
+
+    @RequestMapping(value = "users/remove", method = RequestMethod.GET)
+    public ModelAndView loadRemoveUsersView(Model model){
+        try{
+            return new ModelAndView("removeUsersView", "list", userService.getAllUsers());
+
+        } catch (RuntimeException e){
+            throw e;
+        }
+    }
 
 
 }
