@@ -26,6 +26,7 @@
     <property name="prefix" value="/WEB-INF/view/"/>
     <property name="suffix" value=".jsp"/>
   </bean>
+
   <bean id="entityManagerFactory"
         class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
     <property name="dataSource" ref="dataSource"/>
@@ -35,6 +36,25 @@
       <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
     </property>
   </bean>
+
+  <bean id="sessionFactory"
+        class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+    <property name="dataSource"
+              ref="dataSource"/>
+    <property name="packagesToScan"
+              value="com.tieto.bookyourshelf.library.dao.entityes"/>
+    <property name="hibernateProperties">
+      <props>
+        <prop key="hibernate.hbm2ddl.auto">
+          create-drop
+        </prop>
+        <prop key="hibernate.dialect">
+          org.hibernate.dialect.H2Dialect
+        </prop>
+      </props>
+    </property>
+  </bean>
+
   <bean id="dataSource"
         class="org.springframework.jdbc.datasource.DriverManagerDataSource">
     <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
@@ -42,6 +62,7 @@
               value="jdbc:mysql://192.168.1.201:3306/bys_db"/>
     <property name="username" value="alfa"/>
     <property name="password" value="bys1"/>
+
   </bean>
   <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
     <property name="entityManagerFactory" ref="entityManagerFactory" />
