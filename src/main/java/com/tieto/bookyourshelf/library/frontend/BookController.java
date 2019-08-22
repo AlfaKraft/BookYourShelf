@@ -1,6 +1,8 @@
 package com.tieto.bookyourshelf.library.frontend;
 
+import com.tieto.bookyourshelf.library.dao.entityes.AuthorEnt;
 import com.tieto.bookyourshelf.library.service.BookService;
+import com.tieto.bookyourshelf.library.service.dto.AuthorDto;
 import com.tieto.bookyourshelf.library.service.dto.BookDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,7 +13,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 public class BookController {
@@ -64,12 +68,16 @@ public class BookController {
         return new ModelAndView("scanBook");
     }
 
+
+
     @RequestMapping(value = "book/add", method = RequestMethod.GET)
-    public ModelAndView loadAddBooksform(){
-        BookDto book;
-        book = new BookDto();
-        return new ModelAndView("addbooksview", "addbook", book);
+    public ModelAndView addBooks(@ModelAttribute BookDto book){
+        BookDto model=new BookDto();
+        return new ModelAndView("addbooksview", "addbooks", model);
     }
+
+
+
     @ModelAttribute
     public void addAttributes(Model model){
         try{

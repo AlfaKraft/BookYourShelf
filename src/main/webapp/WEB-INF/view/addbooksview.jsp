@@ -17,7 +17,7 @@
 <div class="container">
     <h1>Add and Remove Books</h1>
 
-    <form:form method="post" modelAttribute="addbook">
+    <form:form method="post" modelAttribute="addbooks">
         <table>
             <tr>
                 <td><form:label path="title">Title</form:label></td>
@@ -40,6 +40,15 @@
             <tr>
                 <td><form:label path="year">Year</form:label></td>
                 <td><form:input path="year"/></td>
+            </tr>
+
+            <tr>
+                <td><form:label path="author1">Autor 1</form:label></td>
+                <td><form:input path="author1"/></td>
+            </tr>
+            <tr>
+                <td><form:label path="author2">Autor 2</form:label></td>
+                <td><form:input path="author2"/></td>
             </tr>
 
             <tr>

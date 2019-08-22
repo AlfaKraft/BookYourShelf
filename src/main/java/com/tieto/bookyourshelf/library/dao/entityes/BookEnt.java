@@ -1,50 +1,46 @@
 package com.tieto.bookyourshelf.library.dao.entityes;
+
+import java.util.Set;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "books", schema = "bys_db")
 public class BookEnt {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
-    @Column(name = "title")
+
+    private long id;
     private String title;
-    @Column(name = "ISBNcode")
     private Long isbnCode;
-    @Column(name = "genre")
     private String genre;
-    @Column(name = "language")
     private String language;
-    @Column(name = "year")
     private Integer year;
-    @Column(name = "cover")
     private String cover;
-    @Column(name = "status")
     private boolean status;
+    private Set<AuthorEnt> authors;
 
+    public BookEnt() {
+    }
 
-
-    public BookEnt(String title, Long isbnCode, String genre, String language, Integer year, String cover) {
+    public BookEnt(String title, Long isbnCode, String genre, String language, Integer year, String cover, boolean status, Set<AuthorEnt> authors) {
         this.title = title;
         this.isbnCode = isbnCode;
         this.genre = genre;
         this.language = language;
         this.year = year;
         this.cover = cover;
+        this.status = status;
+        this.authors = authors;
     }
 
-    public BookEnt() {
-    }
-
-    public Long getId() {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    public long getId() {
         return id;
     }
-
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
-
     public String getTitle() {
         return title;
     }
@@ -100,5 +96,23 @@ public class BookEnt {
     public void setStatus(boolean status) {
         this.status = status;
     }
+
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "AUTHOR_BOOK",
+            joinColumns = @JoinColumn(name = "idBook"),
+            inverseJoinColumns = @JoinColumn(name = "idAuthor")
+    )
+
+    public Set<AuthorEnt> getAuthors() {
+        return authors;
+    }
+
+    public void setAuthors(Set<AuthorEnt> authors) {
+        this.authors = authors;
+    }
+
+
 }
 
