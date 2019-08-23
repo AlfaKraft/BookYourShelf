@@ -1,5 +1,9 @@
 package com.tieto.bookyourshelf.library.frontend;
 
+import com.mysql.cj.protocol.Message;
+import com.tieto.bookyourshelf.library.EmailExistsException;
+import com.tieto.bookyourshelf.library.UserAlreadyExistException;
+import com.tieto.bookyourshelf.library.dao.entityes.UserEnt;
 import com.tieto.bookyourshelf.library.service.UserService;
 import com.tieto.bookyourshelf.library.service.dto.UserDto;
 import org.slf4j.Logger;
@@ -41,22 +45,25 @@ public class UserController {
     @RequestMapping(value="user/registration", method = RequestMethod.GET)
     public ModelAndView addUser(){
         UserDto user=new UserDto();
+
         return new ModelAndView("addUser","user",user);
     }
 
     @RequestMapping(value="user/save", method=RequestMethod.POST)
     public ModelAndView saveUser(@ModelAttribute ("user") @Valid UserDto user, BindingResult br){
-        if (br.hasErrors()) {
-            log.error("error -"+br.getAllErrors().get(0).toString());
-            return new ModelAndView("addUser");}
 
-        else {
-            userService.saveUser(user);
-            //return new ModelAndView("books");
-            return new ModelAndView("users","users", userService.getAllUsers());
+        if (br.hasErrors()) {
+            //log.error("error -"+br.getAllErrors().get(0).toString());
+            return new ModelAndView("addUser");
+        } else {
+            try {
+                    user.setRole("USER");
+                    userService.saveUser(user);
+                    return new ModelAndView("users","users", userService.getAllUsers());
+                } catch (UserAlreadyExistException e) {
+                    br.rejectValue("email", "email.alreadyexists", "A user with that email already exists");
+                    return new ModelAndView("addUser");
+                }
         }
     }
-
-
-
 }

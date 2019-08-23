@@ -9,9 +9,10 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
+import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
 
 
-@Target({ElementType.TYPE})
+@Target({ElementType.METHOD, ElementType.FIELD, ANNOTATION_TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Constraint(validatedBy = PasswordsEqualConstraintValidator.class)

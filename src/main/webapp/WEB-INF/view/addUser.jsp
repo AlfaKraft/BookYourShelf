@@ -77,13 +77,6 @@
             </c:if>
         </spring:hasBindErrors>
 
-        <spring:bind path="role">
-            <div class="form-group ${status.error ? 'has-error' : ''}">
-                <form:input type="role" path="role" class="form-control" placeholder="Role"></form:input>
-                <form:errors path="role"></form:errors>
-            </div>
-        </spring:bind>
-
         <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
     </form:form>
 

@@ -5,7 +5,6 @@ import com.tieto.bookyourshelf.library.validation.ValidEmail;
 
 import javax.validation.constraints.NotEmpty;
 
-@PasswordsEqualConstraint(baseField = "password", matchField = "matchingPassword", message = "Passwords have to match")
 public class UserDto {
 
     private Long id;
@@ -20,6 +19,7 @@ public class UserDto {
     @NotEmpty
     private String password;
     @NotEmpty
+    @PasswordsEqualConstraint(baseField = "password", matchField = "matchingPassword", message = "Passwords have to match")
     private String matchingPassword;
     private String role;
 
