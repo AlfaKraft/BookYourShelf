@@ -25,7 +25,9 @@
 </c:choose>
 
 <form:form method="POST" action="/app/user/save" modelAttribute="user">
-   <form:hidden path="id" />
+    <form:hidden path="id" />
+    <form:hidden path="password" />
+    <form:hidden path="picture" />
     <table>
         <tr>
             <td><form:label path="firstName">First name</form:label></td>
@@ -42,14 +44,6 @@
         <tr>
         <td><form:label path="role">Role</form:label></td>
         <td><form:input path="role"/></td>
-        </tr>
-        <tr>
-            <td><form:label path="picture">Picture</form:label></td>
-            <td><form:input path="picture"/></td>
-        </tr>
-        <tr>
-        <td><form:label path="password">Password</form:label></td>
-        <td><form:input path="password"/></td>
         </tr>
         <tr>
             <td><input type="submit" value="Save"/></td>

@@ -21,6 +21,8 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    private String userFirstName;
+
     @RequestMapping(value = "users", method = RequestMethod.GET)
     public ModelAndView loadAllUsers() {
         List<UserDto> users = userService.getAllUsers();
@@ -74,15 +76,19 @@ public class UserController {
 
 
     }
-    @ModelAttribute
-    public void addAttributes(Model model){
+    @RequestMapping(value = "include/header", method = RequestMethod.GET)
+    public ModelAndView loadAccountName() {
         try {
+            System.out.println("--------------------------------------------------------------------------------------------------------------------------");
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
             String email = auth.getName();
             UserDto account = userService.getUserByEmail(email);
-            model.addAttribute("account", account);
+            System.out.println(account +"-------------------------------------------------------------------------------------------------------->");
+            return new ModelAndView("include/header", "account", account);
         } catch (RuntimeException e) {
             throw e;
         }
+
+
     }
 }
