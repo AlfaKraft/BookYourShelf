@@ -9,6 +9,7 @@ import com.tieto.bookyourshelf.library.dao.entityes.BookEnt;
 import com.tieto.bookyourshelf.library.dao.entityes.BorrowEnt;
 import com.tieto.bookyourshelf.library.frontend.models.Book;
 import com.tieto.bookyourshelf.library.service.dto.BookDto;
+import com.tieto.bookyourshelf.library.service.dto.BorrowDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -154,7 +155,6 @@ public class BookServiceImpl implements BookService {
         return dto;
     }
 
-
     public void updateBookStatus(Long id, boolean status) {
         try {
             BookEnt book = bookDao.findById(id).get();
@@ -167,15 +167,14 @@ public class BookServiceImpl implements BookService {
 
     public void returnDate(Long id, LocalDate date) {
         try {
-            BorrowEnt borrowEnt = borrowDao.findBorrowEntByIdBook(id);
+            BorrowEnt borrowEnt = borrowDao.findBorrowEntByIdBookAndDateBrought(id, null);
             borrowEnt.setDateBrought(date);
             borrowDao.save(borrowEnt);
         } catch (Exception e) {
             throw new LibraryException(e.getMessage(), e);
         }
-
-
     }
+
 }
 
     /*public String loadBook() {

@@ -107,16 +107,6 @@ public class BorrowServiceImpl implements BorrowService {
         }
     }
 
-    @Override
-    public void returnDate(BorrowEnt borrow) {
-        try{
-            borrowDao.save(borrow);
-        } catch (Exception e){
-            throw new LibraryException(e.getMessage(), e);
-        }
-    }
-
-
     private BorrowEnt dtoToEnt(BorrowEnt dto, BorrowEnt ent){
         if (dto == null) {
             return null;

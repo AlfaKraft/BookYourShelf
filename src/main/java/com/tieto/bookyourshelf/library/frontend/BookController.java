@@ -80,6 +80,7 @@ public class BookController {
         LocalDate returnDate = LocalDate.now();
         bookService.returnDate(id, returnDate);
 
+
         return "redirect:/app/books";
     }
 
