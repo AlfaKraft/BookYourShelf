@@ -41,7 +41,6 @@ public class AuthorServiceImpl implements AuthorService {
         } catch (Exception e){
             throw new LibraryException(e.getMessage(), e);
         }
-
     }
 
     private AuthorEnt dtoToEnt(AuthorDto dto, AuthorEnt ent) {
@@ -54,9 +53,7 @@ public class AuthorServiceImpl implements AuthorService {
         //ent.setId(dto.getId());
         ent.setAuthorName(dto.getAuthorName());
         return ent;
-
     }
-
 
     private AuthorDto entToDto(AuthorEnt ent, AuthorDto dto) {
         if (ent == null) {
@@ -71,6 +68,5 @@ public class AuthorServiceImpl implements AuthorService {
 
         return dto;
     }
-
 
 }

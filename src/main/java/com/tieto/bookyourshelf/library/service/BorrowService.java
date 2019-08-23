@@ -20,7 +20,6 @@ public interface BorrowService {
 
     List<BorrowDto> loadBorrows();
     void addBorrow(BorrowEnt borrow);
-    //    void addBrought(BorrowEnt borrow);
     BorrowDto loadById(Integer id);
 
 }

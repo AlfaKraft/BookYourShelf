@@ -41,7 +41,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void saveUser(UserDto user) {
-
         UserEnt userEntity;
         if(user.getId()==null){
             userEntity=new UserEnt();
@@ -51,7 +50,6 @@ public class UserServiceImpl implements UserService {
         }
         userEntity=dtoToEnt(user, userEntity);
         userDao.save(userEntity);
-
     }
 
     @Override

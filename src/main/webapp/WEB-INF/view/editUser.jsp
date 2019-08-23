@@ -10,7 +10,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <html>
 <head>
-    <title>Edit uset</title>
+    <title>Edit user</title>
 </head>
 <body>
 <jsp:include page="include/header.jsp"/>
