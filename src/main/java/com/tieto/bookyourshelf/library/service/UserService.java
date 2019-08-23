@@ -9,10 +9,12 @@ import java.util.List;
 
 public interface UserService {
 
+    void deleteUser(Long id);
+
     List<UserDto> getAllUsers();
     UserDto getUserById(Long id);
     UserEnt saveUser(UserDto user)throws UserAlreadyExistException;
     UserEnt editUser(UserDto user);
-
+    UserDto getUserByEmail(String email);
 
 }

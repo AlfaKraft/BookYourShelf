@@ -22,8 +22,10 @@
                 <p>Genre: ${book.genre}</p>
                 <p>Language: ${book.language}</p>
                 <p>Year: ${book.year}</p>
+
                 <p>Status: ${book.status==true ? "<img width='30px' height='30px' src='https://upload.wikimedia.org/wikipedia/en/f/fb/Yes_check.svg'>" :
                         "<img width='30px' height='30px' src='https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/No_Cross.svg/1024px-No_Cross.svg.png'>"}</p>
+
             </div>
             <div class="col-md-4">
             <img src="https://media.istockphoto.com/photos/open-book-picture-id495477978" height="200" width="200">
@@ -31,16 +33,18 @@
         </div>
         <sec:authorize access="hasRole('USER')">
             <div class="book-btn-page">
+
                 <li><a class="btn btn-outline-primary" href="/app/lendBook/${book.id}">Borrow</a></li>
                 <li><a class="btn btn-outline-primary space-btw" href="/">Queue</a></li>
+
                 <li><a class="btn btn-outline-primary" href="/app/returnBook/${book.id}">Return</a></li>
                 <li></li>
             </div>
         </sec:authorize>
 
             <br>
-                <a class="btn btn-primary" href="/index.jsp">Home</a>
-                <a class="btn btn-primary" href="/app/books">All books</a>
+
+                <a class="btn btn-primary" href="${pageContext.request.contextPath}/app/books">All books</a>
 
 
     </div>

@@ -1,5 +1,9 @@
 package com.tieto.bookyourshelf.library.service.dto;
 
+import com.tieto.bookyourshelf.library.dao.entityes.AuthorEnt;
+
+import java.util.Set;
+
 public class BookDto {
     private Long id;
     private String title;
@@ -8,8 +12,28 @@ public class BookDto {
     private String language;
     private Integer year;
     private String cover;
+    //private Set<AuthorEnt> authors;
+    private String author1;
+    private String author2;
+
+    public String getAuthor1() {
+        return author1;
+    }
+
+    public void setAuthor1(String author1) {
+        this.author1 = author1;
+    }
+
+    public String getAuthor2() {
+        return author2;
+    }
+
+    public void setAuthor2(String author2) {
+        this.author2 = author2;
+    }
 
     private boolean status;
+
     public Long getId() {
         return id;
     }
@@ -74,5 +98,11 @@ public class BookDto {
         this.status = status;
     }
 
+    /*public Set<AuthorEnt> getAuthors() {
+        return authors;
+    }
 
+    public void setAuthors(Set<AuthorEnt> authors) {
+        this.authors = authors;
+    }*/
 }

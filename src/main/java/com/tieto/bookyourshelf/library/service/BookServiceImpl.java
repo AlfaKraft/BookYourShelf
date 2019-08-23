@@ -1,7 +1,9 @@
 package com.tieto.bookyourshelf.library.service;
 
 import com.tieto.bookyourshelf.library.LibraryException;
+import com.tieto.bookyourshelf.library.dao.AuthorDao;
 import com.tieto.bookyourshelf.library.dao.BookDao;
+import com.tieto.bookyourshelf.library.dao.entityes.AuthorEnt;
 import com.tieto.bookyourshelf.library.dao.entityes.BookEnt;
 import com.tieto.bookyourshelf.library.frontend.models.Book;
 import com.tieto.bookyourshelf.library.service.dto.BookDto;
@@ -11,9 +13,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
+
 
 
 @Service
@@ -21,6 +26,8 @@ public class BookServiceImpl implements BookService {
 
     @Autowired
     private BookDao bookDao;
+    @Autowired
+    private AuthorDao autDao;
 
     public List<BookDto> getAllBooks() {
         List<BookDto> ret;
@@ -76,6 +83,7 @@ public class BookServiceImpl implements BookService {
             ent = new BookEnt();
             ent = dtoToEnt(book, ent);
             bookDao.save(ent);
+            //ent.getAuthors().stream().forEach(a -> autDao.save(a));
 
         } catch (Exception e){
             throw new LibraryException(e.getMessage(), e);
@@ -103,14 +111,22 @@ public class BookServiceImpl implements BookService {
         if (ent == null) {
             throw new IllegalArgumentException("Argument ent can not be null");
         }
-        ent.setId(dto.getId());
+        //ent.setId(dto.getId());
         ent.setIsbnCode(dto.getIsbnCode());
         ent.setGenre(dto.getGenre());
         ent.setLanguage(dto.getLanguage());
         ent.setTitle(dto.getTitle());
         ent.setYear(dto.getYear());
-
         ent.setStatus(dto.getStatus());
+        //ent.setAuthors(dto.getAuthors());
+        Set<AuthorEnt> authors = new HashSet<AuthorEnt>();
+        AuthorEnt auth = new AuthorEnt();
+        auth.setAuthorName(dto.getAuthor1());
+        authors.add(auth);
+        auth = new AuthorEnt();
+        auth.setAuthorName(dto.getAuthor2());
+        authors.add(auth);
+        ent.setAuthors(authors);
         return ent;
 
     }
@@ -129,8 +145,8 @@ public class BookServiceImpl implements BookService {
         dto.setTitle(ent.getTitle());
         dto.setCover(ent.getCover());
         dto.setYear(ent.getYear());
-
         dto.setStatus(ent.getStatus());
+        //dto.setAuthors(ent.getAuthors());
 
         return dto;
     }

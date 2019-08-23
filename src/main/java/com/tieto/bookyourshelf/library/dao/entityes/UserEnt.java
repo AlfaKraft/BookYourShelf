@@ -44,23 +44,18 @@ public class UserEnt {
     public String getFirstName() {
         return firstName;
     }
-
     public String getLastName() {
         return lastName;
     }
-
     public String getPicture() {
         return picture;
     }
-
     public String getEmail() {
         return email;
     }
-
     public String getPassword() {
         return password;
     }
-
     public String getRole() {
         return role;
     }

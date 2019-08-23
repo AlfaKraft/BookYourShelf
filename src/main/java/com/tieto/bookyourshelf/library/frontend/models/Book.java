@@ -1,5 +1,9 @@
 package com.tieto.bookyourshelf.library.frontend.models;
 
+import com.tieto.bookyourshelf.library.dao.entityes.AuthorEnt;
+
+import java.util.Set;
+
 public class Book {
     private int id;
     private String title;
@@ -8,15 +12,15 @@ public class Book {
     private String language;
     private int year;
     private Boolean status;
+    //private Set<AuthorEnt> authors;
 
-    public Book(int id, String title, String barCode, String genre, String language, int year, boolean status){
-        this.id = id;
-        this.title = title;
-        this.barCode = barCode;
-        this.genre = genre;
-        this.language = language;
-        this.year = year;
-        this.status = status;
+    private String author1;
+    private String author2;
+
+
+
+
+    public Book() {
     }
 
     public String getTitle() {
@@ -73,4 +77,27 @@ public class Book {
 
     public void setStatus(Boolean status) { this.status = status; }
 
+    /*public Set<AuthorEnt> getAuthors() {
+        return authors;
+    }*/
+
+    public String getAuthor1() {
+        return author1;
+    }
+
+    public void setAuthor1(String author1) {
+        this.author1 = author1;
+    }
+
+    public String getAuthor2() {
+        return author2;
+    }
+
+    public void setAuthor2(String author2) {
+        this.author2 = author2;
+    }
+
+    /*public void setAuthors(Set<AuthorEnt> authors) {
+        this.authors = authors;
+    }*/
 }

@@ -8,6 +8,7 @@ import com.tieto.bookyourshelf.library.service.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import com.tieto.bookyourshelf.library.UserAlreadyExistException;
 
 import java.util.Arrays;
@@ -38,6 +39,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void deleteUser(Long id) {
+        userDao.deleteById(id);
+    }
+
+    @Override
     public UserEnt saveUser(UserDto user) throws UserAlreadyExistException{
        if (emailExist(user.getEmail())) {
             throw new UserAlreadyExistException("There is an account with that email address: " + user.getEmail());
@@ -48,7 +54,7 @@ public class UserServiceImpl implements UserService {
             return userEntity;
         }
     }
-    
+
     @Override
     public UserEnt editUser(UserDto user) {
 
@@ -62,6 +68,15 @@ public class UserServiceImpl implements UserService {
         return userDao.findByEmail(email) != null;
     }
 
+    @Override
+    public UserDto getUserByEmail(String email) {
+        UserDto dto = new UserDto();
+        UserEnt ent = userDao.findUserEntByEmail(email);
+        dto = entToDto(ent, dto);
+        return dto;
+    }
+
+
     private UserEnt dtoToEnt(UserDto dto, UserEnt ent) {
         if (dto == null) {
             return null;
@@ -73,6 +88,7 @@ public class UserServiceImpl implements UserService {
         ent.setFirstName(dto.getFirstName());
         ent.setLastName(dto.getLastName());
         ent.setEmail(dto.getEmail());
+       // ent.setPassword(dto.getPassword());
         ent.setPassword(passwordEncoder.encode(dto.getPassword()));
         ent.setPicture(dto.getPicture());
         ent.setRole(dto.getRole());
@@ -99,5 +115,6 @@ public class UserServiceImpl implements UserService {
 
         return dto;
     }
+
 
 }
