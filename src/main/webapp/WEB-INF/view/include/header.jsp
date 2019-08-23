@@ -59,9 +59,7 @@
         <li>
              <a href="/app/users">Users</a>
         </li>
-        <li>
-            <a href="/app/user/edit">Add Users</a>
-        </li>
+        
             <li>
                 <a href="/app/borrows">Borrows list</a>
             </li>
