@@ -1,6 +1,7 @@
 package com.tieto.bookyourshelf.library.service.dto;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class BorrowDto {

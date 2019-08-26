@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -59,16 +60,14 @@ public class BorrowServiceImpl implements BorrowService {
     }
 
     @Override
-    public List<BorrowDto> getBorrowsByIdUser(Long idUser){
+    public List<BorrowDto>   getBorrowsByIdUser(Long idUser){
         List<BorrowDto> ret;
-
         try{
             List<BorrowEnt> borrows = borrowDao.findAllByIdUser(idUser);
             ret = borrows.stream().map(e -> entToDto(e, null)).collect(Collectors.toList());
         } catch (Exception e){
             throw new LibraryException(e.getMessage(), e);
         }
-
         return ret;
     }
 
@@ -127,7 +126,6 @@ public class BorrowServiceImpl implements BorrowService {
         return ent;
     }
     private BorrowDto entToDto(BorrowEnt ent, BorrowDto dto) {
-        System.out.println("3----------------------------------------------------------------------------------------------------------");
         if (ent == null) {
             return null;
         }

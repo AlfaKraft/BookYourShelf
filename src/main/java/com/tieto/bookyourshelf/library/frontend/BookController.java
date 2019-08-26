@@ -10,6 +10,7 @@ import com.tieto.bookyourshelf.library.service.dto.BorrowDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Date;
@@ -38,6 +41,8 @@ public class BookController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+
     @RequestMapping(value = "/books", method = RequestMethod.GET)
     public ModelAndView getAllBooks() {
         List<BookDto> books=bookService.getAllBooks();
@@ -46,7 +51,11 @@ public class BookController {
 
     @RequestMapping(value = "/book/{id}", method = RequestMethod.GET)
     public ModelAndView getBook(@PathVariable Long id) {
+
         BookDto book = bookService.getBookById(id);
+        
+        BorrowDto borrowDto = borrowService.getBorrowsByIdBook(id);
+
         return new ModelAndView("book", "book", book);
     }
 
@@ -78,9 +87,8 @@ public class BookController {
     public String returnBook(@PathVariable Long id) {
         bookService.updateBookStatus(id, true);
         LocalDate returnDate = LocalDate.now();
+
         bookService.returnDate(id, returnDate);
-
-
         return "redirect:/app/books";
     }
 
@@ -142,6 +150,7 @@ public class BookController {
     public String currentUserName(Principal principal){
         return principal.getName();
     }
+
 
 
 }
