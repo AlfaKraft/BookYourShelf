@@ -1,4 +1,5 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="java.sql.Connection" %><%--
   Created by IntelliJ IDEA.
   User: kasutaja
@@ -24,6 +25,10 @@
                 <p>Year: ${book.year}</p>
                 <p>Status: ${book.status==true ? "<img width='30px' height='30px' src='https://upload.wikimedia.org/wikipedia/en/f/fb/Yes_check.svg'>" :
                         "<img width='30px' height='30px' src='https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/No_Cross.svg/1024px-No_Cross.svg.png'>"}</p>
+                <c:forEach var="item" items="${book.authors}" varStatus="i">
+                    <p>Author ${i.index +1}: ${item.authorName}</p>
+                </c:forEach>
+
             </div>
             <div class="col-md-4">
             <img src="https://media.istockphoto.com/photos/open-book-picture-id495477978" height="200" width="200">

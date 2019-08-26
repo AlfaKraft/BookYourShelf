@@ -5,7 +5,7 @@ import com.tieto.bookyourshelf.library.dao.AuthorDao;
 import com.tieto.bookyourshelf.library.dao.BookDao;
 import com.tieto.bookyourshelf.library.dao.entityes.AuthorEnt;
 import com.tieto.bookyourshelf.library.dao.entityes.BookEnt;
-import com.tieto.bookyourshelf.library.frontend.models.Book;
+import com.tieto.bookyourshelf.library.service.dto.AuthorDto;
 import com.tieto.bookyourshelf.library.service.dto.BookDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +26,7 @@ public class BookServiceImpl implements BookService {
     @Autowired
     private BookDao bookDao;
     @Autowired
-    private AuthorDao autDao;
+    private AuthorDao aut;
 
     public List<BookDto> getAllBooks() {
         List<BookDto> ret;
@@ -118,6 +118,7 @@ public class BookServiceImpl implements BookService {
         ent.setYear(dto.getYear());
         ent.setStatus(dto.getStatus());
         //ent.setAuthors(dto.getAuthors());
+
         Set<AuthorEnt> authors = new HashSet<AuthorEnt>();
         AuthorEnt auth = new AuthorEnt();
         auth.setAuthorName(dto.getAuthor1());
@@ -129,6 +130,8 @@ public class BookServiceImpl implements BookService {
         return ent;
 
     }
+
+
     private BookDto entToDto(BookEnt ent, BookDto dto) {
         if (ent == null) {
             return null;
@@ -145,8 +148,7 @@ public class BookServiceImpl implements BookService {
         dto.setCover(ent.getCover());
         dto.setYear(ent.getYear());
         dto.setStatus(ent.getStatus());
-        //dto.setAuthors(ent.getAuthors());
-
+        dto.setAuthors(ent.getAuthors());
         return dto;
     }
 

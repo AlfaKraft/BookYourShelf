@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -31,6 +32,7 @@ public class BookController {
     }
 
     @RequestMapping(value = "/book/{id}", method = RequestMethod.GET)
+    @Transactional
     public ModelAndView getBook(@PathVariable Long id) {
         BookDto book = bookService.getBookById(id);
         return new ModelAndView("book", "book", book);

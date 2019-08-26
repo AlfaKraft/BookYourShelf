@@ -12,7 +12,7 @@ public class BookDto {
     private String language;
     private Integer year;
     private String cover;
-    //private Set<AuthorEnt> authors;
+    private Set<AuthorEnt> authors;
     private String author1;
     private String author2;
 
@@ -98,11 +98,11 @@ public class BookDto {
         this.status = status;
     }
 
-    /*public Set<AuthorEnt> getAuthors() {
+    public Set<AuthorEnt> getAuthors() {
         return authors;
     }
 
     public void setAuthors(Set<AuthorEnt> authors) {
         this.authors = authors;
-    }*/
+    }
 }

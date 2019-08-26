@@ -3,7 +3,7 @@ package com.tieto.bookyourshelf.library.dao.entityes;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "AUTHORS", schema = "bys_db")
+@Table(name = "authors", schema = "bys_db")
 public class AuthorEnt {
     public long id;
     //public String firstName;
