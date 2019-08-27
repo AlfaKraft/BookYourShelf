@@ -14,42 +14,46 @@
 </head>
 <body>
 <jsp:include page="include/header.jsp"/>
-<h3>Kasutaja muutmine/lisamine</h3>
+<h3>Editing user account</h3>
 <c:choose>
 <c:when test="${user.firstName != null}">
-    <h3>Muuda kasutajat ${user.firstName}</h3>
+    <h3>Edit user ${user.firstName}</h3>
 </c:when>
-<c:otherwise>
-    <h3>Uus isik</h3>
-</c:otherwise>
 </c:choose>
 
-<form:form method="POST" action="/app/user/save" modelAttribute="user">
+<form:form method="POST" action="/app/user/edit" modelAttribute="user">
    <form:hidden path="id" />
+      <form:hidden path="picture" />
     <table>
         <tr>
             <td><form:label path="firstName">First name</form:label></td>
             <td><form:input path="firstName"/></td>
+            <td><form:errors path="firstName"></form:errors></td>
         </tr>
         <tr>
             <td><form:label path="lastName">Last name</form:label></td>
             <td><form:input path="lastName"/></td>
+            <td><form:errors path="lastName"></form:errors></td>
         </tr>
         <tr>
-        <td><form:label path="email">Email</form:label></td>
-        <td><form:input path="email"/></td>
+            <td><form:label path="email">Email</form:label></td>
+            <td><form:input path="email" readonly="true"/></td>
+            <td><form:errors path="email"></form:errors></td>
         </tr>
         <tr>
-        <td><form:label path="role">Role</form:label></td>
-        <td><form:input path="role"/></td>
+            <td><form:label path="role">Role</form:label></td>
+            <td><form:input path="role"/></td>
+            <td><form:errors path="role"></form:errors></td>
         </tr>
         <tr>
-            <td><form:label path="picture">Picture</form:label></td>
-            <td><form:input path="picture"/></td>
+            <td><form:label path="password">Reset password</form:label></td>
+            <td><form:input type="password" path="password"/></td>
+            <td><form:errors path="password"></form:errors></td>
         </tr>
         <tr>
-        <td><form:label path="password">Password</form:label></td>
-        <td><form:input path="password"/></td>
+            <td><form:label path="matchingPassword">Repeat password</form:label></td>
+            <td><form:input type="password" path="matchingPassword"/></td>
+            <td><form:errors path="matchingPassword"></form:errors></td>
         </tr>
         <tr>
             <td><input type="submit" value="Save"/></td>

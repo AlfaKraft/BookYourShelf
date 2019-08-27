@@ -1,6 +1,8 @@
 package com.tieto.bookyourshelf.library.service;
 
+import com.tieto.bookyourshelf.library.BookNotFoundException;
 import com.tieto.bookyourshelf.library.LibraryException;
+import com.tieto.bookyourshelf.library.BookAlreadyExistException;
 import com.tieto.bookyourshelf.library.dao.AuthorDao;
 import com.tieto.bookyourshelf.library.dao.BookDao;
 import com.tieto.bookyourshelf.library.dao.BorrowDao;
@@ -57,14 +59,23 @@ public class BookServiceImpl implements BookService {
         return entToDto(book.get(), null);
     }
 
-    public BookDto getBookByBarcode(Long barCode) {
-        BookEnt book = bookDao.findBookEntByIsbnCode(barCode);
-        return entToDto(book, null);
+    public BookDto getBookByBarcode(Long barCode) throws BookNotFoundException {
+        if (!barCodeExist(barCode)) {
+            throw new BookNotFoundException("Cannot find a book with barcode:"+barCode+". Try to scan again!");
+        } else {
+            BookEnt bookEnt = bookDao.findBookEntByIsbnCode(barCode);
+            return entToDto(bookEnt, null);
+        }
+    }
+
+    private boolean barCodeExist(Long isbnCode) {
+        return bookDao.findBookEntByIsbnCode(isbnCode) != null;
     }
 
     public void deleteBook(Long id) {
         bookDao.deleteById(id);
     }
+
 
 
     private static final Logger log = LoggerFactory.getLogger(BookServiceImpl.class);
@@ -78,31 +89,33 @@ public class BookServiceImpl implements BookService {
             List<BookDto> ret = ent.stream().map(e -> entToDto(e, null)).collect(Collectors.toList());
             return ret;
 
-        } catch (Exception e) {
+        } catch (Exception e){
             throw new LibraryException(e.getMessage(), e);
         }
     }
 
     @Override
-    public void addBook(BookDto book) {
-        BookEnt ent;
-        try {
-            ent = new BookEnt();
-            ent = dtoToEnt(book, ent);
-            bookDao.save(ent);
+    public BookEnt addBook(BookDto book) throws BookAlreadyExistException {
+        if (titleExist(book.getTitle())) {
+            throw new BookAlreadyExistException("There is already book with that title: " + book.getTitle());
+        } else {
+        BookEnt bookEntity = new BookEnt();
+            bookEntity = dtoToEnt(book, bookEntity);
+            bookDao.save(bookEntity);
+            return bookEntity;
             //ent.getAuthors().stream().forEach(a -> autDao.save(a));
-
-        } catch (Exception e) {
-            throw new LibraryException(e.getMessage(), e);
         }
+    }
 
+    private boolean titleExist(String title) {
+        return bookDao.findByTitle(title) != null;
     }
 
     @Override
     @Transactional
     public BookDto loadById(Integer id) {
         Optional<BookEnt> loaded = bookDao.findById(id);
-        if (loaded.isEmpty()) {
+        if(loaded.isEmpty()) {
             return null;
         }
         return entToDto(loaded.get(), null);
@@ -123,7 +136,7 @@ public class BookServiceImpl implements BookService {
         ent.setTitle(dto.getTitle());
         ent.setYear(dto.getYear());
         ent.setStatus(dto.getStatus());
-        //ent.setAuthors(dto.getAuthors());
+        ent.setAuthors(dto.getAuthors());
         Set<AuthorEnt> authors = new HashSet<AuthorEnt>();
         AuthorEnt auth = new AuthorEnt();
         auth.setAuthorName(dto.getAuthor1());
@@ -135,7 +148,6 @@ public class BookServiceImpl implements BookService {
         return ent;
 
     }
-
     private BookDto entToDto(BookEnt ent, BookDto dto) {
         if (ent == null) {
             return null;
@@ -157,6 +169,8 @@ public class BookServiceImpl implements BookService {
         return dto;
     }
 
+
+
     public void updateBookStatus(Long id, boolean status) {
         try {
             BookEnt book = bookDao.findById(id).get();
@@ -177,4 +191,6 @@ public class BookServiceImpl implements BookService {
             throw new LibraryException(e.getMessage(), e);
         }
     }
+
 }
+

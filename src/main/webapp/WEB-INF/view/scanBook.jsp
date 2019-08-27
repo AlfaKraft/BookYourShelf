@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%--
   Created by IntelliJ IDEA.
   User: kasutaja
@@ -29,6 +30,7 @@
         <form action="/app/search" method="post">
             Barcode : <input class="barcode-space" type="text" name="barcode" id="barcode"><br>
             <input class="btn btn-success" type="submit" value="Continue">
+            <form:errors path="firstName"></form:errors>
         </form>
     </div>
 </div>

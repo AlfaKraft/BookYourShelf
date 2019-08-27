@@ -12,9 +12,9 @@
     <h3>Account Information</h3>
     <div class="row">
             <div class="col-md-8">
-                <p>Firstname: ${account.firstName}</p>
-                <p>Lastname: ${account.lastName}</p>
-                <p>E-mail: ${account.email}</p>
+                <p>Firstname: ${details.firstName}</p>
+                <p>Lastname: ${details.lastName}</p>
+                <p>E-mail: ${details.email}</p>
             </div>
     </div>
 

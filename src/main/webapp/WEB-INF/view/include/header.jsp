@@ -17,14 +17,6 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/header.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css">
 
-    <sec:authorize access="!isAuthenticated()">
-        <a href="<c:url value="/app/login"/>">Login</a>
-    </sec:authorize>
-
-    <sec:authorize access="isAuthenticated()">
-        <a href="<c:url value="/logout" />">Logout</a>
-    </sec:authorize>
-
 </head>
 <body>
 <nav>
@@ -43,33 +35,35 @@
         <li>
             <a href="/app/scanBook">Return</a>
         </li>
-
             <li>
                 <a href="/app/history">History</a>
             </li>
-
 
         <li>
             <a href="/app/account">Account</a>
         </li>
         </sec:authorize>
         <sec:authorize access="hasRole('ADMIN')">
-
         <li>
              <a href="/app/users">Users</a>
         </li>
         <li>
-            <a href="/app/user/edit">Add Users</a>
+            <a href="/app/borrows">Borrows list</a>
         </li>
-            <li>
-                <a href="/app/borrows">Borrows list</a>
-            </li>
         <li>
             <a href="/app/account">Account</a>
         </li>
         </sec:authorize>
         <sec:authorize access="isAuthenticated()">
-            Welcome back, <sec:authentication property="name"/>
+            Welcome , <sec:authentication property="name"/>
+        </sec:authorize>
+        <sec:authorize access="!isAuthenticated()">
+            <a href="<c:url value="/app/login"/>">Login</a>
+            <a href="<c:url value="/app/user/registration"/>">Sign-Up</a>
+        </sec:authorize>
+
+        <sec:authorize access="isAuthenticated()">
+            <a href="<c:url value="/logout" />">Logout</a>
         </sec:authorize>
 
     </div>
