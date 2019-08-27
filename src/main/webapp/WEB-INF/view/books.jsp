@@ -27,7 +27,6 @@
 <table id="booktable">
     <tr>
             <th>Title</th>
-            <th>ISBNcode</th>
             <th>Genre</th>
             <th>Language</th>
             <th>Year</th>
@@ -38,7 +37,6 @@
         <c:forEach var="book" items="${books}" >
             <tr>
                 <td>${book.title}</td>
-                <td>${book.isbnCode}</td>
                 <td>${book.genre}</td>
                 <td>${book.language}</td>
                 <td>${book.year}</td>
@@ -52,10 +50,6 @@
                  </sec:authorize>
             </tr>
         </c:forEach>
-
-    <a class="btn btn-primary books-btn-page" href="/index.jsp">Home</a>
-    <a class="btn btn-primary books-btn-page" href="/app/scanBook">Scan book</a>
-
 </table>
 </div>
 <script>
