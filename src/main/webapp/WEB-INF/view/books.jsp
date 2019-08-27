@@ -21,65 +21,66 @@
 </sec:authorize>
 
 <div class="container">
-    <div class="row border border-primary">
-
-            <div class="col-md-3">Title</div>
-            <div class="col-md-2">ISBNcode</div>
-            <div class="col-md-1">Genre</div>
-            <div class="col-md-1">Language</div>
-            <div class="col-md-1">Year</div>
-            <div class="col-md-1">Status</div>
-            <div class="col-md-2">Picture</div>
-            <div class="col-md-1">About</div>
-    </div>
+<input id="search-book" type="text" onkeyup="myFunction()" placeholder="Search books...">
 
 
+<table id="booktable">
+    <tr>
+            <th>Title</th>
+            <th>ISBNcode</th>
+            <th>Genre</th>
+            <th>Language</th>
+            <th>Year</th>
+            <th>Status</th>
+            <th>Picture</th>
+            <th>About</th>
+    </tr>
         <c:forEach var="book" items="${books}" >
-            <div class="row border border-primary">
-                <div class="col-md-3" id="title">${book.title}</div>
-                <div class="col-md-2">${book.isbnCode}</div>
-                <div class="col-md-1">${book.genre}</div>
-                <div class="col-md-1">${book.language}</div>
-                <div class="col-md-1">${book.year}</div>
-                <div class="col-md-1">${book.status==true ? "<img width='30px' height='30px' src='https://upload.wikimedia.org/wikipedia/en/f/fb/Yes_check.svg'>" :
-                        "<img width='30px' height='30px' src='https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/No_Cross.svg/1024px-No_Cross.svg.png'>"}</div>
-                <div class="col-md-2"><img class="cover-photo" src="https://media.istockphoto.com/photos/open-book-picture-id495477978" height="200" width="125"></div>
-                <div class="col-md-1"><a class="btn btn-outline-primary" href="/app/book/${book.id}">Details</a></div>
+            <tr>
+                <td>${book.title}</td>
+                <td>${book.isbnCode}</td>
+                <td>${book.genre}</td>
+                <td>${book.language}</td>
+                <td>${book.year}</td>
+                <td>${book.status==true ? "<img width='30px' height='30px' src='https://upload.wikimedia.org/wikipedia/en/f/fb/Yes_check.svg'>" :
+                        "<img width='30px' height='30px' src='https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/No_Cross.svg/1024px-No_Cross.svg.png'>"}</td>
+                <td><img class="cover-photo" src="https://media.istockphoto.com/photos/open-book-picture-id495477978" height="200" width="125"></td>
+                <td><a class="btn btn-outline-primary" href="/app/book/${book.id}">Details</a></td>
                 <sec:authorize access="hasRole('ADMIN')">
-                <div class="col-md-1">
-                    <a class="btn btn-outline-primary" href="/app/delete/${book.id}" onclick="return confirm('Are you sure you want to delete ${book.title}?')">Delete</a></div>
+                <td>
+                    <a class="btn btn-outline-primary" href="/app/delete/${book.id}" onclick="return confirm('Are you sure you want to delete ${book.title}?')">Delete</a></td>
                  </sec:authorize>
-            </div>
+            </tr>
         </c:forEach>
 
     <a class="btn btn-primary books-btn-page" href="/index.jsp">Home</a>
     <a class="btn btn-primary books-btn-page" href="/app/scanBook">Scan book</a>
 
+</table>
 </div>
 <script>
-   function searchfunction() {
-        console.log("Ready")
-       // Declare variables
-       var input, filter, table, tr, td, i, txtValue;
-       input = document.getElementById("searchInput");
-       filter = input.value.toUpperCase();
-       tr = document.getElementsByClassName("row border border-primary")
-       console.log(tr)
+    function myFunction() {
+        // Declare variables
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("search-book");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("booktable");
+        tr = table.getElementsByTagName("tr");
 
 
-       // Loop through all table rows, and hide those who don't match the search query
-       for (i = 0; i < tr.length; i++) {
-           console.log(td)
-           if (td) {
-               txtValue = td.innerText;
-               console.log(txtValue)
-               if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                   tr[i].style.display = "";
-               } else {
-                   tr[i].style.display = "none";
-               }
-           }
-       }
+
+        // Loop through all table rows, and hide those who don't match the search query
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
     }
 </script>
 

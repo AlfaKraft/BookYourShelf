@@ -27,7 +27,7 @@
 </head>
 
 <body>
-
+<jsp:include page="include/header.jsp"/>
 <div class="container">
 
     <form:form method="POST" action="/app/user/save" modelAttribute="user" class="form-signin">
@@ -75,10 +75,12 @@
     </form:form>
 
 </div>
+<jsp:include page="include/footer.jsp"/>
 <!-- /container -->
+
+</body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
-</body>
 </html>
 
 

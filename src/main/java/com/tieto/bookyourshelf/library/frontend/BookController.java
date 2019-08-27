@@ -24,6 +24,7 @@ import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+//import javax.validation.Valid;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.time.LocalDate;
@@ -159,6 +160,8 @@ public class BookController {
             }
         }
     }
+
+
 
     @RequestMapping(value="book/add", method = RequestMethod.GET)
     public ModelAndView insertBook(){
