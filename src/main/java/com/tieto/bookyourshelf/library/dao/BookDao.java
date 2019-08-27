@@ -14,6 +14,7 @@ public interface BookDao extends JpaRepository<BookEnt, Long> {
     Optional<BookEnt> findById(Integer id);
     BookEnt findBookEntByIsbnCode(Long isbnCode);
     BookEnt findBookEntById(Long id);
+    BookEnt findByTitle(String title);
 
 }
 

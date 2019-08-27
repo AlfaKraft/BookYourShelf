@@ -10,8 +10,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
+     <!--The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags-->
+<meta name="description" content="">
     <meta name="author" content="">
 
     <title>Create an account</title>
@@ -60,22 +60,16 @@
         <spring:bind path="password">
             <div class="form-group ${status.error ? 'has-error' : ''}">
                 <form:input type="password" path="password" class="form-control" placeholder="Password"></form:input>
-                <form:errors path="password"></form:errors>
+                <form:errors path="password">
+                </form:errors>
             </div>
         </spring:bind>
 
         <spring:bind path="matchingPassword">
             <div class="form-group ${status.error ? 'has-error' : ''}">
                 <form:input type="password" path="matchingPassword" class="form-control" placeholder="matchingPassword"></form:input>
-                <form:errors path="matchingPassword"></form:errors>
             </div>
         </spring:bind>
-
-        <spring:hasBindErrors name="password">
-            <c:if test="${errors.globalErrorCount > 0}">
-                <div class="alert alert-danger"><form:errors/></div>
-            </c:if>
-        </spring:hasBindErrors>
 
         <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
     </form:form>
@@ -86,3 +80,5 @@
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
 </body>
 </html>
+
+

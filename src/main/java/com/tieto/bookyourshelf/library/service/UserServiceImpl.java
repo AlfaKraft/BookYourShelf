@@ -1,6 +1,7 @@
 package com.tieto.bookyourshelf.library.service;
 
 import com.tieto.bookyourshelf.library.EmailExistsException;
+import com.tieto.bookyourshelf.library.LibraryException;
 import com.tieto.bookyourshelf.library.dao.UserDao;
 import com.tieto.bookyourshelf.library.dao.UserDetailsDao;
 import com.tieto.bookyourshelf.library.dao.entityes.UserEnt;
@@ -93,7 +94,6 @@ public class UserServiceImpl implements UserService {
         ent.setPicture(dto.getPicture());
         ent.setRole(dto.getRole());
         return ent;
-
     }
 
 

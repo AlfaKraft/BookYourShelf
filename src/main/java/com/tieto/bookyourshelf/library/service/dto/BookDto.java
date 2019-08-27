@@ -2,17 +2,23 @@ package com.tieto.bookyourshelf.library.service.dto;
 
 import com.tieto.bookyourshelf.library.dao.entityes.AuthorEnt;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 public class BookDto {
     private Long id;
+    @NotEmpty
     private String title;
     private Long isbnCode;
+    @NotEmpty
     private String genre;
+    @NotEmpty
     private String language;
+    @NotNull
     private Integer year;
     private String cover;
-    //private Set<AuthorEnt> authors;
+    private Set<AuthorEnt> authors;
     private String author1;
     private String author2;
 
@@ -98,11 +104,11 @@ public class BookDto {
         this.status = status;
     }
 
-    /*public Set<AuthorEnt> getAuthors() {
+    public Set<AuthorEnt> getAuthors() {
         return authors;
     }
 
     public void setAuthors(Set<AuthorEnt> authors) {
         this.authors = authors;
-    }*/
+    }
 }

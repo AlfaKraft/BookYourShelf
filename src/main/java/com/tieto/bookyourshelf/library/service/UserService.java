@@ -16,5 +16,4 @@ public interface UserService {
     UserEnt saveUser(UserDto user)throws UserAlreadyExistException;
     UserEnt editUser(UserDto user);
     UserDto getUserByEmail(String email);
-
 }

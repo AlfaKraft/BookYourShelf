@@ -1,10 +1,14 @@
 package com.tieto.bookyourshelf.library.frontend;
 
+import com.tieto.bookyourshelf.library.BookAlreadyExistException;
+import com.tieto.bookyourshelf.library.BookNotFoundException;
 import com.tieto.bookyourshelf.library.dao.entityes.BorrowEnt;
 import com.tieto.bookyourshelf.library.frontend.models.User;
 import com.tieto.bookyourshelf.library.service.BookService;
+import com.tieto.bookyourshelf.library.service.AuthorService;
 import com.tieto.bookyourshelf.library.service.BorrowService;
 import com.tieto.bookyourshelf.library.service.UserService;
+import com.tieto.bookyourshelf.library.service.dto.AuthorDto;
 import com.tieto.bookyourshelf.library.service.dto.BookDto;
 import com.tieto.bookyourshelf.library.service.dto.BorrowDto;
 import org.slf4j.Logger;
@@ -14,9 +18,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.security.Principal;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -51,9 +58,21 @@ public class BookController {
     }
 
     @RequestMapping(value = "/search", method = RequestMethod.POST)
-    public ModelAndView getBookByBarcode( @RequestParam("barcode") Long barCode) {
+    public ModelAndView getBookByBarcode(@RequestParam("barcode") Long barCode) {
+        try {
         BookDto book = bookService.getBookByBarcode(barCode);
         return new ModelAndView("book", "book", book);
+        } catch (Exception e) {
+           // throw MissingServletRequestParameterException();
+            return new ModelAndView("scanBook");
+        }
+    }
+
+    @ExceptionHandler(MissingServletRequestParameterException.class)
+    public void handleMissingParams(MissingServletRequestParameterException ex) {
+        String name = ex.getParameterName();
+        System.out.println(name + " parameter is missing");
+        // Actual exception handling
     }
 
 
@@ -116,26 +135,28 @@ public class BookController {
     }
 
 
-    @RequestMapping(value = "/books", method = RequestMethod.POST)
-    public ModelAndView addBook(@ModelAttribute BookDto book) {
+    @RequestMapping(value = "book/new", method = RequestMethod.POST)
+    public ModelAndView addBook(@ModelAttribute ("book") @Valid BookDto book, BindingResult br) {
         log.info("Entering to addBook");
-        try {
-            book.setStatus(true);
-            bookService.addBook(book);
-        } catch (RuntimeException e) {
-            log.error(e.getMessage(), e);
-            throw e;
+        if (br.hasErrors()) {
+            return new ModelAndView("addBook");
+        } else {
+            try {
+                book.setStatus(true);
+                bookService.addBook(book);
+                return new ModelAndView("books", "books", bookService.getAllBooks());
+            } catch (BookAlreadyExistException e) {
+                br.rejectValue("title", "title.alreadyexists", "A book with that title already exists");
+                return new ModelAndView("addBook");
+            }
         }
-        try {
-            List<BookDto> model = bookService.loadBooks();
-            return new ModelAndView("books", "books", model);
-        }catch (RuntimeException e){
-            throw e;
-        }
-
-
     }
 
+    @RequestMapping(value="book/add", method = RequestMethod.GET)
+    public ModelAndView insertBook(){
+        BookDto book=new BookDto();
+        return new ModelAndView("addBook","book",book);
+    }
 
     @RequestMapping(value = "/username", method = RequestMethod.GET)
     @ResponseBody

@@ -53,16 +53,12 @@
         </li>
         </sec:authorize>
         <sec:authorize access="hasRole('ADMIN')">
-
         <li>
              <a href="/app/users">Users</a>
         </li>
         <li>
-            <a href="/app/user/edit">Add Users</a>
+            <a href="/app/borrows">Borrows list</a>
         </li>
-            <li>
-                <a href="/app/borrows">Borrows list</a>
-            </li>
         <li>
             <a href="/app/account">Account</a>
         </li>

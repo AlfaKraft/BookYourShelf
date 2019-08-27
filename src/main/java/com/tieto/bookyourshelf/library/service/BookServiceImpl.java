@@ -1,11 +1,12 @@
 package com.tieto.bookyourshelf.library.service;
 
+import com.tieto.bookyourshelf.library.BookNotFoundException;
 import com.tieto.bookyourshelf.library.LibraryException;
+import com.tieto.bookyourshelf.library.BookAlreadyExistException;
 import com.tieto.bookyourshelf.library.dao.AuthorDao;
 import com.tieto.bookyourshelf.library.dao.BookDao;
 import com.tieto.bookyourshelf.library.dao.entityes.AuthorEnt;
 import com.tieto.bookyourshelf.library.dao.entityes.BookEnt;
-import com.tieto.bookyourshelf.library.frontend.models.Book;
 import com.tieto.bookyourshelf.library.service.dto.BookDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,9 +50,17 @@ public class BookServiceImpl implements BookService {
         return entToDto(book.get(), null);
     }
 
-    public BookDto getBookByBarcode(Long barCode) {
-        BookEnt book= bookDao.findBookEntByIsbnCode(barCode);
-        return entToDto(book, null);
+    public BookDto getBookByBarcode(Long barCode) throws BookNotFoundException {
+        if (!barCodeExist(barCode)) {
+            throw new BookNotFoundException("Cannot find a book with barcode:"+barCode+". Try to scan again!");
+        } else {
+            BookEnt bookEnt = bookDao.findBookEntByIsbnCode(barCode);
+            return entToDto(bookEnt, null);
+        }
+    }
+
+    private boolean barCodeExist(Long isbnCode) {
+        return bookDao.findBookEntByIsbnCode(isbnCode) != null;
     }
 
     public void deleteBook(Long id) {
@@ -77,18 +86,20 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void addBook(BookDto book) {
-        BookEnt ent;
-        try{
-            ent = new BookEnt();
-            ent = dtoToEnt(book, ent);
-            bookDao.save(ent);
+    public BookEnt addBook(BookDto book) throws BookAlreadyExistException {
+        if (titleExist(book.getTitle())) {
+            throw new BookAlreadyExistException("There is already book with that title: " + book.getTitle());
+        } else {
+        BookEnt bookEntity = new BookEnt();
+            bookEntity = dtoToEnt(book, bookEntity);
+            bookDao.save(bookEntity);
+            return bookEntity;
             //ent.getAuthors().stream().forEach(a -> autDao.save(a));
-
-        } catch (Exception e){
-            throw new LibraryException(e.getMessage(), e);
         }
+    }
 
+    private boolean titleExist(String title) {
+        return bookDao.findByTitle(title) != null;
     }
 
     @Override
@@ -100,7 +111,6 @@ public class BookServiceImpl implements BookService {
         }
         return entToDto(loaded.get(), null);
     }
-
 
 
 
@@ -118,7 +128,7 @@ public class BookServiceImpl implements BookService {
         ent.setTitle(dto.getTitle());
         ent.setYear(dto.getYear());
         ent.setStatus(dto.getStatus());
-        //ent.setAuthors(dto.getAuthors());
+        ent.setAuthors(dto.getAuthors());
         Set<AuthorEnt> authors = new HashSet<AuthorEnt>();
         AuthorEnt auth = new AuthorEnt();
         auth.setAuthorName(dto.getAuthor1());
@@ -162,9 +172,6 @@ public class BookServiceImpl implements BookService {
             throw new LibraryException(e.getMessage(), e);
         }
     }
-
-
-
 }
 
     /*public String loadBook() {

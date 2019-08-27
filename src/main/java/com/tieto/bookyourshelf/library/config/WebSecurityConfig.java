@@ -17,7 +17,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import java.util.logging.Logger;
 
 @Configuration
-@EnableWebSecurity //algne
+@EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -46,7 +46,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/app/login**","/app/user/registration**").permitAll()
                 .antMatchers("/app/books","/app/book*").permitAll()
                 .antMatchers("/app/account").permitAll()
-                .antMatchers(HttpMethod.GET,"/app/user*","/app/user/**").hasAuthority("ROLE_ADMIN")
+                .antMatchers(HttpMethod.GET,"/app/user*","/app/user/**","/app/book/add").hasAuthority("ROLE_ADMIN")
                 .antMatchers(HttpMethod.GET,"/app/scanBook").hasAuthority("ROLE_USER")
                 .and()
                 .formLogin()
