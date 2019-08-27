@@ -8,9 +8,9 @@ public class BorrowDto {
     private Long id;
     private String name;
     private String title;
-    private LocalDate dateTaken;
-    private Date dateToBring;
-    private LocalDate dateBrought;
+    private String dateTaken;
+    private String dateToBring;
+    private String dateBrought;
 
     public Long getId() {
         return id;
@@ -34,25 +34,27 @@ public class BorrowDto {
         this.title = title;
     }
 
-    public LocalDate getDateTaken() {
+    public String getDateTaken() {
         return dateTaken;
     }
 
-    public void setDateTaken(LocalDate dateTaken) {
+    public void setDateTaken(String dateTaken) {
         this.dateTaken = dateTaken;
     }
 
-    public Date getDateToBring() {
+    public String getDateToBring() {
         return dateToBring;
     }
 
-    public void setDateToBring(Date dateToBring) {
+    public void setDateToBring(String dateToBring) {
         this.dateToBring = dateToBring;
     }
 
-    public LocalDate getDateBrought() {
+    public String getDateBrought() {
         return dateBrought;
     }
 
-    public void setDateBrought(LocalDate dateBrought) { this.dateBrought = dateBrought; }
+    public void setDateBrought(String dateBrought) {
+        this.dateBrought = dateBrought;
+    }
 }

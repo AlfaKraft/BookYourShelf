@@ -7,6 +7,7 @@ import com.tieto.bookyourshelf.library.service.UserService;
 import com.tieto.bookyourshelf.library.service.dto.BookDto;
 import com.tieto.bookyourshelf.library.service.dto.BorrowDto;
 import com.tieto.bookyourshelf.library.service.dto.UserDto;
+import org.apache.commons.lang3.time.DateFormatUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
+import java.sql.Date;
 import java.text.DateFormat;
 import java.text.Format;
 import java.text.SimpleDateFormat;
@@ -27,7 +29,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
 
 @Controller
@@ -71,7 +73,7 @@ public class BookController {
         LocalDate borrowedDate = LocalDate.now();
         borrowEnt.setDateTaken(borrowedDate);
         LocalDate dateToBring = borrowedDate.plusDays(14);
-        Date dateBring = java.sql.Date.valueOf(dateToBring);
+        Date dateBring = Date.valueOf(dateToBring);
         borrowEnt.setDateToBring(dateBring);
         borrowEnt.setIdBook(id);
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();

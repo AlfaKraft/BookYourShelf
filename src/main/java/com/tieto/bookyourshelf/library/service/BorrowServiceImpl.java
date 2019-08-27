@@ -18,6 +18,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -86,8 +88,8 @@ public class BorrowServiceImpl implements BorrowService {
     @Override
     public BorrowDto getBorrowsByDateToBring(Date dateToBring) {
 
-
         return null;
+
     }
 
     @Override
@@ -115,6 +117,7 @@ public class BorrowServiceImpl implements BorrowService {
     }
 
     private BorrowEnt dtoToEnt(BorrowEnt dto, BorrowEnt ent){
+
         if (dto == null) {
             return null;
         }
@@ -129,6 +132,7 @@ public class BorrowServiceImpl implements BorrowService {
         return ent;
     }
     private BorrowDto entToDto(BorrowEnt ent, BorrowDto dto) {
+        String foramttedDate;
         if (ent == null) {
             return null;
         }
@@ -150,10 +154,21 @@ public class BorrowServiceImpl implements BorrowService {
         }catch (Exception e){
             dto.setTitle("");
         }
+        if(ent.getDateBrought() != null){
+            foramttedDate = ent.getDateBrought().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL));
+            dto.setDateBrought(foramttedDate);
 
-        dto.setDateTaken(ent.getDateTaken());
-        dto.setDateToBring(ent.getDateToBring());
-        dto.setDateBrought(ent.getDateBrought());
+        }
+
+        if(ent.getDateToBring() != null){
+            SimpleDateFormat formatter = new SimpleDateFormat("EEEE, dd MMM yyyy");
+
+            dto.setDateToBring(formatter.format(ent.getDateToBring()));
+        }
+        foramttedDate = ent.getDateTaken().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL));
+        dto.setDateTaken(foramttedDate);
+
+
 
         return dto;
 
