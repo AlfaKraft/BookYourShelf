@@ -53,7 +53,7 @@ public class UserController {
         }
     }
 
-    @RequestMapping(value="user/registration", method = RequestMethod.GET)
+    @RequestMapping(value="/registration", method = RequestMethod.GET)
     public ModelAndView addUser(){
         UserDto user=new UserDto();
         return new ModelAndView("addUser","user",user);
