@@ -17,6 +17,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
@@ -25,6 +26,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+
 
 @Service
 public class BookServiceImpl implements BookService {
@@ -59,9 +62,9 @@ public class BookServiceImpl implements BookService {
         return entToDto(book.get(), null);
     }
 
-    public BookDto getBookByBarcode(Long barCode) throws BookNotFoundException {
+    public BookDto getBookByBarcode(Long barCode) throws MissingServletRequestParameterException {
         if (!barCodeExist(barCode)) {
-            throw new BookNotFoundException("Cannot find a book with barcode:"+barCode+". Try to scan again!");
+            throw new MissingServletRequestParameterException("barCode", "Long");
         } else {
             BookEnt bookEnt = bookDao.findBookEntByIsbnCode(barCode);
             return entToDto(bookEnt, null);
@@ -193,4 +196,7 @@ public class BookServiceImpl implements BookService {
     }
 
 }
+
+
+
 

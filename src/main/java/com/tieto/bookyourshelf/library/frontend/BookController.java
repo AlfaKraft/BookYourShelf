@@ -3,6 +3,7 @@ package com.tieto.bookyourshelf.library.frontend;
 import com.tieto.bookyourshelf.library.BookAlreadyExistException;
 import com.tieto.bookyourshelf.library.BookNotFoundException;
 import com.tieto.bookyourshelf.library.dao.entityes.BorrowEnt;
+import com.tieto.bookyourshelf.library.frontend.models.User;
 import com.tieto.bookyourshelf.library.service.BookService;
 import com.tieto.bookyourshelf.library.service.AuthorService;
 import com.tieto.bookyourshelf.library.service.BorrowService;
@@ -21,10 +22,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MissingServletRequestParameterException;
+import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-//import javax.validation.Valid;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.sql.Date;
@@ -36,8 +38,12 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Date;
 import java.util.Calendar;
 import java.util.List;
+import java.util.HashMap;
+import java.util.Set;
 
 @Controller
 public class BookController {
@@ -63,7 +69,7 @@ public class BookController {
     @RequestMapping(value = "/book/{id}", method = RequestMethod.GET)
     public ModelAndView getBook(@PathVariable Long id) {
         BookDto book = bookService.getBookById(id);
-        BorrowDto borrowDto = borrowService.getBorrowedBookBIdBook(id);
+        BorrowDto borrowDto = borrowService.getBorrowsByIdBook(id);
         if(borrowDto != null){
             book.setBorrower(borrowDto.getName());
         }
@@ -72,26 +78,30 @@ public class BookController {
 
 
     @RequestMapping(value = "/search", method = RequestMethod.POST)
-    public ModelAndView getBookByBarcode(@RequestParam("barcode") Long barCode) {
+    public ModelAndView getBookByBarcode(@RequestParam(name = "barcode", required = true) Long barCode) throws MissingServletRequestParameterException {
         try {
-        BookDto book = bookService.getBookByBarcode(barCode);
-        return new ModelAndView("book", "book", book);
-        } catch (Exception e) {
-           // throw new MissingServletRequestParameterException(barCode, "Long");
-            return new ModelAndView("scanBook");
+            BookDto book = bookService.getBookByBarcode(barCode);
+            Long id = book.getId();
+            BorrowDto borrowDto = borrowService.getBorrowsByIdBook(id);
+            if(borrowDto != null){
+                book.setBorrower(borrowDto.getName());
+            }
+            return new ModelAndView("book", "book", book);
+        } catch (MissingServletRequestParameterException e) {
+            throw new MissingServletRequestParameterException("barCode","Long");
         }
     }
 
     @ExceptionHandler(MissingServletRequestParameterException.class)
-    public void handleMissingParams(MissingServletRequestParameterException ex) {
-        String name = ex.getParameterName();
-        System.out.println(name + " parameter is missing");
-        // Actual exception handling
+    public String handleMyException(Exception  e, RedirectAttributes redirectAttrs) {
+
+        redirectAttrs.addFlashAttribute("errorMessage", "No book with this barcode could not be found. Try to scan again!");
+        String redirectUrl = "/app/scanBook?form";
+        return "redirect:" + redirectUrl;
     }
 
 
     @RequestMapping(value = "/lendBook/{id}", method = RequestMethod.GET)
-
     public String lendBook(@PathVariable Long id) {
         if(bookService.getBookById(id).getStatus() == true) {
             bookService.updateBookStatus(id, false);
@@ -107,7 +117,6 @@ public class BookController {
             borrowEnt.setIdUser(userService.getUserByEmail(email).getId());
             borrowService.addBorrow(borrowEnt);
         }
-
         return "redirect:/app/books";
     }
 
@@ -126,9 +135,14 @@ public class BookController {
     }
 
     @RequestMapping(value = "/scanBook", method = RequestMethod.GET)
-    public ModelAndView lendBook() {
+    public ModelAndView lendBook(@ModelAttribute("errorMessage") final String errorMessage, Model model) {
+
+        if(errorMessage != null) {
+            model.addAttribute("errorMessage", errorMessage);
+        }
         return new ModelAndView("scanBook");
     }
+
 
     @ModelAttribute
     public void addAttributes(Model model){
@@ -164,19 +178,14 @@ public class BookController {
                 br.rejectValue("title", "title.alreadyexists", "A book with that title already exists");
                 return new ModelAndView("addBook");
             }
-
         }
     }
-
-
-
 
     @RequestMapping(value="book/add", method = RequestMethod.GET)
     public ModelAndView insertBook(){
         BookDto book=new BookDto();
         return new ModelAndView("addBook","book",book);
     }
-
 
     @RequestMapping(value = "/username", method = RequestMethod.GET)
     @ResponseBody
@@ -186,3 +195,7 @@ public class BookController {
 
 
 }
+
+
+
+
