@@ -69,7 +69,7 @@ public class BookController {
         BookDto book = bookService.getBookByBarcode(barCode);
         return new ModelAndView("book", "book", book);
         } catch (Exception e) {
-           // throw MissingServletRequestParameterException();
+           // throw new MissingServletRequestParameterException(barCode, "Long");
             return new ModelAndView("scanBook");
         }
     }
