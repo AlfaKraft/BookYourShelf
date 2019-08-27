@@ -16,13 +16,6 @@ public class BookDto {
     private String author1;
     private String author2;
 
-   // Name in books
-    private String name;
-
-    public String getName() {return name;}
-    public void setName(String name) { this.name = name; }
-
-
     public String getAuthor1() {
         return author1;
     }
@@ -104,8 +97,6 @@ public class BookDto {
     public void setStatus(boolean status) {
         this.status = status;
     }
-
-
 
     /*public Set<AuthorEnt> getAuthors() {
         return authors;

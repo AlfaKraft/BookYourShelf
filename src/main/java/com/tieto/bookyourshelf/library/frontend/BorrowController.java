@@ -28,8 +28,6 @@ public class BorrowController {
         return new ModelAndView("borrows", "borrows", borrows );
     }
 
-
-
     @RequestMapping(value = "/history", method = RequestMethod.GET)
         public ModelAndView getUserBorrowsHistory(){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();

@@ -1,6 +1,5 @@
 package com.tieto.bookyourshelf.library.dao;
 import com.tieto.bookyourshelf.library.dao.entityes.BookEnt;
-import com.tieto.bookyourshelf.library.dao.entityes.BorrowEnt;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import java.util.List;
@@ -14,7 +13,6 @@ public interface BookDao extends JpaRepository<BookEnt, Long> {
     BookEnt save(BookEnt book);
     Optional<BookEnt> findById(Integer id);
     BookEnt findBookEntByIsbnCode(Long isbnCode);
-    BookEnt findBookEntById(Long id);
 
 }
 

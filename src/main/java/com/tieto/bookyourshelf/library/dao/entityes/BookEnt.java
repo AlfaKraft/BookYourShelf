@@ -30,6 +30,7 @@ public class BookEnt {
         this.cover = cover;
         this.status = status;
         this.authors = authors;
+
     }
 
     @Id
@@ -112,6 +113,7 @@ public class BookEnt {
     public void setAuthors(Set<AuthorEnt> authors) {
         this.authors = authors;
     }
+
 
 }
 

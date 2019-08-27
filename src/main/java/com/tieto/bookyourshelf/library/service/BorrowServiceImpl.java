@@ -13,6 +13,9 @@ import com.tieto.bookyourshelf.library.service.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -38,10 +41,8 @@ public class BorrowServiceImpl implements BorrowService {
     @Override
     public List<BorrowDto> getAllBorrows() {
         List<BorrowDto> ret;
-        System.out.println("1----------------------------------------------------------------------------------------------------------");
         try {
             List<BorrowEnt> ent = borrowDao.findAll();
-            System.out.println("2----------------------------------------------------------------------------------------------------------");
             ret = ent.stream().map(e -> entToDto(e, null)).collect(Collectors.toList());
         } catch (Exception e) {
             throw new LibraryException(e.getMessage(), e);
@@ -84,6 +85,8 @@ public class BorrowServiceImpl implements BorrowService {
 
     @Override
     public BorrowDto getBorrowsByDateToBring(Date dateToBring) {
+
+
         return null;
     }
 
