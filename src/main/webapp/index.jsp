@@ -5,8 +5,8 @@
 <body>
 <br>
 <jsp:include page="WEB-INF/view/include/header.jsp"/>
+<div class="container">
 
-<!--<h2>Library - Tieto</h2>-->
 
 
 <img style="display: block;
@@ -14,10 +14,8 @@
   margin-right: auto;
   width: 35%;" src="https://scontent-hel2-1.xx.fbcdn.net/v/t1.15752-9/67923259_2376003849339539_6290760881017978880_n.png?_nc_cat=100&_nc_oc=AQmeaaRI7cXBr5LBeSXVyxCBd_KiB7Bgt6Wf6gWHk8vzNWN1DKYy22dMmGrM6eZOw88&_nc_ht=scontent-hel2-1.xx&oh=8cb21d06aab4c7e23ced7593387b72f0&oe=5DD8290D" />
 
-
+</div>
 <jsp:include page="WEB-INF/view/include/footer.jsp"/>
-
-
 </body>
 
 

@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%--
   Created by IntelliJ IDEA.
   User: kasutaja
@@ -25,12 +26,12 @@
         <!-- Div to show the scanner-->
     </div>
     <div class="col-md-4">
-        <input type="button" id="btn" value="Start/Stop the scanner" />
+        <input class="btn btn-secondary" type="button" id="btn" value="Start/Stop the scanner" />
         <form action="/app/search" method="post">
-            Triipkood: <input type="text" name="barcode" id="barcode"><br>
-            <input type="submit" value="Edasi">
+            Barcode : <input class="barcode-space" type="text" name="barcode" id="barcode"><br>
+            <input class="btn btn-success" type="submit" value="Continue">
+            <form:errors path="firstName"></form:errors>
         </form>
-        <a class="btn btn-primary" href="/index.jsp">Avalehele</a>
     </div>
 </div>
 <br />
