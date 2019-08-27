@@ -96,7 +96,6 @@ public class UserServiceImpl implements UserService {
         return ent;
     }
 
-
     private UserDto entToDto(UserEnt ent, UserDto dto) {
         if (ent == null) {
             return null;
@@ -104,7 +103,6 @@ public class UserServiceImpl implements UserService {
         if (dto == null) {
             dto = new UserDto();
         }
-
         dto.setId(ent.getId());
         dto.setFirstName(ent.getFirstName());
         dto.setLastName(ent.getLastName());

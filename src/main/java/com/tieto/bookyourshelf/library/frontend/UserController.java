@@ -95,13 +95,15 @@ public class UserController {
         }
     }
 
-    @ModelAttribute
-    public void addAttributes(Model model){
+
+    @RequestMapping(value = "include/header", method = RequestMethod.GET)
+    public ModelAndView loadAccountName() {
         try {
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
             String email = auth.getName();
             UserDto account = userService.getUserByEmail(email);
-            model.addAttribute("account", account);
+            System.out.println(account +"-------------------------------------------------------------------------------------------------------->");
+            return new ModelAndView("include/header", "account", account);
         } catch (RuntimeException e) {
             throw e;
         }

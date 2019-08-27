@@ -11,6 +11,7 @@ import com.tieto.bookyourshelf.library.service.UserService;
 import com.tieto.bookyourshelf.library.service.dto.AuthorDto;
 import com.tieto.bookyourshelf.library.service.dto.BookDto;
 import com.tieto.bookyourshelf.library.service.dto.BorrowDto;
+import com.tieto.bookyourshelf.library.service.dto.UserDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,8 +55,13 @@ public class BookController {
     @RequestMapping(value = "/book/{id}", method = RequestMethod.GET)
     public ModelAndView getBook(@PathVariable Long id) {
         BookDto book = bookService.getBookById(id);
+        BorrowDto borrowDto = borrowService.getBorrowsByIdBook(id);
+        if(borrowDto != null){
+            book.setBorrower(borrowDto.getName());
+        }
         return new ModelAndView("book", "book", book);
     }
+
 
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     public ModelAndView getBookByBarcode(@RequestParam("barcode") Long barCode) {
@@ -78,28 +84,30 @@ public class BookController {
 
     @RequestMapping(value = "/lendBook/{id}", method = RequestMethod.GET)
     public String lendBook(@PathVariable Long id) {
-        bookService.updateBookStatus(id, false);
-        BorrowEnt borrowEnt = new BorrowEnt();
-        LocalDate borrowedDate = LocalDate.now();
-        borrowEnt.setDateTaken(borrowedDate);
-        LocalDate dateToBring = borrowedDate.plusDays(14);
-        Date dateBring = java.sql.Date.valueOf(dateToBring);
-        borrowEnt.setDateToBring(dateBring);
-        borrowEnt.setIdBook(id);
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String email = auth.getName();
-        borrowEnt.setIdUser(userService.getUserByEmail(email).getId());
-        borrowService.addBorrow(borrowEnt);
-
+        if(bookService.getBookById(id).getStatus() == true) {
+            bookService.updateBookStatus(id, false);
+            BorrowEnt borrowEnt = new BorrowEnt();
+            LocalDate borrowedDate = LocalDate.now();
+            borrowEnt.setDateTaken(borrowedDate);
+            LocalDate dateToBring = borrowedDate.plusDays(14);
+            Date dateBring = java.sql.Date.valueOf(dateToBring);
+            borrowEnt.setDateToBring(dateBring);
+            borrowEnt.setIdBook(id);
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            String email = auth.getName();
+            borrowEnt.setIdUser(userService.getUserByEmail(email).getId());
+            borrowService.addBorrow(borrowEnt);
+        }
         return "redirect:/app/books";
     }
 
     @RequestMapping(value = "/returnBook/{id}", method = RequestMethod.GET)
     public String returnBook(@PathVariable Long id) {
         bookService.updateBookStatus(id, true);
-        BorrowDto borrowDto = new BorrowDto();
         LocalDate returnDate = LocalDate.now();
-        borrowDto.setDateBrought(returnDate);
+        bookService.returnDate(id, returnDate);
+
+
         return "redirect:/app/books";
     }
 

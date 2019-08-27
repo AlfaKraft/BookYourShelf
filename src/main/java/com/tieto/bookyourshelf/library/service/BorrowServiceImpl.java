@@ -74,8 +74,18 @@ public class BorrowServiceImpl implements BorrowService {
 
     @Override
     public BorrowDto getBorrowsByIdBook(Long idBook) {
-        BorrowEnt borrow = borrowDao.findBorrowEntByIdBook(idBook);
-        return entToDto(borrow, null);
+        BorrowDto borrowDto;
+        try {
+            BorrowEnt borrowEnt = borrowDao.findBorrowEntByIdBookAndDateBrought(idBook, null);
+            borrowDto = entToDto(borrowEnt, null);
+
+        } catch (Exception e){
+            throw new LibraryException(e.getMessage(), e);
+        }
+        return borrowDto;
+
+
+
     }
 
     @Override
@@ -104,29 +114,15 @@ public class BorrowServiceImpl implements BorrowService {
     }
 
     @Override
-    public void addBorrow(BorrowEnt borrow) {
-
+    public void addBorrow(BorrowEnt borrow){
         try{
-
             borrowDao.save(borrow);
-
         } catch (Exception e){
             throw new LibraryException(e.getMessage(), e);
         }
     }
-/*
-    @Override
-    public void addBrought(BorrowEnt borrow) {
-        try {
-            borrowDao.save(borrow);
-        }   catch (Exception e) {
-            throw new LibraryException(e.getMessage(),e);
-        }
-    }
 
- */
-
-    private BorrowEnt dtoToEnt(BorrowDto dto, BorrowEnt ent){
+    private BorrowEnt dtoToEnt(BorrowEnt dto, BorrowEnt ent){
         if (dto == null) {
             return null;
         }

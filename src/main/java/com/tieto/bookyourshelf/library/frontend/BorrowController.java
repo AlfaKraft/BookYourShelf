@@ -39,7 +39,5 @@ public class BorrowController {
         return new ModelAndView("history", "borrows", borrowDtos);
     }
 
-
-
 }
 

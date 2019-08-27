@@ -6,6 +6,7 @@ import com.tieto.bookyourshelf.library.BookNotFoundException;
 import com.tieto.bookyourshelf.library.dao.entityes.BookEnt;
 import com.tieto.bookyourshelf.library.service.dto.BookDto;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface BookService {
@@ -19,6 +20,8 @@ public interface BookService {
      void updateBookStatus(Long id, boolean status);
 
      void deleteBook(Long id);
+
+     void returnDate(Long id, LocalDate date);
 /*
     //String loadBook();
 

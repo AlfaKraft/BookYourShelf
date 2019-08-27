@@ -64,7 +64,14 @@
         </li>
         </sec:authorize>
         <sec:authorize access="isAuthenticated()">
-            Welcome back, <sec:authentication property="name"/>
+            Welcome , <sec:authentication property="name"/>
+        </sec:authorize>
+        <sec:authorize access="!isAuthenticated()">
+            <a href="<c:url value="/app/login"/>">Login</a>
+        </sec:authorize>
+
+        <sec:authorize access="isAuthenticated()">
+            <a href="<c:url value="/logout" />">Logout</a>
         </sec:authorize>
 
     </div>

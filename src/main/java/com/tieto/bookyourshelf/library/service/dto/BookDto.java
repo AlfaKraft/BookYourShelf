@@ -18,6 +18,7 @@ public class BookDto {
     @NotNull
     private Integer year;
     private String cover;
+    private String borrower;
     private Set<AuthorEnt> authors;
     private String author1;
     private String author2;
@@ -110,5 +111,13 @@ public class BookDto {
 
     public void setAuthors(Set<AuthorEnt> authors) {
         this.authors = authors;
+    }
+
+    public String getBorrower() {
+        return borrower;
+    }
+
+    public void setBorrower(String borrower) {
+        this.borrower = borrower;
     }
 }
