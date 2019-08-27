@@ -14,5 +14,6 @@
         <mapping class="com.tieto.bookyourshelf.library.dao.entityes.BookEnt"/>
         <mapping class="com.tieto.bookyourshelf.library.dao.entityes.AuthorEnt"/>
 
+
     </session-factory>
 </hibernate-configuration>

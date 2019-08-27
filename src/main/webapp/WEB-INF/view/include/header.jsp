@@ -8,7 +8,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 <html>
 <head>
     <title>Library - Tieto</title>
@@ -17,8 +16,6 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/header.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css">
-
-
 
 </head>
 <body>
@@ -38,25 +35,21 @@
         <li>
             <a href="/app/scanBook">Return</a>
         </li>
-
             <li>
                 <a href="/app/history">History</a>
             </li>
-
 
         <li>
             <a href="/app/account">Account</a>
         </li>
         </sec:authorize>
         <sec:authorize access="hasRole('ADMIN')">
-
         <li>
              <a href="/app/users">Users</a>
         </li>
-        
-            <li>
-                <a href="/app/borrows">Borrows list</a>
-            </li>
+        <li>
+            <a href="/app/borrows">Borrows list</a>
+        </li>
         <li>
             <a href="/app/account">Account</a>
         </li>
@@ -66,6 +59,7 @@
         </sec:authorize>
         <sec:authorize access="!isAuthenticated()">
             <a href="<c:url value="/app/login"/>">Login</a>
+            <a href="<c:url value="/app/user/registration"/>">Sign-Up</a>
         </sec:authorize>
 
         <sec:authorize access="isAuthenticated()">

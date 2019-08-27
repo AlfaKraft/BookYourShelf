@@ -1,4 +1,6 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page import="java.sql.Connection" %><%--
   Created by IntelliJ IDEA.
   User: kasutaja
@@ -22,6 +24,7 @@
                 <p>Genre: ${book.genre}</p>
                 <p>Language: ${book.language}</p>
                 <p>Year: ${book.year}</p>
+                <p>Author: ${book.authors}</p>
                 <p>Currently in the hands of: ${book.borrower}</p>
 
                 <p>Status: ${book.status==true ? "<img width='30px' height='30px' src='https://upload.wikimedia.org/wikipedia/en/f/fb/Yes_check.svg'>" :
@@ -38,7 +41,7 @@
                 <li><a class="btn btn-outline-primary" href="/app/lendBook/${book.id}">Borrow</a></li>
                 <!--<li><a class="btn btn-outline-primary space-btw" href="/">Queue</a></li>-->
 
-                <li><a class="btn btn-outline-primary" href="/app/returnBook/${book.id}">Return</a></li>
+                <li><a class="btn btn-outline-primary" href="/app/returnBook/${book.id}" onclick="return confirm('Are you sure you want to return ${book.title}?')">Return</a></li>
                 <li></li>
             </div>
         </sec:authorize>

@@ -30,6 +30,7 @@ public class BookEnt {
         this.cover = cover;
         this.status = status;
         this.authors = authors;
+
     }
 
     @Id
