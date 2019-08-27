@@ -19,9 +19,9 @@
 
         <div class="col-md-2">Book reader</div>
         <div class="col-md-4">Books title</div>
-        <div class="col-md-2">Book taken date</div>
-        <div class="col-md-2">Book brought date</div>
-        <div class="col-md-2">Book to bring date</div>
+        <div class="col-md-2">Borrowed date</div>
+        <div class="col-md-2">Return date</div>
+        <div class="col-md-2">Due date</div>
 
     </div>
 

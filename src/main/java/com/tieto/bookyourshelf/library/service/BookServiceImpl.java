@@ -88,7 +88,7 @@ public class BookServiceImpl implements BookService {
             ent = new BookEnt();
             ent = dtoToEnt(book, ent);
             bookDao.save(ent);
-            //ent.getAuthors().stream().forEach(a -> autDao.save(a));
+
 
         } catch (Exception e) {
             throw new LibraryException(e.getMessage(), e);
@@ -169,6 +169,7 @@ public class BookServiceImpl implements BookService {
         try {
             BorrowEnt borrowEnt = borrowDao.findBorrowEntByIdBookAndDateBrought(id, null);
             borrowEnt.setDateBrought(date);
+            borrowEnt.setDateToBring(null);
             borrowDao.save(borrowEnt);
         } catch (Exception e) {
             throw new LibraryException(e.getMessage(), e);
@@ -177,22 +178,6 @@ public class BookServiceImpl implements BookService {
 
 }
 
-    /*public String loadBook() {
-        String ret;
-        try {
-            ret = bookDao.loadBook();
-        } catch (Exception e) {
-            throw new LibraryException(e.getMessage(), e);
-        }
-        return ret;
-    }
 
-    public void saveBook(String book) {
-        try {
-            bookDao.saveBook(book, true);
-        } catch (Exception e) {
-            throw new LibraryException(e.getMessage(), e);
-        }
-    }*/
 
 

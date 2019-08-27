@@ -15,8 +15,8 @@
 </head>
 <body>
 
-
-<h4>Login Form</h4>
+<jsp:include page="include/header.jsp"/>
+<h4>Login</h4>
 
 <form action='<spring:url value="/app/loginAction"/>' method="post">
     <table>
@@ -34,5 +34,6 @@
     </table>
 </form>
 <br/>
+<jsp:include page="include/footer.jsp"/>
 </body>
 </html>

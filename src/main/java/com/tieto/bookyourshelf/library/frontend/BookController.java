@@ -59,18 +59,20 @@ public class BookController {
 
     @RequestMapping(value = "/lendBook/{id}", method = RequestMethod.GET)
     public String lendBook(@PathVariable Long id) {
-        bookService.updateBookStatus(id, false);
-        BorrowEnt borrowEnt = new BorrowEnt();
-        LocalDate borrowedDate = LocalDate.now();
-        borrowEnt.setDateTaken(borrowedDate);
-        LocalDate dateToBring = borrowedDate.plusDays(14);
-        Date dateBring = java.sql.Date.valueOf(dateToBring);
-        borrowEnt.setDateToBring(dateBring);
-        borrowEnt.setIdBook(id);
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String email = auth.getName();
-        borrowEnt.setIdUser(userService.getUserByEmail(email).getId());
-        borrowService.addBorrow(borrowEnt);
+        if(bookService.getBookById(id).getStatus() == true) {
+            bookService.updateBookStatus(id, false);
+            BorrowEnt borrowEnt = new BorrowEnt();
+            LocalDate borrowedDate = LocalDate.now();
+            borrowEnt.setDateTaken(borrowedDate);
+            LocalDate dateToBring = borrowedDate.plusDays(14);
+            Date dateBring = java.sql.Date.valueOf(dateToBring);
+            borrowEnt.setDateToBring(dateBring);
+            borrowEnt.setIdBook(id);
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            String email = auth.getName();
+            borrowEnt.setIdUser(userService.getUserByEmail(email).getId());
+            borrowService.addBorrow(borrowEnt);
+        }
         return "redirect:/app/books";
     }
 
