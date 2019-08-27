@@ -7,6 +7,7 @@ import com.tieto.bookyourshelf.library.service.BorrowService;
 import com.tieto.bookyourshelf.library.service.UserService;
 import com.tieto.bookyourshelf.library.service.dto.BookDto;
 import com.tieto.bookyourshelf.library.service.dto.BorrowDto;
+import com.tieto.bookyourshelf.library.service.dto.UserDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,8 +48,13 @@ public class BookController {
     @RequestMapping(value = "/book/{id}", method = RequestMethod.GET)
     public ModelAndView getBook(@PathVariable Long id) {
         BookDto book = bookService.getBookById(id);
+        BorrowDto borrowDto = borrowService.getBorrowsByIdBook(id);
+        if(borrowDto != null){
+            book.setBorrower(borrowDto.getName());
+        }
         return new ModelAndView("book", "book", book);
     }
+
 
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     public ModelAndView getBookByBarcode( @RequestParam("barcode") Long barCode) {

@@ -22,6 +22,7 @@
                 <p>Genre: ${book.genre}</p>
                 <p>Language: ${book.language}</p>
                 <p>Year: ${book.year}</p>
+                <p>Currently in the hands of: ${book.borrower}</p>
 
                 <p>Status: ${book.status==true ? "<img width='30px' height='30px' src='https://upload.wikimedia.org/wikipedia/en/f/fb/Yes_check.svg'>" :
                         "<img width='30px' height='30px' src='https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/No_Cross.svg/1024px-No_Cross.svg.png'>"}</p>
