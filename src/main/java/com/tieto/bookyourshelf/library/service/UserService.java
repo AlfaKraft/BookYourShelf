@@ -12,4 +12,5 @@ public interface UserService {
     UserDto getUserById(Long id);
     void saveUser(UserDto user);
     UserDto getUserByEmail(String email);
+    String faceRecognition(String imageBase64);
 }

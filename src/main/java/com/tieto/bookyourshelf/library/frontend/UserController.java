@@ -3,16 +3,16 @@ package com.tieto.bookyourshelf.library.frontend;
 import com.tieto.bookyourshelf.library.service.UserService;
 import com.tieto.bookyourshelf.library.service.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -90,5 +90,25 @@ public class UserController {
         }
 
 
+    }
+
+
+    @RequestMapping(value="user/faceRecognition", method = RequestMethod.GET)
+    public ModelAndView fr(){
+        return new ModelAndView("faceRecognition");
+    }
+
+    @RequestMapping(value="user/uploadImage", method=RequestMethod.POST)
+    public String uploadImage(@RequestParam("imageBase64") String file) throws IOException {
+        String userEmail= userService.faceRecognition(file);
+        if(userEmail==null || userEmail==""){
+
+        }
+        else{
+            Authentication authentication = new UsernamePasswordAuthenticationToken(userEmail, null,
+                    AuthorityUtils.createAuthorityList("ROLE_USER"));
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+        }
+        return "redirect:/";
     }
 }

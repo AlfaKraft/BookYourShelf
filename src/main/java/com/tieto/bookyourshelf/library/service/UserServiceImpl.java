@@ -4,16 +4,22 @@ import com.tieto.bookyourshelf.library.dao.UserDao;
 import com.tieto.bookyourshelf.library.dao.entityes.UserEnt;
 import com.tieto.bookyourshelf.library.service.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.RestTemplate;
 
+import java.io.FileOutputStream;
+import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
+
+    private static String UPLOADED_FOLDER = "C:\\Users\\kasutaja\\Documents\\Python\\RestExamples\\FR_REST_API\\unknown_people\\";
 
     @Autowired
     private UserDao userDao;
@@ -58,6 +64,29 @@ public class UserServiceImpl implements UserService {
         UserEnt ent = userDao.findUserEntByEmail(email);
         dto = entToDto(ent, dto);
         return dto;
+    }
+
+    @Override
+    public String faceRecognition(String imageBase64) {
+        String encodedImg = imageBase64.split(",")[1];
+        byte[] imageByteArray= Base64.getDecoder().decode(encodedImg);
+
+        FileOutputStream imageOutFile = null;
+        try {
+            imageOutFile = new FileOutputStream(
+                    UPLOADED_FOLDER + "unknown.jpg");
+            imageOutFile.write(imageByteArray);
+            imageOutFile.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        RestTemplate restTemplate = new RestTemplate();
+        String fooResourceUrl
+                = "http://127.0.0.1:8000/faceRecognition/?imageUrl=";
+        ResponseEntity<String> response
+                = restTemplate.getForEntity(fooResourceUrl + "unknown.jpg", String.class);
+        return response.getBody();
     }
 
 
