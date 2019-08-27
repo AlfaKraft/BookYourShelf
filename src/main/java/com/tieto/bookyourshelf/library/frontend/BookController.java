@@ -1,7 +1,6 @@
 package com.tieto.bookyourshelf.library.frontend;
 
 import com.tieto.bookyourshelf.library.BookAlreadyExistException;
-import com.tieto.bookyourshelf.library.BookNotFoundException;
 import com.tieto.bookyourshelf.library.dao.entityes.BorrowEnt;
 import com.tieto.bookyourshelf.library.frontend.models.User;
 import com.tieto.bookyourshelf.library.service.BookService;
@@ -39,7 +38,6 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Date;
 import java.util.Calendar;
 import java.util.List;
 import java.util.HashMap;
@@ -69,10 +67,10 @@ public class BookController {
     @RequestMapping(value = "/book/{id}", method = RequestMethod.GET)
     public ModelAndView getBook(@PathVariable Long id) {
         BookDto book = bookService.getBookById(id);
-        BorrowDto borrowDto = borrowService.getBorrowsByIdBook(id);
+        /*BorrowDto borrowDto = borrowService.getBorrowsByIdBook(id);
         if(borrowDto != null){
             book.setBorrower(borrowDto.getName());
-        }
+        }*/
         return new ModelAndView("book", "book", book);
     }
 
@@ -82,10 +80,10 @@ public class BookController {
         try {
             BookDto book = bookService.getBookByBarcode(barCode);
             Long id = book.getId();
-            BorrowDto borrowDto = borrowService.getBorrowsByIdBook(id);
+            /*BorrowDto borrowDto = borrowService.getBorrowsByIdBook(id);
             if(borrowDto != null){
                 book.setBorrower(borrowDto.getName());
-            }
+            }*/
             return new ModelAndView("book", "book", book);
         } catch (MissingServletRequestParameterException e) {
             throw new MissingServletRequestParameterException("barCode","Long");

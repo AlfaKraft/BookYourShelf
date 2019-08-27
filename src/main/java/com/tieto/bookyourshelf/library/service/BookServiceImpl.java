@@ -1,6 +1,6 @@
 package com.tieto.bookyourshelf.library.service;
 
-import com.tieto.bookyourshelf.library.BookNotFoundException;
+
 import com.tieto.bookyourshelf.library.LibraryException;
 import com.tieto.bookyourshelf.library.BookAlreadyExistException;
 import com.tieto.bookyourshelf.library.dao.AuthorDao;

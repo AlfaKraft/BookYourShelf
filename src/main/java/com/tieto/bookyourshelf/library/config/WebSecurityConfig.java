@@ -39,15 +39,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
-                .antMatchers("/app/login**").permitAll()
+                .antMatchers("/app/login**","/app/user/registration**").permitAll()
                 .antMatchers("/app/user/uploadImage").permitAll()
                 .antMatchers("/app/books","/app/book*", "/app/user/faceRecognition").permitAll()
                 .antMatchers("/app/account").permitAll()
-                .antMatchers(HttpMethod.GET,"/app/user*","/app/user/**").hasAuthority("ROLE_ADMIN")
+                //.antMatchers(HttpMethod.GET,"/app/user*","/app/user/**").hasAuthority("ROLE_ADMIN")
                 .antMatchers(HttpMethod.GET,"/app/scanBook").hasAuthority("ROLE_USER")
                 .and()
                 .formLogin()
