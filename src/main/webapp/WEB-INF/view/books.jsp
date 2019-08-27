@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 <%--
   Created by IntelliJ IDEA.
   User: kasutaja
@@ -15,55 +16,8 @@
 </head>
 <body>
 <jsp:include page="include/header.jsp"/>
-
 <sec:authorize access="hasRole('ADMIN')">
-<div class="container">
-    <h1>Add and Remove Books</h1>
-
-    <form:form method="post" modelAttribute="addbook">
-        <table>
-            <tr>
-                <td><form:label path="title">Title</form:label></td>
-                <td><form:input path="title"/></td>
-            </tr>
-            <tr>
-                <td><form:label path="isbnCode">ISBN code</form:label></td>
-                <td><form:input path="isbnCode"/></td>
-            </tr>
-            <tr>
-                <td><form:label path="genre">Genre</form:label></td>
-                <td><form:input path="genre"/></td>
-            </tr>
-            <tr>
-                <td><form:label path="language">Language</form:label></td>
-                <td><form:select path="language">
-                    <form:options items="${languageList}"/>
-                </form:select></td>
-            </tr>
-            <tr>
-                <td><form:label path="year">Year</form:label></td>
-                <td><form:input path="year"/></td>
-            </tr>
-            <tr>
-                <td><form:label path="author1">Autor 1</form:label></td>
-                <td><form:input path="author1"/></td>
-            </tr>
-            <tr>
-                <td><form:label path="author2">Autor 2</form:label></td>
-                <td><form:input path="author2"/></td>
-            </tr>
-
-            <tr>
-                <td><input type="submit" value="Add"></td>
-            </tr>
-
-
-        </table>
-
-
-    </form:form>
-
-</div>
+<a class="btn btn-outline-primary" href="/app/book/add">Add new book</a>
 </sec:authorize>
 
 <div class="container">
@@ -92,9 +46,9 @@
                 <div class="col-md-2"><img class="cover-photo" src="https://media.istockphoto.com/photos/open-book-picture-id495477978" height="200" width="125"></div>
                 <div class="col-md-1"><a class="btn btn-outline-primary" href="/app/book/${book.id}">Details</a></div>
                 <sec:authorize access="hasRole('ADMIN')">
-                <div class="col-md-1"><a class="btn btn-outline-primary" href="/app/delete/${book.id}">Remove</a></div>
-                </sec:authorize>
-
+                <div class="col-md-1">
+                    <a class="btn btn-outline-primary" href="/app/delete/${book.id}" onclick="return confirm('Are you sure you want to delete ${book.title}?')">Delete</a></div>
+                 </sec:authorize>
             </div>
         </c:forEach>
 
@@ -128,6 +82,8 @@
        }
     }
 </script>
+
+
 
 </body>
 </html>

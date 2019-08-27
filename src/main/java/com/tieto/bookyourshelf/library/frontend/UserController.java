@@ -1,17 +1,21 @@
 package com.tieto.bookyourshelf.library.frontend;
 
+
+import com.tieto.bookyourshelf.library.UserAlreadyExistException;
 import com.tieto.bookyourshelf.library.service.UserService;
 import com.tieto.bookyourshelf.library.service.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import javax.validation.Valid;
 
 import java.util.List;
 
@@ -20,8 +24,6 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-
-    private String userFirstName;
 
     @RequestMapping(value = "users", method = RequestMethod.GET)
     public ModelAndView loadAllUsers() {
@@ -32,35 +34,53 @@ public class UserController {
     @RequestMapping(value = "user/edit/{id}", method = RequestMethod.GET)
     public ModelAndView editUser(@PathVariable Long id) {
         UserDto user = userService.getUserById(id);
+        user.setPassword("");
+        user.setMatchingPassword("");
         return new ModelAndView("editUser", "user", user);
     }
 
-    @RequestMapping(value = "user/edit", method = RequestMethod.GET)
-    public ModelAndView addUser() {
-        UserDto user = new UserDto();
-        return new ModelAndView("editUser", "user", user);
+    @RequestMapping(value="user/edit", method=RequestMethod.POST)
+    public ModelAndView editUser(@ModelAttribute ("user") @Valid UserDto user, BindingResult br) {
+        if (br.hasErrors()) {
+            return new ModelAndView("editUser");
+        } else {
+            try {
+                userService.editUser(user);
+                return new ModelAndView("users", "users", userService.getAllUsers());
+            }catch (RuntimeException e){
+                throw e;
+            }
+        }
     }
 
-    @RequestMapping(value = "user/save", method = RequestMethod.POST)
-    public ModelAndView saveUser(@ModelAttribute UserDto user) {
-        userService.saveUser(user);
-        return new ModelAndView("users", "users", userService.getAllUsers());
+    @RequestMapping(value="user/registration", method = RequestMethod.GET)
+    public ModelAndView addUser(){
+        UserDto user=new UserDto();
+        return new ModelAndView("addUser","user",user);
     }
+
+    @RequestMapping(value="user/save", method=RequestMethod.POST)
+    public ModelAndView saveUser(@ModelAttribute ("user") @Valid UserDto user, BindingResult br){
+
+        if (br.hasErrors()) {
+            return new ModelAndView("addUser");
+        } else {
+            try {
+                    user.setRole("USER");
+                    userService.saveUser(user);
+                    return new ModelAndView("login");
+                } catch (UserAlreadyExistException e) {
+                    br.rejectValue("email", "email.alreadyexists", "A user with that email already exists");
+                    return new ModelAndView("addUser");
+                }
+        }
+    }
+
 
     @RequestMapping(value = "user/delete/{id}", method = RequestMethod.GET)
     public String deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
-        return "redirect:/app/users/remove";
-    }
-
-    @RequestMapping(value = "users/remove", method = RequestMethod.GET)
-    public ModelAndView loadRemoveUsersView(Model model) {
-        try {
-            return new ModelAndView("removeUsersView", "list", userService.getAllUsers());
-
-        } catch (RuntimeException e) {
-            throw e;
-        }
+        return "redirect:/app/users";
     }
 
     @RequestMapping(value = "account", method = RequestMethod.GET)
@@ -73,13 +93,12 @@ public class UserController {
         } catch (RuntimeException e) {
             throw e;
         }
-
-
     }
+
+
     @RequestMapping(value = "include/header", method = RequestMethod.GET)
     public ModelAndView loadAccountName() {
         try {
-            System.out.println("--------------------------------------------------------------------------------------------------------------------------");
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
             String email = auth.getName();
             UserDto account = userService.getUserByEmail(email);
@@ -88,7 +107,5 @@ public class UserController {
         } catch (RuntimeException e) {
             throw e;
         }
-
-
     }
 }

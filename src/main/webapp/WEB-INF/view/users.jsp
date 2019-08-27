@@ -14,14 +14,24 @@
 <body>
 <jsp:include page="include/header.jsp"/>
 <h3>Users list</h3>
-<ul>
-    <c:forEach var="user" items="${users}">
-        <li>${user.firstName} ${user.lastName} <a href="/app/user/edit/${user.id}">CHANGE</a></li>
-    </c:forEach>
-</ul>
+<div class="container">
+    <div class="row border border-primary">
+        <div class="col-md-2">First name</div>
+        <div class="col-md-2">Last name</div>
+        <div class="col-md-1"></div>
+        <div class="col-md-1"></div>
+    </div>
 
-<a href="/app/user/edit/">Add user</a>
-<a href="/app/users/remove">Delete user</a>
+
+    <c:forEach var="user" items="${users}">
+        <div class="row border border-primary">
+            <div class="col-md-2">${user.firstName} </div>
+            <div class="col-md-2">${user.lastName}</div>
+            <div class="col-md-1"><a href="/app/user/edit/${user.id}">Edit</a></div>
+            <div><a class="btn btn-outline-primary" href="/app/user/delete/${user.id}" onclick="return confirm('Are you sure you want to remove ${user.firstName} ${user.lastName}?')">Remove</a></div>
+        </div>
+    </c:forEach>
+</div>
 
 </body>
 </html>

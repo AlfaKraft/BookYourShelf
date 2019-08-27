@@ -9,6 +9,7 @@ import java.util.Optional;
 
 @Repository
 public interface UserDao extends JpaRepository<UserEnt,Long> {
+    UserEnt findByEmail(String email);
 
     List<UserEnt> findAll();
     UserEnt save(UserEnt user);
