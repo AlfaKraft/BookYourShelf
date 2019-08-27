@@ -73,7 +73,7 @@ public class BorrowServiceImpl implements BorrowService {
     }
 
     @Override
-    public BorrowDto getBorrowsByIdBook(Long idBook) {
+    public BorrowDto getBorrowedBookBIdBook(Long idBook) {
         BorrowDto borrowDto;
         try {
             BorrowEnt borrowEnt = borrowDao.findBorrowEntByIdBookAndDateBrought(idBook, null);
@@ -83,10 +83,8 @@ public class BorrowServiceImpl implements BorrowService {
             throw new LibraryException(e.getMessage(), e);
         }
         return borrowDto;
-
-
-
     }
+
 
     @Override
     public BorrowDto getBorrowsByDateTaken(LocalDate dateTaken) {

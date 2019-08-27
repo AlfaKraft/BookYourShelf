@@ -12,7 +12,7 @@ public interface BorrowService {
     List<BorrowDto> getAllBorrows();
     BorrowDto getBorrowsById(Long Id);
     List<BorrowDto> getBorrowsByIdUser(Long idUser);
-    BorrowDto getBorrowsByIdBook(Long idBook);
+    BorrowDto getBorrowedBookBIdBook(Long idBook);
     BorrowDto getBorrowsByDateTaken(LocalDate dateTaken);
     BorrowDto getBorrowsByDateToBring(Date dateToBring);
     BorrowDto getBorrowsByDateBrought(LocalDate dateBrought);

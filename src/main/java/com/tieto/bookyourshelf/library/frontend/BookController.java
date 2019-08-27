@@ -48,7 +48,7 @@ public class BookController {
     @RequestMapping(value = "/book/{id}", method = RequestMethod.GET)
     public ModelAndView getBook(@PathVariable Long id) {
         BookDto book = bookService.getBookById(id);
-        BorrowDto borrowDto = borrowService.getBorrowsByIdBook(id);
+        BorrowDto borrowDto = borrowService.getBorrowedBookBIdBook(id);
         if(borrowDto != null){
             book.setBorrower(borrowDto.getName());
         }
