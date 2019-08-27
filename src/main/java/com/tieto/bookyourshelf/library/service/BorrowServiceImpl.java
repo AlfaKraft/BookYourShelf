@@ -83,10 +83,8 @@ public class BorrowServiceImpl implements BorrowService {
             throw new LibraryException(e.getMessage(), e);
         }
         return borrowDto;
-
-
-
     }
+
 
     @Override
     public BorrowDto getBorrowsByDateTaken(LocalDate dateTaken) {
