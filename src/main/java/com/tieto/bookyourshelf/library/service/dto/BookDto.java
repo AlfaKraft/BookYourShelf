@@ -1,6 +1,7 @@
 package com.tieto.bookyourshelf.library.service.dto;
 
 import com.tieto.bookyourshelf.library.dao.entityes.AuthorEnt;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -18,10 +19,19 @@ public class BookDto {
     @NotNull
     private Integer year;
     private String cover;
+    private MultipartFile coverImage;
     private String borrower;
     private Set<AuthorEnt> authors;
     private String author1;
     private String author2;
+
+    public MultipartFile getCoverImage() {
+        return coverImage;
+    }
+
+    public void setCoverImage(MultipartFile coverImage) {
+        this.coverImage = coverImage;
+    }
 
     public String getAuthor1() {
         return author1;

@@ -2,46 +2,37 @@ package com.tieto.bookyourshelf.library.frontend;
 
 import com.tieto.bookyourshelf.library.BookAlreadyExistException;
 import com.tieto.bookyourshelf.library.dao.entityes.BorrowEnt;
-import com.tieto.bookyourshelf.library.frontend.models.User;
 import com.tieto.bookyourshelf.library.service.BookService;
-import com.tieto.bookyourshelf.library.service.AuthorService;
 import com.tieto.bookyourshelf.library.service.BorrowService;
 import com.tieto.bookyourshelf.library.service.UserService;
-import com.tieto.bookyourshelf.library.service.dto.AuthorDto;
 import com.tieto.bookyourshelf.library.service.dto.BookDto;
 import com.tieto.bookyourshelf.library.service.dto.BorrowDto;
-import com.tieto.bookyourshelf.library.service.dto.UserDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MissingServletRequestParameterException;
-import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.ServletContext;
 import javax.validation.Valid;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.Principal;
 import java.sql.Date;
-import java.text.DateFormat;
-import java.text.Format;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Calendar;
 import java.util.List;
-import java.util.HashMap;
-import java.util.Set;
 
 @Controller
 public class BookController {
@@ -57,6 +48,7 @@ public class BookController {
     private UserService userService;
 
     @Autowired
+    ServletContext context;
 
     @RequestMapping(value = "/books", method = RequestMethod.GET)
     public ModelAndView getAllBooks() {
@@ -163,14 +155,23 @@ public class BookController {
 
 
     @RequestMapping(value = "book/new", method = RequestMethod.POST)
-    public ModelAndView addBook(@ModelAttribute ("book") @Valid BookDto book, BindingResult br) {
+    public ModelAndView addBook(@ModelAttribute ("book") @Valid BookDto book, BindingResult br) throws IOException {
         log.info("Entering to addBook");
+
+        if (!book.getCoverImage().isEmpty()) {
+            byte[] bytes = book.getCoverImage().getBytes();
+            Path path = Paths.get(context.getRealPath("/img/")+ book.getCoverImage().getOriginalFilename());
+            Files.write(path, bytes);
+        }
+
         if (br.hasErrors()) {
             return new ModelAndView("addBook");
         } else {
             try {
                 book.setStatus(true);
+                book.setCover(book.getCoverImage().getOriginalFilename());
                 bookService.addBook(book);
+
                 return new ModelAndView("books", "books", bookService.getAllBooks());
             } catch (BookAlreadyExistException e) {
                 br.rejectValue("title", "title.alreadyexists", "A book with that title already exists");
@@ -178,6 +179,7 @@ public class BookController {
             }
         }
     }
+
 
     @RequestMapping(value="book/add", method = RequestMethod.GET)
     public ModelAndView insertBook(){
@@ -189,6 +191,20 @@ public class BookController {
     @ResponseBody
     public String currentUserName(Principal principal){
         return principal.getName();
+    }
+
+    @RequestMapping(value = "book/new_v2", method = RequestMethod.POST)
+    public String addBookv2(@ModelAttribute ("book") BookDto book, BindingResult br) {
+        log.info("Entering to addBook " + book.getTitle());
+        return "redirect:/";
+
+}
+
+
+    @PostMapping("book/new_v3")
+    public String multiUploadFileModel(@RequestParam("file") MultipartFile file) {
+        log.info("importing file >>>"+ file.getOriginalFilename()+ " "+file.getSize());
+        return "redirect:/";
     }
 
 

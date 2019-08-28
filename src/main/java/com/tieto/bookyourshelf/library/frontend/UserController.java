@@ -14,6 +14,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import javax.validation.Valid;
 
 import java.io.IOException;
@@ -116,10 +118,12 @@ public class UserController {
     }
 
     @RequestMapping(value="uploadImage", method=RequestMethod.POST)
-    public String uploadImage(@RequestParam("imageBase64") String file) throws IOException {
+    public String uploadImage(@RequestParam("imageBase64") String file, RedirectAttributes redirectAttrs){// throws IOException {
         String userEmail= userService.faceRecognition(file);
         if(userEmail==null || userEmail==""){
-
+        redirectAttrs.addFlashAttribute("errorMessage","Could not log-in, try again!");
+        String redirectUrl="/app/login?form";
+        return "redirect:" + redirectUrl;
         }
         else{
             Authentication authentication = new UsernamePasswordAuthenticationToken(userEmail, null,

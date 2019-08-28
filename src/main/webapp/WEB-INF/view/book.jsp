@@ -36,7 +36,13 @@
 
             </div>
             <div class="col-md-4">
-            <img src="https://media.istockphoto.com/photos/open-book-picture-id495477978" height="200" width="200">
+                <c:if test="${book.cover==null}">
+                    <img src="https://media.istockphoto.com/photos/open-book-picture-id495477978" height="200" width="200">
+                </c:if>
+                <c:if test="${book.cover!=null}">
+                    <img src="/img/${book.cover}" height="200" width="200">
+                </c:if>
+
             </div>
         </div>
         <sec:authorize access="hasRole('USER')">
