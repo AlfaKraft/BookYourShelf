@@ -24,9 +24,12 @@
                 <p>Genre: ${book.genre}</p>
                 <p>Language: ${book.language}</p>
                 <p>Year: ${book.year}</p>
-                <c:if test="${book.authors != null}">
-                <p>Author: ${book.authors}</p>
-                </c:if>
+
+                <c:forEach var="item" items="${book.authors}" varStatus="i">
+                    <p>Author ${i.index +1}: ${item.authorName}</p>
+                </c:forEach>
+
+
                 <c:if test="${book.borrower != null}">
                 <p>Currently in the hands of: ${book.borrower}</p>
                 </c:if>

@@ -1,5 +1,6 @@
 package com.tieto.bookyourshelf.library.service;
 
+import com.tieto.bookyourshelf.library.UserAlreadyExistException;
 import com.tieto.bookyourshelf.library.dao.UserDao;
 import com.tieto.bookyourshelf.library.dao.entityes.UserEnt;
 import com.tieto.bookyourshelf.library.service.dto.UserDto;
@@ -8,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.FileOutputStream;
@@ -46,16 +48,28 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void saveUser(UserDto user) {
-        UserEnt userEntity;
-        if(user.getId()==null){
-            userEntity=new UserEnt();
+    public UserEnt saveUser(UserDto user) throws UserAlreadyExistException{
+        if (emailExist(user.getEmail())) {
+            throw new UserAlreadyExistException("There is an account with that email address: " + user.getEmail());
+        } else {
+            UserEnt userEntity = new UserEnt();
+            userEntity = dtoToEnt(user, userEntity);
+            userDao.save(userEntity);
+            return userEntity;
         }
-        else{
-            userEntity=userDao.findById(user.getId()).get();
-        }
-        userEntity=dtoToEnt(user, userEntity);
+    }
+
+    @Override
+    public UserEnt editUser(UserDto user) {
+
+        UserEnt userEntity = userDao.findById(user.getId()).get();
+        userEntity = dtoToEnt(user, userEntity);
         userDao.save(userEntity);
+        return userEntity;
+    }
+
+    private boolean emailExist(String email) {
+        return userDao.findByEmail(email) != null;
     }
 
     @Override
@@ -67,7 +81,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String faceRecognition(String imageBase64) {
+    public String faceRecognition(String imageBase64){
+
+
         String encodedImg = imageBase64.split(",")[1];
         byte[] imageByteArray= Base64.getDecoder().decode(encodedImg);
 
@@ -88,6 +104,7 @@ public class UserServiceImpl implements UserService {
                 = restTemplate.getForEntity(fooResourceUrl + "unknown.jpg", String.class);
         return response.getBody();
     }
+
 
 
     private UserEnt dtoToEnt(UserDto dto, UserEnt ent) {

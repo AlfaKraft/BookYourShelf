@@ -139,7 +139,7 @@ public class BookServiceImpl implements BookService {
         ent.setTitle(dto.getTitle());
         ent.setYear(dto.getYear());
         ent.setStatus(dto.getStatus());
-        ent.setAuthors(dto.getAuthors());
+        //ent.setAuthors(dto.getAuthors());
         Set<AuthorEnt> authors = new HashSet<AuthorEnt>();
         AuthorEnt auth = new AuthorEnt();
         auth.setAuthorName(dto.getAuthor1());
@@ -167,7 +167,7 @@ public class BookServiceImpl implements BookService {
         dto.setCover(ent.getCover());
         dto.setYear(ent.getYear());
         dto.setStatus(ent.getStatus());
-        //dto.setAuthors(ent.getAuthors());
+        dto.setAuthors(ent.getAuthors());
 
         return dto;
     }
