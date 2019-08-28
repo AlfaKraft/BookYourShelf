@@ -38,7 +38,7 @@
         <sec:authorize access="hasRole('USER')">
             <div class="book-btn-page">
 
-                <li><a class="btn btn-outline-primary" href="/app/lendBook/${book.id}">Borrow</a></li>
+                <li><a class="btn btn-outline-primary space-right" href="/app/lendBook/${book.id}">Borrow</a></li>
                 <!--<li><a class="btn btn-outline-primary space-btw" href="/">Queue</a></li>-->
 
                 <li><a class="btn btn-outline-primary" href="/app/returnBook/${book.id}" onclick="return confirm('Are you sure you want to return ${book.title}?')">Return</a></li>
