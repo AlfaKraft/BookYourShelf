@@ -75,7 +75,7 @@ public class BorrowServiceImpl implements BorrowService {
     }
 
     @Override
-    public BorrowDto getBorrowedBookBIdBook(Long idBook) {
+    public BorrowDto getBorrowedBookByIdBook(Long idBook) {
         BorrowDto borrowDto;
         try {
             BorrowEnt borrowEnt = borrowDao.findBorrowEntByIdBookAndDateBrought(idBook, null);
@@ -169,7 +169,7 @@ public class BorrowServiceImpl implements BorrowService {
         }
 
         if(ent.getDateToBring() != null){
-            SimpleDateFormat formatter = new SimpleDateFormat("EEEE, dd MMM yyyy");
+            SimpleDateFormat formatter = new SimpleDateFormat("EEEE, dd. MMM yyyy");
 
             dto.setDateToBring(formatter.format(ent.getDateToBring()));
         }

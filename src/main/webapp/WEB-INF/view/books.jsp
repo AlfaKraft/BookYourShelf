@@ -35,40 +35,47 @@
         <a class="btn btn-outline-primary space-down" href="/app/book/add">Add new book</a>
     </sec:authorize>
 </div>
-        <div class="limiter">
+<div class="limiter">
+    <div class="container-table100">
+        <div class="wrap-table100">
+            <div class="table100">
+                <input class="search rounded" id="search-book" type="text" onkeyup="myFunction()" placeholder="Search books...">
+                <table id="booktable">
+                    <tr class="table-head">
+                            <th class="mobile_hide_btitle">Title</th>
+                            <th class="mobile_hide">Genre</th>
+                            <th class="mobile_hide">Language</th>
+                            <th class="mobile_hide_tblt">Year</th>
+                            <th>Status</th>
+                            <th>Picture</th>
+                            <th>About</th>
+                    </tr>
+                    <c:forEach var="book" items="${books}" >
+                    <tr>
+                        <td class="mobile_hide_btitle">${book.title}</td>
+                        <td class="mobile_hide">${book.genre}</td>
+                        <td class="mobile_hide">${book.language}</td>
+                        <td class="mobile_hide_tblt">${book.year}</td>
+                        <td>${book.status==true ? "<img width='30px' height='30px' src='https://upload.wikimedia.org/wikipedia/en/f/fb/Yes_check.svg'>" :
+                                "<img width='30px' height='30px' src='https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/No_Cross.svg/1024px-No_Cross.svg.png'>"}</td>
+                        <td>
+                            <c:if test="${book.cover==null}">
+                                <img src="https://media.istockphoto.com/photos/open-book-picture-id495477978" height="200" width="200">
+                            </c:if>
+                            <c:if test="${book.cover!=null}">
+                                <img src="/img/${book.cover}" height="200" width="200">
+                            </c:if>
+                        </td>
+                        <td>
+                            <a class="btn btn-outline-primary" href="/app/book/${book.id}">Details</a>
+                        <sec:authorize access="hasRole('ADMIN')">
+                            <a class="btn btn-danger" href="/app/delete/${book.id}" onclick="return confirm('Are you sure you want to delete ${book.title}?')">Delete</a>
+                         </sec:authorize>
+                        </td>
+                    </tr>
+                    </c:forEach>
 
-            <div class="container-table100">
-                <div class="wrap-table100">
-                    <div class="table100">
-                        <input class="search rounded" id="search-book" type="text" onkeyup="myFunction()" placeholder="Search books...">
-<table id="booktable">
-    <tr class="table-head">
-            <th class="mobile_hide_btitle">Title</th>
-            <th class="mobile_hide">Genre</th>
-            <th class="mobile_hide">Language</th>
-            <th class="mobile_hide_tblt">Year</th>
-            <th>Status</th>
-            <th>Picture</th>
-            <th>About</th>
-    </tr>
-        <c:forEach var="book" items="${books}" >
-
-            <tr>
-                <td class="mobile_hide_btitle">${book.title}</td>
-                <td class="mobile_hide">${book.genre}</td>
-                <td class="mobile_hide">${book.language}</td>
-                <td class="mobile_hide_tblt">${book.year}</td>
-                <td>${book.status==true ? "<img width='30px' height='30px' src='https://upload.wikimedia.org/wikipedia/en/f/fb/Yes_check.svg'>" :
-                        "<img width='30px' height='30px' src='https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/No_Cross.svg/1024px-No_Cross.svg.png'>"}</td>
-                <td><img class="cover-photo" src="https://media.istockphoto.com/photos/open-book-picture-id495477978"></td>
-                <td><a class="btn btn-outline-primary btn-space-down" href="/app/book/${book.id}">Details</a>
-                <sec:authorize access="hasRole('ADMIN')">
-
-                    <a class="btn btn-danger" href="/app/delete/${book.id}" onclick="return confirm('Are you sure you want to delete ${book.title}?')">Delete</a></td>
-                 </sec:authorize>
-            </tr>
-        </c:forEach>
-</table>
+                </table>
                     </div>
                 </div>
             </div>

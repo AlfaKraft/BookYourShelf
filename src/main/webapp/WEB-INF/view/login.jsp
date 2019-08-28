@@ -8,6 +8,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,6 +17,7 @@
 <body>
 
 <jsp:include page="include/header.jsp"/>
+
 
 <div class="container">
 <div class="row">
@@ -35,6 +37,12 @@
         </div>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
         </form>
+    <c:if test="${not empty sessionScope.message}">
+        <span style="color:green"><c:out value="${sessionScope.message}"/></span>
+        <c:remove var="message" scope="session" />
+    </c:if>
+    <a href="/app/faceRecognition"><button>Face recognition</button></a>
+    <c:if test="${not empty errorMessage}">${errorMessage}</c:if>
 </div>
     <div class="col-md-3">
 
