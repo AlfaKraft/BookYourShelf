@@ -67,8 +67,6 @@
   <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
     <property name="entityManagerFactory" ref="entityManagerFactory" />
   </bean>
-
-
   <tx:annotation-driven />
 
   <bean id="persistenceExceptionTranslationPostProcessor" class=
@@ -76,22 +74,23 @@
 
   <jpa:repositories base-package="com.tieto.bookyourshelf.library.dao"/>
 
+  <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
 
-  <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-    <property name="host" value="smtp.gmail.com" />
-    <property name="port" value="587" />
-    <property name="username" value="tieto.estonia@gmail.com" />
-    <property name="password" value="Bookyourself1" />
-    <!-- The name of the property, following JavaBean naming conventions -->
-    <property name="javaMailProperties">
-      <props>
-        <prop key="mail.transport.protocol">smtp</prop>
-        <prop key="mail.smtp.auth">true</prop>
-        <prop key="mail.smtp.starttls.enable">true</prop>
-        <prop key="mail.debug">true</prop>
-      </props>
-    </property>
-  </bean>
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="smtp.gmail.com" />
+        <property name="port" value="587" />
+        <property name="username" value="tieto.estonia@gmail.com" />
+        <property name="password" value="Bookyourself1" />
+        <!-- The name of the property, following JavaBean naming conventions -->
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.transport.protocol">smtp</prop>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+                <prop key="mail.debug">true</prop>
+            </props>
+        </property>
+    </bean>
 
     <!-- this is a template message that we can pre-load with default state -->
     <bean id="templateMessage" class="org.springframework.mail.SimpleMailMessage">
@@ -99,13 +98,8 @@
         <property name="subject" value="Book"/>
     </bean>
 
-  <bean id="NotificationService" class="com.tieto.bookyourshelf.library.service.NotificationServiceImpl">
-    <property name="mailSender" ref="mailSender"/>
-    <property name="templateMessage" ref="templateMessage"/>
-  </bean>
-
-
-
+    <bean id="NotificationService" class="com.tieto.bookyourshelf.library.service.NotificationServiceImpl">
+        <property name="mailSender" ref="mailSender"/>
+        <property name="templateMessage" ref="templateMessage"/>
+    </bean>
 </beans>
-
-

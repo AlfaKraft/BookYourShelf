@@ -16,7 +16,7 @@
 <jsp:include page="include/header.jsp"/>
 
 <div class="container">
-    <form:form method="POST" action="/app/book/new" modelAttribute="book" class="form-signin">
+    <form:form method="POST" enctype="multipart/form-data"  action="/app/book/new" modelAttribute="book"  class="form-signin">
 
     <table>
         <tr>
@@ -53,6 +53,11 @@
         <tr>
             <td><form:label path="author2">Autor 2</form:label></td>
             <td><form:input path="author2"/></td>
+        </tr>
+
+        <tr>
+            <td><form:label path="coverImage">Cover</form:label></td>
+            <td><form:input type="file" path="coverImage"/></td>
         </tr>
 
         <tr>

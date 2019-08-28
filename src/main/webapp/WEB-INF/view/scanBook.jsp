@@ -48,6 +48,8 @@
 <!--<script src="quagga.min.js"></script>-->
 
 <script>
+
+    document.getElementById("barcode").focus();
     var _scannerIsRunning = false;
     function startScanner() {
         Quagga.init({
