@@ -27,6 +27,15 @@
     </plugin>
 
   </plugins>
+
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+      </resource>
+      <resource>
+        <directory>target/library-1.0-SNAPSHOT/img</directory>
+      </resource>
+    </resources>
 </build>
 
   <dependencies>

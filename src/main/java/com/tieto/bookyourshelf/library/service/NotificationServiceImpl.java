@@ -12,7 +12,11 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -44,7 +48,7 @@ public class NotificationServiceImpl implements NotificationService {
     //@Scheduled(cron="0 0 0 ? *")
     //@Scheduled(fixedDelay=1000)
     //@Scheduled(cron="0 0 10 ? * MON-FRI")
-    @Scheduled(cron="0 16 18 ? * MON-FRI")
+    @Scheduled(cron="0 18 17 ? * MON-FRI") //seconds, minutes, hours(24h)
     public void sendNotification() {
         Date date = new Date();;
 
@@ -55,14 +59,19 @@ public class NotificationServiceImpl implements NotificationService {
 
             UserDto user = userService.getUserById(borrowsWithDueDatesExpired.get(i).getIdUser());
             BookDto book = bookService.getBookById(borrowsWithDueDatesExpired.get(i).getIdBook());
+            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+
             msg.setTo(user.getEmail());
             msg.setText(
-                    "Dear user," +
+                    "Dear "+user.getFirstName()+","+
                             "\n\n" +
-                            "please return " +
-                            book.getTitle()+"!"+
+                            "Please return \""+
+                            book.getTitle()+"\"!" +
+                            "\n" +
+                            "Your return date was " +
+                            dateFormat.format(borrowsWithDueDatesExpired.get(i).getDateToBring())+"." +
                             "\n\n" +
-                            "Your Library " );
+                            "Your BookYourShelf" );
             try{
                 this.mailSender.send(msg);
             }

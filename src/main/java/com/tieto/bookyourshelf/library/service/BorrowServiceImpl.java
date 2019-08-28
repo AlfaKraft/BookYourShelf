@@ -169,7 +169,7 @@ public class BorrowServiceImpl implements BorrowService {
         }
 
         if(ent.getDateToBring() != null){
-            SimpleDateFormat formatter = new SimpleDateFormat("EEEE, dd MMM yyyy");
+            SimpleDateFormat formatter = new SimpleDateFormat("EEEE, dd. MMM yyyy");
 
             dto.setDateToBring(formatter.format(ent.getDateToBring()));
         }
