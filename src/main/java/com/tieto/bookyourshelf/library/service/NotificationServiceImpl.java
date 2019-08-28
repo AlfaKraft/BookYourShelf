@@ -44,7 +44,7 @@ public class NotificationServiceImpl implements NotificationService {
     //@Scheduled(cron="0 0 0 ? *")
     //@Scheduled(fixedDelay=1000)
     //@Scheduled(cron="0 0 10 ? * MON-FRI")
-    @Scheduled(cron="0 12 14 ? * MON-FRI")
+    @Scheduled(cron="0 16 18 ? * MON-FRI")
     public void sendNotification() {
         Date date = new Date();;
 
