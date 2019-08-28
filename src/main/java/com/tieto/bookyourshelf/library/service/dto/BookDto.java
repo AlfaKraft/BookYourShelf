@@ -18,7 +18,9 @@ public class BookDto {
     @NotNull
     private Integer year;
     private String cover;
+
     private String borrower;
+
     private Set<AuthorEnt> authors;
     private String author1;
     private String author2;

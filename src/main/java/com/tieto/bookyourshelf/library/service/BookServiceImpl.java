@@ -9,6 +9,7 @@ import com.tieto.bookyourshelf.library.dao.BorrowDao;
 import com.tieto.bookyourshelf.library.dao.UserDao;
 import com.tieto.bookyourshelf.library.dao.entityes.AuthorEnt;
 import com.tieto.bookyourshelf.library.dao.entityes.BookEnt;
+import com.tieto.bookyourshelf.library.service.dto.AuthorDto;
 import com.tieto.bookyourshelf.library.dao.entityes.BorrowEnt;
 import com.tieto.bookyourshelf.library.dao.entityes.UserEnt;
 import com.tieto.bookyourshelf.library.service.dto.BookDto;
@@ -34,6 +35,8 @@ public class BookServiceImpl implements BookService {
 
     @Autowired
     private BookDao bookDao;
+    @Autowired
+    private AuthorDao aut;
     @Autowired
     private AuthorDao autDao;
     @Autowired
@@ -139,7 +142,9 @@ public class BookServiceImpl implements BookService {
         ent.setTitle(dto.getTitle());
         ent.setYear(dto.getYear());
         ent.setStatus(dto.getStatus());
+
         //ent.setAuthors(dto.getAuthors());
+
         Set<AuthorEnt> authors = new HashSet<AuthorEnt>();
         AuthorEnt auth = new AuthorEnt();
         auth.setAuthorName(dto.getAuthor1());
@@ -168,7 +173,6 @@ public class BookServiceImpl implements BookService {
         dto.setYear(ent.getYear());
         dto.setStatus(ent.getStatus());
         dto.setAuthors(ent.getAuthors());
-
         return dto;
     }
 

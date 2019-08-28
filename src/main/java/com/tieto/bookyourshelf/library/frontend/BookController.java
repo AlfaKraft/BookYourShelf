@@ -14,6 +14,7 @@ import com.tieto.bookyourshelf.library.service.dto.UserDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -25,6 +26,9 @@ import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+
+import javax.transaction.Transactional;
 
 import javax.validation.Valid;
 import java.security.Principal;
@@ -65,6 +69,7 @@ public class BookController {
     }
 
     @RequestMapping(value = "/book/{id}", method = RequestMethod.GET)
+    @Transactional
     public ModelAndView getBook(@PathVariable Long id) {
         BookDto book = bookService.getBookById(id);
         BorrowDto borrowDto = borrowService.getBorrowedBookByIdBook(id);
@@ -123,6 +128,8 @@ public class BookController {
         bookService.updateBookStatus(id, true);
         LocalDate returnDate = LocalDate.now();
         bookService.returnDate(id, returnDate);
+
+
         return "redirect:/app/books";
     }
 
