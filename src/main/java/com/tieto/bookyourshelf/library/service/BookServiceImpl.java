@@ -1,14 +1,18 @@
 package com.tieto.bookyourshelf.library.service;
 
+
 import com.tieto.bookyourshelf.library.LibraryException;
 import com.tieto.bookyourshelf.library.BookAlreadyExistException;
 import com.tieto.bookyourshelf.library.dao.AuthorDao;
 import com.tieto.bookyourshelf.library.dao.BookDao;
 import com.tieto.bookyourshelf.library.dao.BorrowDao;
+import com.tieto.bookyourshelf.library.dao.UserDao;
 import com.tieto.bookyourshelf.library.dao.entityes.AuthorEnt;
 import com.tieto.bookyourshelf.library.dao.entityes.BookEnt;
 import com.tieto.bookyourshelf.library.dao.entityes.BorrowEnt;
+import com.tieto.bookyourshelf.library.dao.entityes.UserEnt;
 import com.tieto.bookyourshelf.library.service.dto.BookDto;
+import com.tieto.bookyourshelf.library.service.dto.BorrowDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +38,9 @@ public class BookServiceImpl implements BookService {
     private AuthorDao autDao;
     @Autowired
     private BorrowDao borrowDao;
+    @Autowired
+    private UserService userService;
+
 
     public List<BookDto> getAllBooks() {
         List<BookDto> ret;

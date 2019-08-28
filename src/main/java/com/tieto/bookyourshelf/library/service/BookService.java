@@ -4,6 +4,7 @@ package com.tieto.bookyourshelf.library.service;
 import com.tieto.bookyourshelf.library.BookAlreadyExistException;
 import com.tieto.bookyourshelf.library.dao.entityes.BookEnt;
 import com.tieto.bookyourshelf.library.service.dto.BookDto;
+import com.tieto.bookyourshelf.library.service.dto.BorrowDto;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 
 import java.time.LocalDate;

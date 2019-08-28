@@ -33,6 +33,7 @@
         </tr>
     </table>
 </form>
+<a href="/app/user/faceRecognition"><button>Face recognition</button></a>
 <br/>
 <jsp:include page="include/footer.jsp"/>
 </body>

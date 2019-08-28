@@ -2,14 +2,19 @@ package com.tieto.bookyourshelf.library.frontend;
 
 import com.tieto.bookyourshelf.library.BookAlreadyExistException;
 import com.tieto.bookyourshelf.library.dao.entityes.BorrowEnt;
+import com.tieto.bookyourshelf.library.frontend.models.User;
 import com.tieto.bookyourshelf.library.service.BookService;
+import com.tieto.bookyourshelf.library.service.AuthorService;
 import com.tieto.bookyourshelf.library.service.BorrowService;
 import com.tieto.bookyourshelf.library.service.UserService;
+import com.tieto.bookyourshelf.library.service.dto.AuthorDto;
 import com.tieto.bookyourshelf.library.service.dto.BookDto;
 import com.tieto.bookyourshelf.library.service.dto.BorrowDto;
+import com.tieto.bookyourshelf.library.service.dto.UserDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -23,11 +28,20 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Calendar;
 import java.util.List;
+import java.util.HashMap;
+import java.util.Set;
 
 @Controller
 public class BookController {
@@ -42,6 +56,8 @@ public class BookController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+
     @RequestMapping(value = "/books", method = RequestMethod.GET)
     public ModelAndView getAllBooks() {
         List<BookDto> books=bookService.getAllBooks();
@@ -51,10 +67,10 @@ public class BookController {
     @RequestMapping(value = "/book/{id}", method = RequestMethod.GET)
     public ModelAndView getBook(@PathVariable Long id) {
         BookDto book = bookService.getBookById(id);
-        BorrowDto borrowDto = borrowService.getBorrowsByIdBook(id);
+        /*BorrowDto borrowDto = borrowService.getBorrowsByIdBook(id);
         if(borrowDto != null){
             book.setBorrower(borrowDto.getName());
-        }
+        }*/
         return new ModelAndView("book", "book", book);
     }
 
@@ -64,16 +80,15 @@ public class BookController {
         try {
             BookDto book = bookService.getBookByBarcode(barCode);
             Long id = book.getId();
-            BorrowDto borrowDto = borrowService.getBorrowsByIdBook(id);
+            /*BorrowDto borrowDto = borrowService.getBorrowsByIdBook(id);
             if(borrowDto != null){
                 book.setBorrower(borrowDto.getName());
-            }
+            }*/
             return new ModelAndView("book", "book", book);
         } catch (MissingServletRequestParameterException e) {
             throw new MissingServletRequestParameterException("barCode","Long");
         }
     }
-
 
     @ExceptionHandler(MissingServletRequestParameterException.class)
     public String handleMyException(Exception  e, RedirectAttributes redirectAttrs) {
@@ -108,8 +123,6 @@ public class BookController {
         bookService.updateBookStatus(id, true);
         LocalDate returnDate = LocalDate.now();
         bookService.returnDate(id, returnDate);
-
-
         return "redirect:/app/books";
     }
 

@@ -17,15 +17,6 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/header.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css">
 
-    <sec:authorize access="!isAuthenticated()">
-        <a href="<c:url value="/app/login"/>">Login</a>
-        <a href="<c:url value="/app/registration"/>">Sign-Up</a>
-    </sec:authorize>
-
-    <sec:authorize access="isAuthenticated()">
-        <a href="<c:url value="/logout" />">Logout</a>
-    </sec:authorize>
-
 </head>
 <body>
 <nav>
@@ -68,6 +59,7 @@
         </sec:authorize>
         <sec:authorize access="!isAuthenticated()">
             <a href="<c:url value="/app/login"/>">Login</a>
+            <a href="<c:url value="/app/registration"/>">Sign-Up</a>
         </sec:authorize>
 
         <sec:authorize access="isAuthenticated()">
