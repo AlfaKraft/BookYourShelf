@@ -1,0 +1,38 @@
+@media screen and (max-width: 767px) {
+    th {
+        font-size: 14px;
+    }
+    td{
+        font-size: 12px;
+    }
+    th.mobile_hide, td.mobile_hide{
+        display: none;
+    }
+}
+@media screen and (max-width: 767px) {
+    .nav_mobile_desk{
+        display: none;
+    }
+}
+@media screen and (max-width: 800px) {
+    .mobile_hide_tblt{
+        display: none;
+    }
+}
+@media screen and (max-width: 430px) {
+    .mobile_hide_btitle{
+        display: none;
+    }
+}
+@media screen and (max-width: 335px) {
+    .cover-photo{
+        width: 100px;
+        height: 175px;
+    }
+}
+
+@media screen and (min-width: 767px) {
+    .nav_mobile_mobile{
+        display: none;
+    }
+}

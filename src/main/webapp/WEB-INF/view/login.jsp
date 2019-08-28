@@ -16,24 +16,33 @@
 <body>
 
 <jsp:include page="include/header.jsp"/>
-<h4>Login</h4>
 
-<form action='<spring:url value="/app/loginAction"/>' method="post">
-    <table>
-        <tr>
-            <td>Username</td>
-            <td><input type="text" name="username"></td>
-        </tr>
-        <tr>
-            <td>Password</td>
-            <td><input type="password" name="password"></td>
-        </tr>
-        <tr>
-            <td><button type="submit">Login</button></td>
-        </tr>
-    </table>
-</form>
-<br/>
+<div class="container">
+<div class="row">
+    <div class="col-md-3">
+
+    </div>
+<div class="col-md-6">
+        <form action='<spring:url value="/app/loginAction"/>' method="post">
+        <h2>Log in</h2>
+        <div class="form-group">
+            <label>E-mail</label>
+                <input class="form-control" type="text" name="username" placeholder="E-mail">
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+                <input class="form-control" type="password" name="password" placeholder="Password">
+        </div>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+        </form>
+</div>
+    <div class="col-md-3">
+
+    </div>
+
+</div>
+</div>
+
 <jsp:include page="include/footer.jsp"/>
 </body>
 </html>

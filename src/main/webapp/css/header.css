@@ -5,3 +5,13 @@
     margin-top: 25px;
     margin-bottom: 25px;
 }
+.bg-nav-color {
+    background: #62b3e5;
+    margin-bottom: 0px;
+}
+.bg-nav-color-extend{
+    background: #9acaeb;
+}
+a{
+    color: #fff;
+}

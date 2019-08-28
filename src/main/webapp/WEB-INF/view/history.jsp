@@ -16,23 +16,26 @@
 <body>
 <jsp:include page="include/header.jsp"/>
 <div class="container">
-    <div class="row border border-primary">
-        
-        <div class="col-md-4">Book title</div>
-        <div class="col-md-2">Borrowed date</div>
-        <div class="col-md-2">Return date</div>
-        <div class="col-md-2">Due date</div>
+    <h2>History</h2>
+    <table class="table table-striped">
+        <thead>
+            <th>Book title</th>
+            <th>Borrowed date</th>
+            <th>Return date</th>
+            <th>Due date</th>
+        </thead>
+        <tbody>
+        <c:forEach var="borrows"  items="${borrows}" >
+            <tr>
+                <td>${borrows.title}</td>
+                <td>${borrows.dateTaken}</td>
+                <td>${borrows.dateBrought}</td>
+                <td>${borrows.dateToBring}</td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
 
-    </div>
-
-    <c:forEach var="borrows"  items="${borrows}" >
-        <div class="row border border-primary">
-            <div class="col-md-4">${borrows.title}</div>
-            <div class="col-md-2">${borrows.dateTaken}</div>
-            <div class="col-md-2">${borrows.dateBrought}</div>
-            <div class="col-md-2">${borrows.dateToBring}</div>
-        </div>
-    </c:forEach>
 </div>
 <jsp:include page="include/footer.jsp"/>
 

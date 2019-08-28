@@ -1,12 +1,8 @@
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: #E6E6E6;
+    background-color: #d2d2d2;
 }
 
-h4 {
-    text-align: center;
-    text-decoration: none;
-}
 a:hover {
     text-decoration: none;
 }
@@ -19,13 +15,18 @@ input#barcode {
 }
 .cover-photo {
     margin: 5px 0;
+    width: 125px;
+    height: 200px;
 }
 
 .book-btn-page {
     display: flex;
 }
+.space-down, .btn-space-down {
+    margin: 0 0 10px 0;
+}
 .space-right {
-    margin: 0 25px 0 0;
+    margin: 0 10px 0 0;
 }
 .row.border.border-primary{
     display: flex;
@@ -39,15 +40,16 @@ input#barcode {
 .remove-space {
     padding: 5px 0;
 }
-.remove-space:hover{
-    background-color: #ffffff;
-}
-.main-img-cntr {
-    display: flex;
-    justify-content: center;
-}
 
-#search-book {
+.bys_logo{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+/* Borrowtable admin and booktable */
+
+#search-book, #search-user {
 
     background-position: 10px 12px; /* Position the search icon */
     background-repeat: no-repeat; /* Do not repeat the icon image */
@@ -58,25 +60,28 @@ input#barcode {
     margin-bottom: 12px; /* Add some space below the input */
 }
 
-#booktable {
+#booktable, #borrowtable {
     border-collapse: collapse; /* Collapse borders */
     width: 100%; /* Full-width */
     border: 1px solid #ddd; /* Add a grey border */
     font-size: 18px; /* Increase font-size */
 }
 
-#booktable th, #booktable td {
+#booktable th, #booktable td, #borrowtable th, #borrowtable td {
     text-align: left; /* Left-align text */
     padding: 12px; /* Add padding */
 }
 
-#booktable tr {
+#booktable tr, #borrowtable tr {
     /* Add a bottom border to all table rows */
     border-bottom: 1px solid #ddd;
 }
 
-#booktable tr.header, #booktable tr:hover {
+#booktable tr.header, #booktable tr:hover, #borrowtable tr:hover ,.borrowtable:hover, .usersTable:hover {
     /* Add a grey background color to the table header and on hover */
     background-color: #f1f1f1;
 }
 
+.borrowtable {
+    padding: 5px 0;
+}
