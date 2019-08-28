@@ -14,11 +14,15 @@
 <body>
 <jsp:include page="include/header.jsp"/>
 
-<div class="container">
+<div class="limiter">
+
+    <div class="container-table100">
+        <div class="wrap-table100">
+            <div class="table100">
     <h2>Users list</h2>
-    <table class="table table-striped">
+    <table>
         <thead>
-        <tr>
+        <tr class="table-head">
             <th>Name</th>
             <th></th>
             <th></th>
@@ -36,6 +40,9 @@
     </table>
 
 
+</div>
+        </div>
+    </div>
 </div>
 
 </body>

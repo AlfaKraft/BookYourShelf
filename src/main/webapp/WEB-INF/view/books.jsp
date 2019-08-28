@@ -12,8 +12,20 @@
 <html>
 <head>
 <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
 
-</head>
 <body>
 <jsp:include page="include/header.jsp"/>
 
@@ -22,11 +34,17 @@
     <sec:authorize access="hasRole('ADMIN')">
         <a class="btn btn-primary space-down" href="/app/book/add">Add new book</a>
     </sec:authorize>
-<input class="form-control search-round" id="search-book" type="text" onkeyup="myFunction()" placeholder="Search books...">
+
+</div>
+        <div class="limiter">
 
 
+            <div class="container-table100">
+                <div class="wrap-table100">
+                    <div class="table100">
+                        <input class="form-control search-round" id="search-book" type="text" onkeyup="myFunction()" placeholder="Search books...">
 <table id="booktable">
-    <tr>
+    <tr class="table-head">
             <th class="mobile_hide_btitle">Title</th>
             <th class="mobile_hide">Genre</th>
             <th class="mobile_hide">Language</th>
@@ -54,7 +72,11 @@
             </tr>
         </c:forEach>
 </table>
-</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 <script src="${pageContext.request.contextPath}/js/books.js">
 
 </script>
