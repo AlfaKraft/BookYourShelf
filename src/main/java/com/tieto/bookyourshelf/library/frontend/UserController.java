@@ -110,12 +110,12 @@ public class UserController {
     }
 
 
-    @RequestMapping(value="user/faceRecognition", method = RequestMethod.GET)
+    @RequestMapping(value="faceRecognition", method = RequestMethod.GET)
     public ModelAndView fr(){
         return new ModelAndView("faceRecognition");
     }
 
-    @RequestMapping(value="user/uploadImage", method=RequestMethod.POST)
+    @RequestMapping(value="uploadImage", method=RequestMethod.POST)
     public String uploadImage(@RequestParam("imageBase64") String file) throws IOException {
         String userEmail= userService.faceRecognition(file);
         if(userEmail==null || userEmail==""){

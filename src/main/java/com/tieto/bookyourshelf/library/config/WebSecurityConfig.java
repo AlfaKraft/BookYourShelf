@@ -44,9 +44,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
                 .antMatchers("/app/login**","/app/registration**").permitAll()
-                .antMatchers("/app/user/uploadImage").permitAll()
-                .antMatchers("/app/books","/app/book*", "/app/user/faceRecognition").permitAll()
-                .antMatchers("/app/account").permitAll()
+                .antMatchers("/app/uploadImage", "/app/faceRecognition").permitAll()
+                .antMatchers("/app/books","/app/book*").permitAll()
+                .antMatchers("/app/account").authenticated()
                 .antMatchers(HttpMethod.GET,"/app/user*","/app/user/**","/app/book/add").hasAuthority("ROLE_ADMIN")
                 .antMatchers(HttpMethod.GET,"/app/scanBook").hasAuthority("ROLE_USER")
                 .and()

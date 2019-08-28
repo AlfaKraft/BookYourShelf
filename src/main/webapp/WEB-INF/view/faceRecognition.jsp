@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Näotuvastus</title>
+    <title>Face recognition</title>
 
 </head>
 <body>
@@ -45,7 +45,7 @@
 </script>
 
 
-<form method="POST" action="/app/user/uploadImage" >
+<form method="POST" action="/app/uploadImage" >
     <input type="hidden" name="imageBase64" id="imageBase64"/><br/><br/>
     <input type="submit" value="Identify" />
 </form>
