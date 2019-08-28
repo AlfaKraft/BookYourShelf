@@ -46,6 +46,8 @@ input#barcode {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    max-width: 100%;
+    height: auto;
 }
 /* Borrowtable admin and booktable */
 
@@ -63,7 +65,6 @@ input#barcode {
 #booktable, #borrowtable {
     border-collapse: collapse; /* Collapse borders */
     width: 100%; /* Full-width */
-    border: 1px solid #ddd; /* Add a grey border */
     font-size: 18px; /* Increase font-size */
 }
 
@@ -72,16 +73,15 @@ input#barcode {
     padding: 12px; /* Add padding */
 }
 
-#booktable tr, #borrowtable tr {
-    /* Add a bottom border to all table rows */
-    border-bottom: 1px solid #ddd;
-}
 
-#booktable tr.header, #booktable tr:hover, #borrowtable tr:hover ,.borrowtable:hover, .usersTable:hover {
+#booktable tr.header,#booktable tr:hover, #borrowtable tr:hover ,.borrowtable:hover, .usersTable:hover {
     /* Add a grey background color to the table header and on hover */
     background-color: #f1f1f1;
 }
 
 .borrowtable {
     padding: 5px 0;
+}
+.search-round {
+    border-radius: 1rem;
 }

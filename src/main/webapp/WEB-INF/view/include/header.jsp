@@ -91,7 +91,7 @@
             </sec:authorize>
             <sec:authorize access="isAuthenticated()">
                 <li>
-                Welcome , <sec:authentication property="name"/>
+                Welcome, <sec:authentication property="name"/>
                 </li>
             </sec:authorize>
             <sec:authorize access="!isAuthenticated()">

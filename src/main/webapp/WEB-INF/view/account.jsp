@@ -9,7 +9,7 @@
 <body>
 <jsp:include page="include/header.jsp"/>
 <div class="container">
-    <h3>Account Information</h3>
+    <h2>Account Information</h2>
     <div class="row">
             <div class="col-md-8">
                 <p>Firstname: ${details.firstName}</p>

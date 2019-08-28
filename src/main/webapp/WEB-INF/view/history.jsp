@@ -13,7 +13,6 @@
     <title>History</title>
 </head>
 <body>
-<body>
 <jsp:include page="include/header.jsp"/>
 <div class="container">
     <h2>History</h2>

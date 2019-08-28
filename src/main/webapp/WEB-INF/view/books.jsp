@@ -20,9 +20,9 @@
 
 <div class="container">
     <sec:authorize access="hasRole('ADMIN')">
-        <a class="btn btn-outline-primary space-down" href="/app/book/add">Add new book</a>
+        <a class="btn btn-primary space-down" href="/app/book/add">Add new book</a>
     </sec:authorize>
-<input id="search-book" type="text" onkeyup="myFunction()" placeholder="Search books...">
+<input class="form-control search-round" id="search-book" type="text" onkeyup="myFunction()" placeholder="Search books...">
 
 
 <table id="booktable">
@@ -35,6 +35,7 @@
             <th>Picture</th>
             <th>About</th>
     </tr>
+
         <c:forEach var="book" items="${books}" >
 
             <tr>
@@ -45,7 +46,7 @@
                 <td>${book.status==true ? "<img width='30px' height='30px' src='https://upload.wikimedia.org/wikipedia/en/f/fb/Yes_check.svg'>" :
                         "<img width='30px' height='30px' src='https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/No_Cross.svg/1024px-No_Cross.svg.png'>"}</td>
                 <td><img class="cover-photo" src="https://media.istockphoto.com/photos/open-book-picture-id495477978"></td>
-                <td><a class="btn btn-outline-primary btn-space-down" href="/app/book/${book.id}">Details</a>
+                <td><a class="btn btn-primary btn-space-down" href="/app/book/${book.id}">Details</a>
                 <sec:authorize access="hasRole('ADMIN')">
 
                     <a class="btn btn-danger" href="/app/delete/${book.id}" onclick="return confirm('Are you sure you want to delete ${book.title}?')">Delete</a></td>

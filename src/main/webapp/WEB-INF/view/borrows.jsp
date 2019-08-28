@@ -15,7 +15,7 @@
 <body>
 <jsp:include page="include/header.jsp"/>
 <div class="container">
-    <input id="search-user" type="text" onkeyup="myFunction()" placeholder="Search for a user...">
+    <input class="form-control search-round" id="search-user" type="text" onkeyup="myFunction()" placeholder="Search for a user...">
 
      <table id="borrowtable" class="table table-striped">
          <thead>
