@@ -24,8 +24,9 @@ public interface BorrowDao extends JpaRepository<BorrowEnt, Long> {
     BorrowEnt findBorrowEntByDateTaken(LocalDate dateTaken);
     BorrowEnt findBorrowEntByDateToBring(Date dateToBring);
     BorrowEnt findBorrowEntByDateBrought(LocalDate dateBrought);
-
-
     BorrowEnt save(BorrowDto borrow);
+    List<BorrowEnt> findBorrowEntByDateToBringBeforeAndDateBroughtIsNull(Date localDate);
+
+
 
 }

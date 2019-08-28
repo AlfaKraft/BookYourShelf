@@ -23,15 +23,12 @@
                 <p>Genre: ${book.genre}</p>
                 <p>Language: ${book.language}</p>
                 <p>Year: ${book.year}</p>
-                <p>Author: ${book.authors}</p>
                 <p>Currently in the hands of: ${book.borrower}</p>
-
                 <p>Status: ${book.status==true ? "<img width='30px' height='30px' src='https://upload.wikimedia.org/wikipedia/en/f/fb/Yes_check.svg'>" :
                         "<img width='30px' height='30px' src='https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/No_Cross.svg/1024px-No_Cross.svg.png'>"}</p>
                 <c:forEach var="item" items="${book.authors}" varStatus="i">
                     <p>Author ${i.index +1}: ${item.authorName}</p>
                 </c:forEach>
-
             </div>
             <div class="col-md-4">
             <img src="https://media.istockphoto.com/photos/open-book-picture-id495477978" height="200" width="200">
@@ -51,7 +48,6 @@
             <br>
 
                 <a class="btn btn-primary" href="${pageContext.request.contextPath}/app/books">All books</a>
-
 
     </div>
 </body>
