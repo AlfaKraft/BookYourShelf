@@ -19,7 +19,8 @@ import java.util.stream.Collectors;
 @Service
 public class UserServiceImpl implements UserService {
 
-    private static String UPLOADED_FOLDER = "C:\\Users\\kasutaja\\Documents\\Python\\RestExamples\\FR_REST_API\\unknown_people\\";
+    private static String UPLOADED_FOLDER = "C:/pics/unknown_people/";
+    private final String faceRecServer="http://192.168.1.193:8000/";
 
     @Autowired
     private UserDao userDao;
@@ -83,7 +84,7 @@ public class UserServiceImpl implements UserService {
 
         RestTemplate restTemplate = new RestTemplate();
         String fooResourceUrl
-                = "http://127.0.0.1:8000/faceRecognition/?imageUrl=";
+                = faceRecServer+"faceRecognition/?imageUrl=";
         ResponseEntity<String> response
                 = restTemplate.getForEntity(fooResourceUrl + "unknown.jpg", String.class);
         return response.getBody();

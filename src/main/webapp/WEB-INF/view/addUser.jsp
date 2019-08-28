@@ -30,7 +30,7 @@
 <jsp:include page="include/header.jsp"/>
 <div class="container">
 
-    <form:form method="POST" action="/app/user/save" modelAttribute="user" class="form-signin">
+    <form:form method="POST" action="/app/user/save" modelAttribute="user" enctype="multipart/form-data" class="form-signin">
         <h2 class="form-signin-heading">Create your account</h2>
         <form:hidden path="id" />
         <spring:bind path="firstName">
@@ -70,6 +70,14 @@
                 <form:input type="password" path="matchingPassword" class="form-control" placeholder="matchingPassword"></form:input>
             </div>
         </spring:bind>
+
+
+        <spring:bind path="pictureFile">
+            <div class="form-group ${status.error ? 'has-error' : ''}">
+                <form:input type="file" path="pictureFile" class="form-control" placeholder="Picture"></form:input>
+            </div>
+        </spring:bind>
+
 
         <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
     </form:form>
