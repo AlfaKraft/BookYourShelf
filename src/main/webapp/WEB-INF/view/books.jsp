@@ -32,14 +32,15 @@
 
 <div class="container">
     <sec:authorize access="hasRole('ADMIN')">
-        <a class="btn btn-outline-primary space-down" href="/app/book/add">Add new book</a>
+        <a class="btn btn-primary space-down" href="/app/book/add">Add new book</a>
     </sec:authorize>
+
 </div>
 <div class="limiter">
     <div class="container-table100">
         <div class="wrap-table100">
             <div class="table100">
-                <input class="search rounded" id="search-book" type="text" onkeyup="myFunction()" placeholder="Search books...">
+                <input class="form-control search-round" id="search-book" type="text" onkeyup="myFunction()" placeholder="Search books...">
                 <table id="booktable">
                     <tr class="table-head">
                             <th class="mobile_hide_btitle">Title</th>

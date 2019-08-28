@@ -36,6 +36,9 @@ input#barcode {
 .books-btn-page {
     margin-top: 20px;
 }
+.btn-lg{
+    margin-bottom: 10px;
+}
 
 .remove-space {
     padding: 5px 0;
@@ -46,6 +49,8 @@ input#barcode {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    max-width: 100%;
+    height: auto;
 }
 /* Borrowtable admin and booktable */
 
@@ -72,9 +77,7 @@ input#barcode {
     padding: 12px; /* Add padding */
 }
 
-#booktable tr, #borrowtable tr {
-    /* Add a bottom border to all table rows */
-}
+
 
 #booktable tr:hover, #borrowtable tr:hover ,.borrowtable:hover, .usersTable:hover {
     /* Add a grey background color to the table header and on hover */
@@ -84,6 +87,11 @@ input#barcode {
 .borrowtable {
     padding: 5px 0;
 }
+
+.search-round {
+    border-radius: 1rem;
+}
+
 
 /* Books table view CSS*/
 .table-head th{

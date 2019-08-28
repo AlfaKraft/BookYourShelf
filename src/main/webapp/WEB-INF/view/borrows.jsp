@@ -14,12 +14,14 @@
 </head>
 <body>
 <jsp:include page="include/header.jsp"/>
+
 <div class="limiter">
 
     <div class="container-table100">
         <div class="wrap-table100">
             <div class="table100">
-    <input id="search-user" type="text" onkeyup="myFunction()" placeholder="Search for a user...">
+                <input class="form-control search-round" id="search-user" type="text" onkeyup="myFunction()" placeholder="Search for a user...">
+
 
      <table id="borrowtable">
          <thead>

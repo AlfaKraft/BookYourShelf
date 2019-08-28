@@ -41,7 +41,7 @@
         <span style="color:green"><c:out value="${sessionScope.message}"/></span>
         <c:remove var="message" scope="session" />
     </c:if>
-    <a href="/app/faceRecognition"><button>Face recognition</button></a>
+    <a href="/app/faceRecognition"><button class="btn btn-lg btn-primary btn-block">Face recognition</button></a>
     <c:if test="${not empty errorMessage}">${errorMessage}</c:if>
 </div>
     <div class="col-md-3">
