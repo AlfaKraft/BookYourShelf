@@ -14,12 +14,16 @@
 </head>
 <body>
 <jsp:include page="include/header.jsp"/>
-<div class="container">
+<div class="limiter">
+
+    <div class="container-table100">
+        <div class="wrap-table100">
+            <div class="table100">
     <input id="search-user" type="text" onkeyup="myFunction()" placeholder="Search for a user...">
 
-     <table id="borrowtable" class="table table-striped">
+     <table id="borrowtable">
          <thead>
-    <tr>
+    <tr class="table-head">
         <th>Book reader</th>
         <th>Books title</th>
         <th>Borrowed date</th>
@@ -41,7 +45,9 @@
 </c:forEach>
          </tbody>
      </table>
-
+            </div>
+        </div>
+    </div>
 </div>
 
 <script src="${pageContext.request.contextPath}/js/borrows.js"></script>

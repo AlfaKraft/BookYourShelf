@@ -15,15 +15,19 @@
 <body>
 <body>
 <jsp:include page="include/header.jsp"/>
-<div class="container">
+<div class="limiter">
+
+    <div class="container-table100">
+        <div class="wrap-table100">
+            <div class="table100">
     <h2>History</h2>
-    <table class="table table-striped">
-        <thead>
+    <table>
+        <tr class="table-head">
             <th>Book title</th>
             <th>Borrowed date</th>
             <th>Return date</th>
             <th>Due date</th>
-        </thead>
+        </tr>
         <tbody>
         <c:forEach var="borrows"  items="${borrows}" >
             <tr>
@@ -35,8 +39,11 @@
         </c:forEach>
         </tbody>
     </table>
-
+            </div>
+        </div>
+    </div>
 </div>
+
 <jsp:include page="include/footer.jsp"/>
 
 </body>
