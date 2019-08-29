@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
 
     private static String UPLOADED_FOLDER = "C:/pics/unknown_people/";
-    private final String faceRecServer="http://192.168.1.193:8000/";
+    private final String faceRecServer="http://127.0.0.1:8000/";
 
     @Autowired
     private UserDao userDao;
