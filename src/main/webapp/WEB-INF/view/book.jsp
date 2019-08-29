@@ -1,6 +1,5 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page import="java.sql.Connection" %><%--
   Created by IntelliJ IDEA.
   User: kasutaja
@@ -24,25 +23,39 @@
                 <p>Genre: ${book.genre}</p>
                 <p>Language: ${book.language}</p>
                 <p>Year: ${book.year}</p>
-                <p>Author: ${book.authors}</p>
-                <p>Currently in the hands of: ${book.borrower}</p>
 
+                <c:if test="${book.borrower != null}">
+                    <p>Currently in the hands of: ${book.borrower}</p>
+                </c:if>
                 <p>Status: ${book.status==true ? "<img width='30px' height='30px' src='https://upload.wikimedia.org/wikipedia/en/f/fb/Yes_check.svg'>" :
                         "<img width='30px' height='30px' src='https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/No_Cross.svg/1024px-No_Cross.svg.png'>"}</p>
 
+                    <c:forEach var="item" items="${book.authors}" varStatus="i">
+                        <c:if test="${item.authorName.length()>0}">
+                            <p>Author ${i.index +1}: ${item.authorName}</p>
+                        </c:if>
+                    </c:forEach>
             </div>
             <div class="col-md-4">
-            <img src="https://media.istockphoto.com/photos/open-book-picture-id495477978" height="200" width="200">
+                <c:if test="${book.cover==null || book.cover.length() == 0}">
+                    <img src="https://media.istockphoto.com/photos/open-book-picture-id495477978" height="200" width="200">
+                </c:if>
+                <c:if test="${book.cover!=null && book.cover.length() != 0}">
+                    <img src="/img/${book.cover}" height="200" width="200">
+                </c:if>
+
             </div>
         </div>
         <sec:authorize access="hasRole('USER')">
             <div class="book-btn-page">
 
-                <li><a class="btn btn-outline-primary space-right" href="/app/lendBook/${book.id}">Borrow</a></li>
-                <!--<li><a class="btn btn-outline-primary space-btw" href="/">Queue</a></li>-->
+                <c:if test="${book.status == true}">
+                <li><a class="btn btn-outline-primary" href="/app/lendBook/${book.id}">Borrow</a></li>
+                </c:if>
 
-                <li><a class="btn btn-outline-primary" href="/app/returnBook/${book.id}" onclick="return confirm('Are you sure you want to return ${book.title}?')">Return</a></li>
-                <li></li>
+                <c:if test="${book.status == false}">
+                <li><a class="btn btn-outline-primary" href="/app/returnBook/${book.id}">Return</a></li>
+                </c:if>
             </div>
         </sec:authorize>
 

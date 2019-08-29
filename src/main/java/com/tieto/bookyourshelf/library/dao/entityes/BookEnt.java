@@ -1,5 +1,6 @@
 package com.tieto.bookyourshelf.library.dao.entityes;
 
+import java.sql.Blob;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -99,12 +100,13 @@ public class BookEnt {
     }
 
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
             name = "AUTHOR_BOOK",
             joinColumns = @JoinColumn(name = "idBook"),
             inverseJoinColumns = @JoinColumn(name = "idAuthor")
     )
+
 
     public Set<AuthorEnt> getAuthors() {
         return authors;
@@ -113,7 +115,6 @@ public class BookEnt {
     public void setAuthors(Set<AuthorEnt> authors) {
         this.authors = authors;
     }
-
 
 }
 

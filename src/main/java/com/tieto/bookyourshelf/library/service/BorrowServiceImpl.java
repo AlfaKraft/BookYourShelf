@@ -75,7 +75,7 @@ public class BorrowServiceImpl implements BorrowService {
     }
 
     @Override
-    public BorrowDto getBorrowedBookBIdBook(Long idBook) {
+    public BorrowDto getBorrowedBookByIdBook(Long idBook) {
         BorrowDto borrowDto;
         try {
             BorrowEnt borrowEnt = borrowDao.findBorrowEntByIdBookAndDateBrought(idBook, null);
@@ -85,6 +85,16 @@ public class BorrowServiceImpl implements BorrowService {
             throw new LibraryException(e.getMessage(), e);
         }
         return borrowDto;
+    }
+
+    @Override
+    public void deleteByBookId(Long id) {
+        List<BorrowEnt> borrows = borrowDao.findAllByIdBook(id);
+        if(!borrows.isEmpty()){
+            for (int i = 0; i < borrows.size(); i++){
+                borrowDao.deleteById(borrows.get(i).getId());
+            }
+        }
     }
 
 
@@ -169,7 +179,7 @@ public class BorrowServiceImpl implements BorrowService {
         }
 
         if(ent.getDateToBring() != null){
-            SimpleDateFormat formatter = new SimpleDateFormat("EEEE, dd MMM yyyy");
+            SimpleDateFormat formatter = new SimpleDateFormat("EEEE, dd. MMM yyyy");
 
             dto.setDateToBring(formatter.format(ent.getDateToBring()));
         }

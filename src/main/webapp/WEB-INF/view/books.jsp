@@ -31,15 +31,12 @@
 <jsp:include page="include/header.jsp"/>
 
         <div class="limiter">
-
-
             <div class="container-table100">
-
                 <div class="wrap-table100">
                     <div class="table100">
-<sec:authorize access="hasRole('USER')">
+                        <sec:authorize access="hasRole('USER')">
                         <h1>Library</h1>
-</sec:authorize>
+                        </sec:authorize>
                         <sec:authorize access="hasRole('ADMIN')">
                             <div class="col text-center">
                                 <h1>Library</h1>
@@ -67,7 +64,14 @@
                 <td class="mobile_hide_tblt">${book.year}</td>
                 <td>${book.status==true ? "<img width='40px' height='40px' src='/css/img/icons8-book-shelf-64.png' alt='book in shelf' title='This book is in shelf'>  " :
                         "<img width='40px' height='40px' src='/css/img/icons8-return-book-64.png' alt='book is taken' title='Book is taken'>"}</td>
-                <td><img class="cover-photo" src="https://media.istockphoto.com/photos/open-book-picture-id495477978"></td>
+                <td>
+                    <c:if test="${book.cover==null || book.cover.length() == 0}">
+                    <img src="https://media.istockphoto.com/photos/open-book-picture-id495477978"  width="125" height="200">
+                </c:if>
+                    <c:if test="${book.cover!=null && book.cover.length() != 0}">
+                        <img src="/img/${book.cover}" height="200" width="125">
+                    </c:if>
+                </td>
                 <td><a class="btn btn-primary btn-space-down" href="/app/book/${book.id}">Details</a>
                 <sec:authorize access="hasRole('ADMIN')">
                     <a class="btn btn-danger" href="/app/delete/${book.id}" onclick="return confirm('Are you sure you want to delete ${book.title}?')">Delete</a></td>
@@ -75,6 +79,8 @@
             </tr>
         </c:forEach>
 </table>
+
+
                     </div>
                 </div>
             </div>

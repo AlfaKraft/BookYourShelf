@@ -1,24 +1,28 @@
 package com.tieto.bookyourshelf.library.service;
 
-import com.tieto.bookyourshelf.library.EmailExistsException;
-import com.tieto.bookyourshelf.library.LibraryException;
+import com.tieto.bookyourshelf.library.UserAlreadyExistException;
 import com.tieto.bookyourshelf.library.dao.UserDao;
-import com.tieto.bookyourshelf.library.dao.UserDetailsDao;
 import com.tieto.bookyourshelf.library.dao.entityes.UserEnt;
 import com.tieto.bookyourshelf.library.service.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.tieto.bookyourshelf.library.UserAlreadyExistException;
+import org.springframework.web.bind.MissingServletRequestParameterException;
+import org.springframework.web.client.RestTemplate;
 
-import java.util.Arrays;
+import java.io.FileOutputStream;
+import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
+
+    private static String UPLOADED_FOLDER = "C:/pics/unknown_people/";
+    private final String faceRecServer="http://127.0.0.1:8000/";
 
     @Autowired
     private UserDao userDao;
@@ -46,7 +50,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserEnt saveUser(UserDto user) throws UserAlreadyExistException{
-       if (emailExist(user.getEmail())) {
+        if (emailExist(user.getEmail())) {
             throw new UserAlreadyExistException("There is an account with that email address: " + user.getEmail());
         } else {
             UserEnt userEntity = new UserEnt();
@@ -59,10 +63,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserEnt editUser(UserDto user) {
 
-            UserEnt userEntity = userDao.findById(user.getId()).get();
-            userEntity = dtoToEnt(user, userEntity);
-            userDao.save(userEntity);
-            return userEntity;
+        UserEnt userEntity = userDao.findById(user.getId()).get();
+        userEntity = dtoToEnt(user, userEntity);
+        userDao.save(userEntity);
+        return userEntity;
     }
 
     private boolean emailExist(String email) {
@@ -76,6 +80,32 @@ public class UserServiceImpl implements UserService {
         dto = entToDto(ent, dto);
         return dto;
     }
+
+    @Override
+    public String faceRecognition(String imageBase64){
+
+
+        String encodedImg = imageBase64.split(",")[1];
+        byte[] imageByteArray= Base64.getDecoder().decode(encodedImg);
+
+        FileOutputStream imageOutFile = null;
+        try {
+            imageOutFile = new FileOutputStream(
+                    UPLOADED_FOLDER + "unknown.jpg");
+            imageOutFile.write(imageByteArray);
+            imageOutFile.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        RestTemplate restTemplate = new RestTemplate();
+        String fooResourceUrl
+                = faceRecServer+"faceRecognition/?imageUrl=";
+        ResponseEntity<String> response
+                = restTemplate.getForEntity(fooResourceUrl + "unknown.jpg", String.class);
+        return response.getBody();
+    }
+
 
 
     private UserEnt dtoToEnt(UserDto dto, UserEnt ent) {
@@ -94,6 +124,7 @@ public class UserServiceImpl implements UserService {
         ent.setPicture(dto.getPicture());
         ent.setRole(dto.getRole());
         return ent;
+
     }
 
     private UserDto entToDto(UserEnt ent, UserDto dto) {

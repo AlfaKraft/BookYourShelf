@@ -12,7 +12,7 @@ public class Book {
     private String language;
     private int year;
     private Boolean status;
-    //private Set<AuthorEnt> authors;
+    private Set<AuthorEnt> authors;
 
     private String author1;
     private String author2;
@@ -77,9 +77,9 @@ public class Book {
 
     public void setStatus(Boolean status) { this.status = status; }
 
-    /*public Set<AuthorEnt> getAuthors() {
+    public Set<AuthorEnt> getAuthors() {
         return authors;
-    }*/
+    }
 
     public String getAuthor1() {
         return author1;
@@ -97,7 +97,9 @@ public class Book {
         this.author2 = author2;
     }
 
-    /*public void setAuthors(Set<AuthorEnt> authors) {
+    public void setAuthors(Set<AuthorEnt> authors) {
         this.authors = authors;
-    }*/
+    }
+
+
 }

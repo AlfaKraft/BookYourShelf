@@ -17,7 +17,8 @@ public interface BorrowService {
     List<BorrowDto> getAllBorrows();
     BorrowDto getBorrowsById(Long Id);
     List<BorrowDto> getBorrowsByIdUser(Long idUser);
-    BorrowDto getBorrowedBookBIdBook(Long idBook);
+    BorrowDto getBorrowedBookByIdBook(Long idBook);
+    void deleteByBookId(Long id);
     BorrowDto getBorrowsByDateTaken(LocalDate dateTaken);
     BorrowDto getBorrowsByDateToBring(Date dateToBring);
     BorrowDto getBorrowsByDateBrought(LocalDate dateBrought);

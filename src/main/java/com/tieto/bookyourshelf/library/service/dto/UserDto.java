@@ -3,6 +3,7 @@ package com.tieto.bookyourshelf.library.service.dto;
 import com.tieto.bookyourshelf.library.validation.PasswordsEqualConstraint;
 import com.tieto.bookyourshelf.library.validation.ValidEmail;
 import com.tieto.bookyourshelf.library.validation.ValidPassword;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotEmpty;
 
@@ -15,6 +16,7 @@ public class UserDto {
     @NotEmpty
     private String lastName;
     private String picture;
+    private MultipartFile pictureFile;
 
     @ValidEmail
     private String email;
@@ -24,6 +26,15 @@ public class UserDto {
     @NotEmpty
     private String matchingPassword;
     private String role;
+
+
+    public MultipartFile getPictureFile() {
+        return pictureFile;
+    }
+
+    public void setPictureFile(MultipartFile pictureFile) {
+        this.pictureFile = pictureFile;
+    }
 
     public Long getId() {
         return id;

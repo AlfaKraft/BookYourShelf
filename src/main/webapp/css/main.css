@@ -54,6 +54,9 @@ input#barcode {
 .books-btn-page {
     margin-top: 20px;
 }
+.btn-lg{
+    margin-bottom: 10px;
+}
 
 .remove-space {
     padding: 5px 0;

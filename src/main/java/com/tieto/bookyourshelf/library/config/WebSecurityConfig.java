@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -43,16 +44,26 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
-                .antMatchers("/app/login**","/app/user/registration**").permitAll()
+                .antMatchers("/app/login**","/app/registration**").permitAll()
+                .antMatchers("/app/uploadImage", "/app/faceRecognition").permitAll()
                 .antMatchers("/app/books","/app/book*").permitAll()
-                .antMatchers("/app/account").permitAll()
+                .antMatchers("/app/account").authenticated()
                 .antMatchers(HttpMethod.GET,"/app/user*","/app/user/**","/app/book/add").hasAuthority("ROLE_ADMIN")
                 .antMatchers(HttpMethod.GET,"/app/scanBook").hasAuthority("ROLE_USER")
                 .and()
                 .formLogin()
                 .loginPage("/app/login").permitAll().loginProcessingUrl("/app/loginAction").permitAll()
                 .successHandler(myAuthenticationSuccessHandler())
-               // .failureUrl("/app/books")
+                .failureHandler((req,res,exp)->{  // Failure handler invoked after authentication failure
+                    String errMsg="";
+                    if(exp.getClass().isAssignableFrom(BadCredentialsException.class)){
+                        errMsg="Invalid username or password.";
+                    }else{
+                        errMsg="Unknown error - "+exp.getMessage();
+                    }
+                    req.getSession().setAttribute("message", errMsg);
+                    res.sendRedirect("/app/login"); // Redirect user to login page with error message.
+                })
                 .and()
                 .logout().logoutSuccessUrl("/").permitAll()
                 .invalidateHttpSession(true)
@@ -63,22 +74,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 }
 
 
-    /*@Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable()
-                .authorizeRequests()
-                .antMatchers("/app/login*").anonymous()
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .loginPage("/app/login")
-                .defaultSuccessUrl("/app/index", true)
-                .failureUrl("/login?error=true")
-                .and()
-                .logout().logoutSuccessUrl("/app/login");
-    }
-}*/
 
 
 
