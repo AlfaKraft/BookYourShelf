@@ -38,10 +38,9 @@
         <li>
             <a href="/app/scanBook">Return</a>
         </li>
-            <li>
-                <a href="/app/history">History</a>
-            </li>
-
+        <li>
+            <a href="/app/history">History</a>
+        </li>
         <li>
             <a href="/app/account">Account</a>
         </li>
@@ -96,13 +95,12 @@
             </sec:authorize>
             <sec:authorize access="!isAuthenticated()">
                 <li><a href="<c:url value="/app/login"/>">Login</a></li>
-                <li><a href="<c:url value="/app/user/registration"/>">Sign-Up</a></li>
+                <li><a href="<c:url value="/app/registration"/>">Sign-Up</a></li>
             </sec:authorize>
             <sec:authorize access="isAuthenticated()">
                 <a href="<c:url value="/logout" />">Logout</a>
             </sec:authorize>
         </ul>
-
         </div>
     </div>
     <nav class="navbar navbar-dark bg-nav-color nav_mobile_mobile">

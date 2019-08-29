@@ -31,9 +31,10 @@
                         "<img width='30px' height='30px' src='https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/No_Cross.svg/1024px-No_Cross.svg.png'>"}</p>
 
                     <c:forEach var="item" items="${book.authors}" varStatus="i">
-                        <p>Author ${i.index +1}: ${item.authorName}</p>
+                        <c:if test="${item.authorName.length()>0}">
+                            <p>Author ${i.index +1}: ${item.authorName}</p>
+                        </c:if>
                     </c:forEach>
-
             </div>
             <div class="col-md-4">
                 <c:if test="${book.cover==null}">

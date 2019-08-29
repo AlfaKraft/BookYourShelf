@@ -35,8 +35,10 @@
                 </div>
 
                 <div class="form-group">
-                    <form:label path="genre">Genre</form:label></td>
-                    <form:input class="form-control" placeholder="Genre" path="genre"/></td>
+                    <form:label path="genre">Genre</form:label>
+                    <form:select class="form-control" path="genre">
+                        <form:options class="form-control" items="${genreList}"/>
+                    </form:select>
                     <form:errors path="genre"></form:errors></td>
                 </div>
                 <div class="form-group">
@@ -49,7 +51,7 @@
                 </div>
                 <div class="form-group">
                    <form:label path="year">Year</form:label>
-                     <form:input class="form-control" placeholder="Year" path="year"/>
+                     <form:input class="form-control" placeholder="Year" path="year" type="year" maxlength="4"/>
                     <form:errors path="year"></form:errors>
                 </div>
                 <div class="form-group">

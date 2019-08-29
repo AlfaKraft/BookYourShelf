@@ -167,6 +167,22 @@ public class BookController {
             model.addAttribute("addbook", book);
             model.addAttribute("languageList", languages);
 
+            List<String> genres = new ArrayList<>();
+            genres.add("");
+            genres.add("Biography");
+            genres.add("Educational");
+            genres.add("Fiction");
+            genres.add("Food");
+            genres.add("Java");
+            genres.add("Magazine");
+            genres.add(".NET");
+            genres.add("Python");
+            genres.add("Programming");
+            genres.add("SQL");
+            genres.add("Other");
+
+            model.addAttribute("genreList", genres);
+
         } catch (RuntimeException e){
             throw e;
         }
