@@ -157,9 +157,11 @@ public class BookController {
             List<BookDto> list = bookService.loadBooks();
             model.addAttribute("list", list);
             List<String> languages = new ArrayList<>();
-            languages.add("EN");
-            languages.add("EST");
-            languages.add("ESP");
+            languages.add("English");
+            languages.add("Estonian");
+            languages.add("Spanish");
+            languages.add("Russian");
+            languages.add("German");
             BookDto book;
             book = new BookDto();
             model.addAttribute("addbook", book);
@@ -178,6 +180,7 @@ public class BookController {
         if (!book.getCoverImage().isEmpty()) {
             byte[] bytes = book.getCoverImage().getBytes();
             Path path = Paths.get(context.getRealPath("/img/")+ book.getCoverImage().getOriginalFilename());
+
             Files.write(path, bytes);
         }
 

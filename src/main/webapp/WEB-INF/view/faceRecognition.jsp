@@ -13,7 +13,7 @@
 
 </head>
 <body>
-
+<jsp:include page="include/header.jsp"/>
 <video id="video" width="640" height="480" autoplay></video>
 <button id="snap">Snap Photo</button>
 <canvas id="canvas" width="640" height="480"></canvas>
@@ -49,5 +49,6 @@
     <input type="hidden" name="imageBase64" id="imageBase64"/><br/><br/>
     <input type="submit" value="Identify" />
 </form>
+<jsp:include page="include/footer.jsp"/>
 </body>
 </html>
