@@ -16,20 +16,34 @@
 <jsp:include page="include/header.jsp"/>
 
 <div class="container">
+
     <div class="row">
+        <div class="col-md-10">
+            <button id="snap" class="btn btn-lg btn-primary btn-block">Snap Photo</button>
 <video id="video" width="640" height="480" autoplay></video>
-<button id="snap" class="btn btn-lg btn-primary btn-block">Snap Photo</button>
+
 <canvas id="canvas" width="640" height="480"></canvas>
 
 
+        </div>
 
-<form method="POST" action="/app/uploadImage" >
+
+
+
+    <div class="col-md-2">
+        <form method="POST" action="/app/uploadImage" >
+
     <input type="hidden" name="imageBase64" id="imageBase64"/><br/><br/>
+
+
     <input type="submit" value="Identify" class="btn btn-lg btn-primary btn-block"/>
-</form>
+        </form>
+    </div>
 
     </div>
+
 </div>
+
 <jsp:include page="include/footer.jsp"/>
 
 
