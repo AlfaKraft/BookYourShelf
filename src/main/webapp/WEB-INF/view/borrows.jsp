@@ -21,7 +21,7 @@
         <h1>All borrows</h1>
         <div class="wrap-table100">
             <div class="table100">
-                <input class="form-control search-round" id="search-user" type="text" onkeyup="myFunction()" placeholder="Search for a user...">
+                <input class="form-control search-round" id="search-user" type="text" onkeyup="myFunction()" placeholder="Search for a user or a book...">
 
      <table id="borrowtable">
          <thead>

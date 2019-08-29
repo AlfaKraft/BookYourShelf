@@ -15,7 +15,7 @@
 <body>
 <jsp:include page="include/header.jsp"/>
     <div class="container">
-        <h3>About your chosen book</h3>
+        <h1>About your chosen book</h1>
         <div class="row">
             <div class="col-md-8">
                 <p>Title: <b>${book.title}</b></p>
@@ -27,8 +27,8 @@
                 <c:if test="${book.borrower != null}">
                     <p>Currently in the hands of: ${book.borrower}</p>
                 </c:if>
-                <p>Status: ${book.status==true ? "<img width='30px' height='30px' src='https://upload.wikimedia.org/wikipedia/en/f/fb/Yes_check.svg'>" :
-                        "<img width='30px' height='30px' src='https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/No_Cross.svg/1024px-No_Cross.svg.png'>"}</p>
+                <p>Status: ${book.status==true ? "<img width='30px' height='30px' src='/css/img/icons8-book-shelf-64.png' alt='book in shelf' title='This book is in shelf'>" :
+                        "<img width='30px' height='30px' src='/css/img/icons8-return-book-64.png' alt='book is taken' title='Book is taken'>"}</p>
 
                     <c:forEach var="item" items="${book.authors}" varStatus="i">
                         <c:if test="${item.authorName.length()>0}">
@@ -38,10 +38,10 @@
             </div>
             <div class="col-md-4">
                 <c:if test="${book.cover==null || book.cover.length() == 0}">
-                    <img src="https://media.istockphoto.com/photos/open-book-picture-id495477978" height="200" width="200">
+                    <img src="https://media.istockphoto.com/photos/open-book-picture-id495477978" height="200" width="125">
                 </c:if>
                 <c:if test="${book.cover!=null && book.cover.length() != 0}">
-                    <img src="/img/${book.cover}" height="200" width="200">
+                    <img src="/img/${book.cover}" height="200" width="125">
                 </c:if>
 
             </div>

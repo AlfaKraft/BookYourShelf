@@ -12,7 +12,7 @@
 </head>
 <body>
 <jsp:include page="include/header.jsp"/>
-<h3>Return a book</h3>
+<h1>Return a book</h1>
 Barcode:
 <input type="text">
 <a href="/app/books">Return</a>

@@ -10,7 +10,7 @@
 <body>
 <jsp:include page="include/header.jsp"/>
 <div class="container">
-    <h2>Account Information</h2>
+    <h1>Account Information</h1>
     <div class="row">
         <div class="col-md-3">
 

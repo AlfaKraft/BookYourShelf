@@ -63,8 +63,8 @@
                     <form:input class="form-control" placeholder="Author 2" path="author2"/>
                 </div>
                 <div class="form-group">
-                    <form:label path="coverImage">Cover</form:label>
-                    <form:input type="file" path="coverImage"/>
+                    <form:label for="file-upload" class="custom-file-upload" path="coverImage">Cover upload <img src="/css/img/cloud-computing.png"></form:label>
+                    <form:input id="file-upload" class="btn btn-primary" type="file" path="coverImage"/>
                 </div>
                  <input class="btn btn-primary btn-block" type="submit" value="Add">
 
