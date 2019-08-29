@@ -87,6 +87,16 @@ public class BorrowServiceImpl implements BorrowService {
         return borrowDto;
     }
 
+    @Override
+    public void deleteByBookId(Long id) {
+        List<BorrowEnt> borrows = borrowDao.findAllByIdBook(id);
+        if(!borrows.isEmpty()){
+            for (int i = 0; i < borrows.size(); i++){
+                borrowDao.deleteById(borrows.get(i).getId());
+            }
+        }
+    }
+
 
     @Override
     public BorrowDto getBorrowsByDateTaken(LocalDate dateTaken) {
