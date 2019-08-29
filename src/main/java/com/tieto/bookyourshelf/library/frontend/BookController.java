@@ -138,6 +138,7 @@ public class BookController {
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String deleteBook(@PathVariable Long id) {
         bookService.deleteBook(id);
+        borrowService.deleteByBookId(id);
         return "redirect:/app/books";
     }
 
