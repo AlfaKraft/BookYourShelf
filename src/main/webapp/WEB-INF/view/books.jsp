@@ -25,23 +25,27 @@
     <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/books.css">
 
 <body>
 <jsp:include page="include/header.jsp"/>
 
-
-<div class="container">
-    <sec:authorize access="hasRole('ADMIN')">
-        <a class="btn btn-primary space-down" href="/app/book/add">Add new book</a>
-    </sec:authorize>
-
-</div>
         <div class="limiter">
 
 
             <div class="container-table100">
+
                 <div class="wrap-table100">
                     <div class="table100">
+<sec:authorize access="hasRole('USER')">
+                        <h1>Library</h1>
+</sec:authorize>
+                        <sec:authorize access="hasRole('ADMIN')">
+                            <div class="col text-center">
+                                <h1>Library</h1>
+                                <a class="btn btn-primary space-down btn-size-books" href="/app/book/add">Add new book</a>
+                            </div>
+                        </sec:authorize>
                         <input class="form-control search-round" id="search-book" type="text" onkeyup="myFunction()" placeholder="Search books...">
 <table id="booktable">
     <tr class="table-head">
@@ -61,12 +65,11 @@
                 <td class="mobile_hide">${book.genre}</td>
                 <td class="mobile_hide">${book.language}</td>
                 <td class="mobile_hide_tblt">${book.year}</td>
-                <td>${book.status==true ? "<img width='30px' height='30px' src='https://upload.wikimedia.org/wikipedia/en/f/fb/Yes_check.svg'>" :
-                        "<img width='30px' height='30px' src='https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/No_Cross.svg/1024px-No_Cross.svg.png'>"}</td>
+                <td>${book.status==true ? "<img width='40px' height='40px' src='/css/img/icons8-book-shelf-64.png' alt='book in shelf' title='This book is in shelf'>  " :
+                        "<img width='40px' height='40px' src='/css/img/icons8-return-book-64.png' alt='book is taken' title='Book is taken'>"}</td>
                 <td><img class="cover-photo" src="https://media.istockphoto.com/photos/open-book-picture-id495477978"></td>
                 <td><a class="btn btn-primary btn-space-down" href="/app/book/${book.id}">Details</a>
                 <sec:authorize access="hasRole('ADMIN')">
-
                     <a class="btn btn-danger" href="/app/delete/${book.id}" onclick="return confirm('Are you sure you want to delete ${book.title}?')">Delete</a></td>
                  </sec:authorize>
             </tr>

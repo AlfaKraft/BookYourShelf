@@ -9,7 +9,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Users list</title>
+    <title>Users list - BookYourShelf - Tieto</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/users_list.css">
 </head>
 <body>
 <jsp:include page="include/header.jsp"/>
@@ -19,7 +20,7 @@
     <div class="container-table100">
         <div class="wrap-table100">
             <div class="table100">
-    <h2>Users list</h2>
+                <h2><span>Users list</span></h2>
     <table>
         <thead>
         <tr class="table-head">
@@ -32,8 +33,10 @@
 <c:forEach var="user" items="${users}">
         <tr>
             <td>${user.firstName} ${user.lastName}</td>
-            <td><a class="btn btn-info" href="/app/user/edit/${user.id}">Edit</a></td>
-            <td><a class="btn btn-danger" href="/app/user/delete/${user.id}" onclick="return confirm('Are you sure you want to remove ${user.firstName} ${user.lastName}?')">Remove</a></td>
+            <td class="btn-pstn-users">
+                <a class="btn btn-info" href="/app/user/edit/${user.id}">Edit</a>
+                <a class="btn btn-danger" href="/app/user/delete/${user.id}" onclick="return confirm('Are you sure you want to remove ${user.firstName} ${user.lastName}?')">Remove</a>
+            </td>
         </tr>
 </c:forEach>
         </tbody>

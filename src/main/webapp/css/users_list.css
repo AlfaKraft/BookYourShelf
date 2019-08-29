@@ -1,0 +1,5 @@
+@media screen and (max-width: 992px) {
+    table tbody tr td:nth-child(1):before {
+        content: "Full name";
+    }
+}

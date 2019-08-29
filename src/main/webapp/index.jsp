@@ -17,7 +17,7 @@
 
 
 <div>
-    <img class="bys_logo" src="css/img/byslogo.png" width="750" height="250">
+    <img class="bys_logo animated animatedFadeInUp fadeInUp" src="css/img/byslogo.png" width="750" height="250">
 </div>
 
 

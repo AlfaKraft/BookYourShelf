@@ -10,8 +10,22 @@ a:hover {
 li {
     list-style-type: none;
 }
+ h1 {
+    color: #0065a0;
+    width: 100%;
+    text-align: center;
+    line-height: 0.1em;
+    margin: 10px 0 20px 0;
+}
+h1 span {
+    padding:0 10px;
+}
+
 input#barcode {
     margin: 20px 0;
+}
+.container{
+    padding: 33px 30px;
 }
 .cover-photo {
     margin: 5px 0;
@@ -22,8 +36,12 @@ input#barcode {
 .book-btn-page {
     display: flex;
 }
-.space-down, .btn-space-down {
-    margin: 0 0 10px 0;
+.btn-size-books {
+    margin: 5px 0 10px 0;
+    padding: 6px 3px;
+}
+.space-down, .btn-space-down{
+    margin: 5px 0 10px 0;
 }
 .space-right {
     margin: 0 10px 0 0;
@@ -52,15 +70,13 @@ input#barcode {
 /* Borrowtable admin and booktable */
 
 #search-book, #search-user {
-
-     background-position: 10px 12px; /* Position the search icon */
-    background-repeat: no-repeat; /* Do not repeat the icon image */
+    background: url(/css/img/icons8-search-30.png) no-repeat scroll 5px 5px;
+    background-color: #fff;
     width: 100%; /* Full-width */
     font-size: 16px; /* Increase font-size */
-    padding: 12px 20px 12px 40px; /* Add some padding */
-    border: 1px solid #ddd; /* Add a grey border */
+    padding: 12px 20px 12px 60px; /* Add some padding */
     margin-bottom: 12px; /* Add some space below the input */
-
+    border-radius: 1rem;
 }
 
 #booktable, #borrowtable {
@@ -68,13 +84,6 @@ input#barcode {
     width: 100%; /* Full-width */
     font-size: 18px; /* Increase font-size */
 }
-
-#booktable th, #booktable td, #borrowtable th, #borrowtable td {
-    text-align: left; /* Left-align text */
-    padding: 12px; /* Add padding */
-}
-
-
 
 #booktable tr:hover, #borrowtable tr:hover ,.borrowtable:hover, .usersTable:hover {
     /* Add a grey background color to the table header and on hover */
@@ -85,8 +94,10 @@ input#barcode {
     padding: 5px 0;
 }
 
-.search-round {
-    border-radius: 1rem;
+input .search-round {
+    background: url(/css/img/icons8-search-30.png) no-repeat scroll 7px 7px;
+    padding-left:30px;
+
 }
 
 
@@ -117,8 +128,6 @@ table {
 
 .container-table100 {
     width: 100%;
-    min-height: 100vh;
-
     display: -webkit-box;
     display: -webkit-flex;
     display: -moz-box;
@@ -161,7 +170,7 @@ a:hover {
 }
 
 /* ------------------------------------ */
-h1,h2,h3,h4,h5,h6 {margin: 0px;}
+
 
 p {margin: 0px;}
 
@@ -233,7 +242,6 @@ table td.r, table th.r {
 
 
 .table100-head th{
-    font-family: OpenSans-Regular;
     font-size: 18px;
     color: #fff;
     line-height: 1.2;
@@ -245,9 +253,8 @@ tbody tr:nth-child(even) {
 }
 
 tbody tr {
-    font-family: OpenSans-Regular;
-    font-size: 15px;
-    color: #808080;
+    font-size: 18px;
+    color: #333333;
     line-height: 1.2;
     font-weight: unset;
 }
@@ -316,8 +323,7 @@ tbody tr:hover {
     }
 
     table tbody tr td:before {
-        font-family: OpenSans-Regular;
-        font-size: 14px;
+        font-size: 16px;
         color: #999999;
         line-height: 1.2;
         font-weight: unset;
@@ -327,26 +333,42 @@ tbody tr:hover {
         top: 0;
     }
 
-    table tbody tr td:nth-child(1):before {
-        content: "Title";
-    }
-    table tbody tr td:nth-child(2):before {
-        content: "Genre";
-    }
-    table tbody tr td:nth-child(3):before {
-        content: "Language";
-    }
-    table tbody tr td:nth-child(4):before {
-        content: "Status";
-    }
-    table tbody tr td:nth-child(5):before {
-        content: "Picture";
-    }
-    table tbody tr td:nth-child(6):before {
-        content: "About";
-    }
+
 }
 textarea:focus, input:focus {
     border-color: transparent !important;
 }
 
+/* Animation */
+@-webkit-keyframes fadeInUp {
+    from {
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+.animated {
+    animation-duration: 3s;
+    animation-fill-mode: both;
+    -webkit-animation-duration: 3s;
+    -webkit-animation-fill-mode: both
+}
+
+.animatedFadeInUp {
+    opacity: 0
+}
+
+.fadeInUp {
+    opacity: 0;
+    animation-name: fadeInUp;
+    -webkit-animation-name: fadeInUp;
+}
+.btn-pstn-users{
+    float: right;
+    margin-top: 5px;
+}
+.has-error{
+    color: #ff0000;
+}

@@ -47,9 +47,9 @@
                 <td>  <form:errors path="language"></form:errors></td>
             </tr>
             <tr>
-                <td>  <form:label path="year">Year</form:label></td>
-                <td>  <form:input class="form-control" placeholder="Year" path="year"/></td>
-                <td>  <form:errors path="year"></form:errors></td>
+                <td><form:label path="year">Year</form:label></td>
+                <td><form:input class="form-control" placeholder="Year" path="year"/></td>
+                <td><form:errors path="year"></form:errors></td>
             </tr>
             <tr>
                 <td>  <form:label path="author1">Author 1</form:label></td>

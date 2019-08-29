@@ -1,0 +1,7 @@
+.account-view{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: #5e5e5e 2px dotted;
+    font-size: 18px;
+    padding: 10px 0;
+}

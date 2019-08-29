@@ -10,7 +10,7 @@ function myFunction() {
         td = tr[i].getElementsByTagName("td")[0];
         title = tr[i].getElementsByTagName("td")[1];
         if (td || title) {
-            txtTitle = title.textContent || name.innerText;
+            txtTitle = title.textContent || title.innerText;
             txtValue = td.textContent || td.innerText;
             if (txtValue.toUpperCase().indexOf(filter) > -1 || txtTitle.toUpperCase().indexOf(filter) > -1)
             {

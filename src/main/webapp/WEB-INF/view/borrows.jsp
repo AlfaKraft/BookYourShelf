@@ -18,10 +18,10 @@
 <div class="limiter">
 
     <div class="container-table100">
+        <h1>All borrows</h1>
         <div class="wrap-table100">
             <div class="table100">
                 <input class="form-control search-round" id="search-user" type="text" onkeyup="myFunction()" placeholder="Search for a user...">
-
 
      <table id="borrowtable">
          <thead>

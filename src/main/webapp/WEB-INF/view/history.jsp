@@ -11,6 +11,7 @@
 <html>
 <head>
     <title>History</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/history.css" >
 </head>
 <body>
 <jsp:include page="include/header.jsp"/>
@@ -21,7 +22,7 @@
             <div class="table100">
     <h2>History</h2>
     <table>
-        <tr class="table-head">
+        <tr class="table-head ">
             <th>Book title</th>
             <th>Borrowed date</th>
             <th>Return date</th>

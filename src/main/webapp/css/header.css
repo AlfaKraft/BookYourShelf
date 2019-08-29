@@ -4,6 +4,7 @@
     font-size: 18px;
     margin-top: 25px;
     margin-bottom: 25px;
+    padding: 0;
 }
 .bg-nav-color {
     background: rgba(98,179,229, 0.8);

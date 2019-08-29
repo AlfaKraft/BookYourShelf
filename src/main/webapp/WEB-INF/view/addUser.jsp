@@ -67,8 +67,10 @@
 
         <spring:bind path="matchingPassword">
             <div class="form-group ${status.error ? 'has-error' : ''}">
+
                 <form:label path="matchingPassword">Repeat password</form:label>
                 <form:input type="password" path="matchingPassword" class="form-control" placeholder="Repeat password"></form:input>
+
             </div>
         </spring:bind>
 

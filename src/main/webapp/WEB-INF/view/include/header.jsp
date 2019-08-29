@@ -15,10 +15,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/header.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/mobile.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css">
-
 </head>
 <body>
 
@@ -26,7 +27,8 @@
     <div class="container menu-bar">
 
         <li>
-            <a href="/index.jsp">Home</a>
+
+            <a href="/index.jsp"><img src="${pageContext.request.contextPath}/css/img/bys_logo_white.png" height="auto" width="200"></a>
         </li>
         <li>
             <a href="/app/books">Books</a>
