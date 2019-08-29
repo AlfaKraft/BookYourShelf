@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -26,7 +27,6 @@ public interface BorrowDao extends JpaRepository<BorrowEnt, Long> {
     BorrowEnt findBorrowEntByDateBrought(LocalDate dateBrought);
     BorrowEnt save(BorrowDto borrow);
     List<BorrowEnt> findBorrowEntByDateToBringBeforeAndDateBroughtIsNull(Date localDate);
-
-
+    List<BorrowEnt> findBorrowEntByDateToBringIsBetweenAndDateBroughtIsNull(Date localDate1, Date localDate2);
 
 }
