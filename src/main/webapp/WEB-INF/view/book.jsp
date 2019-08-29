@@ -36,10 +36,10 @@
 
             </div>
             <div class="col-md-4">
-                <c:if test="${book.cover==null}">
+                <c:if test="${book.cover==null || book.cover.length() == 0}">
                     <img src="https://media.istockphoto.com/photos/open-book-picture-id495477978" height="200" width="200">
                 </c:if>
-                <c:if test="${book.cover!=null}">
+                <c:if test="${book.cover!=null && book.cover.length() != 0}">
                     <img src="/img/${book.cover}" height="200" width="200">
                 </c:if>
 

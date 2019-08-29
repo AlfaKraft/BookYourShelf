@@ -1,5 +1,6 @@
 package com.tieto.bookyourshelf.library.dao.entityes;
 
+import java.sql.Blob;
 import java.util.Set;
 
 import javax.persistence.*;

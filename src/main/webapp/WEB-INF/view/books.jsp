@@ -60,10 +60,10 @@
                         <td>${book.status==true ? "<img width='30px' height='30px' src='https://upload.wikimedia.org/wikipedia/en/f/fb/Yes_check.svg'>" :
                                 "<img width='30px' height='30px' src='https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/No_Cross.svg/1024px-No_Cross.svg.png'>"}</td>
                         <td>
-                            <c:if test="${book.cover==null}">
+                            <c:if test="${book.cover==null || book.cover.length() == 0}">
                                 <img src="https://media.istockphoto.com/photos/open-book-picture-id495477978" height="200" width="200">
                             </c:if>
-                            <c:if test="${book.cover!=null}">
+                            <c:if test="${book.cover!=null && book.cover.length() != 0}">
                                 <img src="/img/${book.cover}" height="200" width="200">
                             </c:if>
                         </td>
