@@ -20,7 +20,7 @@
     <div class="container-table100">
         <div class="wrap-table100">
             <div class="table100">
-    <h2>History</h2>
+    <h1>History</h1>
     <table>
         <tr class="table-head ">
             <th>Book title</th>

@@ -35,10 +35,7 @@
         </li>
         <sec:authorize access="hasRole('USER')">
         <li>
-            <a href="/app/scanBook">Borrow</a>
-        </li>
-        <li>
-            <a href="/app/scanBook">Return</a>
+            <a href="/app/scanBook">Borrow/Return</a>
         </li>
         <li>
             <a href="/app/history">History</a>

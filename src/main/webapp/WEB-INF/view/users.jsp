@@ -20,7 +20,7 @@
     <div class="container-table100">
         <div class="wrap-table100">
             <div class="table100">
-                <h2><span>Users list</span></h2>
+                <h1><span>Users list</span></h1>
     <table>
         <thead>
         <tr class="table-head">

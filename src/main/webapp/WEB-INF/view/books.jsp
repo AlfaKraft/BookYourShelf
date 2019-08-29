@@ -58,7 +58,7 @@
         <c:forEach var="book" items="${books}" >
 
             <tr>
-                <td class="mobile_hide_btitle">${book.title}</td>
+                <td class="mobile_btitle book-title-font">${book.title}</td>
                 <td class="mobile_hide">${book.genre}</td>
                 <td class="mobile_hide">${book.language}</td>
                 <td class="mobile_hide_tblt">${book.year}</td>
@@ -66,10 +66,10 @@
                         "<img width='40px' height='40px' src='/css/img/icons8-return-book-64.png' alt='book is taken' title='Book is taken'>"}</td>
                 <td>
                     <c:if test="${book.cover==null || book.cover.length() == 0}">
-                    <img src="https://media.istockphoto.com/photos/open-book-picture-id495477978"  width="125" height="200">
+                    <img class="cover-photo" src="https://media.istockphoto.com/photos/open-book-picture-id495477978"  width="125" height="200">
                 </c:if>
                     <c:if test="${book.cover!=null && book.cover.length() != 0}">
-                        <img src="/img/${book.cover}" height="200" width="125">
+                        <img class="cover-photo" src="/img/${book.cover}" height="200" width="125">
                     </c:if>
                 </td>
                 <td><a class="btn btn-primary btn-space-down" href="/app/book/${book.id}">Details</a>

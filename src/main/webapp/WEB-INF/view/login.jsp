@@ -26,7 +26,7 @@
     </div>
 <div class="col-md-6">
         <form action='<spring:url value="/app/loginAction"/>' method="post">
-        <h2>Log in</h2>
+        <h1>Log in</h1>
         <div class="form-group">
             <label>E-mail</label>
                 <input class="form-control" type="text" name="username" placeholder="E-mail">

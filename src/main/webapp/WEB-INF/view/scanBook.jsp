@@ -17,20 +17,16 @@
 
 <jsp:include page="include/header.jsp"/>
 <div class="container">
-
-<h3>Identify book - show the barcode</h3>
-
-
 <div class="row">
 
     <div class="col-md-8" id="scanner-container">
         <!-- Div to show the scanner-->
     </div>
     <div class="col-md-4">
-        <input class="btn btn-secondary" type="button" id="btn" value="Start/Stop the scanner" />
-        <form action="/app/search" method="post">
-            Barcode : <input class="barcode-space" type="text" name="barcode" id="barcode"><br>
-            <input class="btn btn-success" type="submit" value="Continue">
+
+        <form  id="btn" action="/app/search" method="post">
+            <h3 style="color:#0065a0">Identify book - show or scan the barcode</h3> <input class="barcode-space form-control" type="text" name="barcode" id="barcode"><br>
+            <input class="btn btn-primary" type="submit" value="Continue">
             <c:if test="${not empty errorMessage}">${errorMessage}</c:if>
         </form>
     </div>

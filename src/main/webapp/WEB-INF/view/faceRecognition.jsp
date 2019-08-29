@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Face recognition</title>
+    <title>Face recognition - BookYourShelf- Tieto</title>
 
 </head>
 <body>

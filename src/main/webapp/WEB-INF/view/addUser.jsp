@@ -28,7 +28,7 @@
         </div>
         <div class="col-md-6">
     <form:form method="POST" action="/app/user/save" modelAttribute="user" enctype="multipart/form-data" class="form-signin">
-        <h2 class="form-signin-heading">Create your account</h2>
+        <h1 class="form-signin-heading">Create your account</h1>
         <form:hidden path="id" />
         <spring:bind path="firstName">
             <div class="form-group ${status.error ? 'has-error' : ''}">
@@ -78,13 +78,13 @@
 
         <spring:bind path="pictureFile">
             <div class="form-group ${status.error ? 'has-error' : ''}">
-                <form:label path="pictureFile">Add profile picture</form:label>
-                <form:input type="file" path="pictureFile" class="form-control" placeholder="Picture"></form:input>
+                <form:label class="custom-file-upload" path="pictureFile">Add profile picture  <img src="/css/img/cloud-computing.png"></form:label>
+                <form:input type="file" path="pictureFile" class="form-control " placeholder="Picture"></form:input>
             </div>
         </spring:bind>
 
 
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+        <button class="btn btn-lg btn-primary btn-block " type="submit">Submit</button>
     </form:form>
         </div>
 
