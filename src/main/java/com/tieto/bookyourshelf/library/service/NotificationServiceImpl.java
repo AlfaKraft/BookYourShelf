@@ -40,7 +40,7 @@ public class NotificationServiceImpl implements NotificationService {
         this.templateMessage = templateMessage;
     }
 
-    @Scheduled(cron="0 18 14 ? * MON-FRI")
+    @Scheduled(cron="0 38 14 ? * MON-FRI")
     public void sendNotification() {
 
         try {
@@ -109,7 +109,8 @@ public class NotificationServiceImpl implements NotificationService {
             BookDto book = bookService.getBookById(borrowsWithDueDatesExpired.get(i).getIdBook());
             msg.setTo(user.getEmail());
             msg.setText(
-                    "Dear user, deadline is coming" +
+                    "Dear " +user.getFirstName()+ "," +
+                            "deadline is coming" +
                             "\n\n" +
                             "please return " +
                             book.getTitle()+"!"+
