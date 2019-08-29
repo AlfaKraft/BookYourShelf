@@ -14,9 +14,24 @@
 </head>
 <body>
 <jsp:include page="include/header.jsp"/>
+
+<div class="container">
+    <div class="row">
 <video id="video" width="640" height="480" autoplay></video>
-<button id="snap">Snap Photo</button>
+<button id="snap" class="btn btn-lg btn-primary btn-block">Snap Photo</button>
 <canvas id="canvas" width="640" height="480"></canvas>
+
+
+
+<form method="POST" action="/app/uploadImage" >
+    <input type="hidden" name="imageBase64" id="imageBase64"/><br/><br/>
+    <input type="submit" value="Identify" class="btn btn-lg btn-primary btn-block"/>
+</form>
+
+    </div>
+</div>
+<jsp:include page="include/footer.jsp"/>
+
 
 <script>
     var canvas = document.getElementById('canvas');
@@ -43,12 +58,5 @@
         document.getElementById('imageBase64').value = dataURL;
     });
 </script>
-
-
-<form method="POST" action="/app/uploadImage" >
-    <input type="hidden" name="imageBase64" id="imageBase64"/><br/><br/>
-    <input type="submit" value="Identify" />
-</form>
-<jsp:include page="include/footer.jsp"/>
 </body>
 </html>
