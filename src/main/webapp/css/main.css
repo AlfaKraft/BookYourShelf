@@ -392,6 +392,7 @@ input[type="file"] {
     width: 40%;
 }
 
+
 .inputGroup {
     background-color: #fff;
     display: block;
@@ -482,5 +483,16 @@ input[type="file"] {
 .book-cover-pos{
     display: flex;
     justify-content: flex-end;
+}
+
+
+.face-rec-align{
+    text-align: center;
+}
+.btn-face-rec{
+    float: right;
+}
+#identify{
+
 }
 

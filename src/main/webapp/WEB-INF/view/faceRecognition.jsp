@@ -18,11 +18,18 @@
 <div class="container">
 
     <div class="row">
-        <div class="col-md-10">
-            <button id="snap" class="btn btn-lg btn-primary btn-block">Snap Photo</button>
+        <div class="face-rec-align">
+            <div class="btn-face-rec">
+            <button id="snap" class="btn btn-primary faceRecBtn">Snap Photo</button>
+            <form id="identify" method="POST" action="/app/uploadImage" >
+                <input type="hidden" name="imageBase64" id="imageBase64"/><br/>
+
+                <input  type="submit" value="Identify" class="btn btn-primary"/>
+            </form>
+            </div>
 <video id="video" width="640" height="480" autoplay></video>
 
-<canvas id="canvas" width="640" height="480"></canvas>
+<canvas id="canvas" width="640" height="480" style="margin-right: 110px;"></canvas>
 
 
         </div>
@@ -30,14 +37,8 @@
 
 
 
-    <div class="col-md-2">
-        <form method="POST" action="/app/uploadImage" >
+    <div class="">
 
-    <input type="hidden" name="imageBase64" id="imageBase64"/><br/><br/>
-
-
-    <input type="submit" value="Identify" class="btn btn-lg btn-primary btn-block"/>
-        </form>
     </div>
 
     </div>
@@ -48,6 +49,14 @@
 
 
 <script>
+    $(document).ready(function(){
+        $("#identify").hide();
+        $(".faceRecBtn").click(function(e) {
+            $("#identify").show();
+            $(".faceRecBtn").show();
+
+        });
+    });
     var canvas = document.getElementById('canvas');
     var context = canvas.getContext('2d');
     var video = document.getElementById('video');
@@ -71,6 +80,10 @@
         // var canvas = document.getElementById('canvas');
         document.getElementById('imageBase64').value = dataURL;
     });
+
+
+
 </script>
+
 </body>
 </html>

@@ -43,7 +43,7 @@ public class NotificationServiceImpl implements NotificationService {
     }
 
 
-    @Scheduled(cron="0 49 14 ? * MON-FRI")
+    @Scheduled(cron="0 25 16 ? * MON-FRI")
     public void sendNotification() {
 
         try {
