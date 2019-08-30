@@ -79,7 +79,8 @@
         <spring:bind path="pictureFile">
             <div class="form-group ${status.error ? 'has-error' : ''}">
                 <form:label class="custom-file-upload" path="pictureFile">Add profile picture  <img src="/css/img/cloud-computing.png"></form:label>
-                <form:input type="file" path="pictureFile" class="form-control " placeholder="Picture"></form:input>
+                <form:input type="file" path="pictureFile" class="form-control picture-user " placeholder="Picture"></form:input>
+                <p class="file-return"></p>
             </div>
         </spring:bind>
 
@@ -97,7 +98,26 @@
 
 
 </body>
+<script>
+    document.querySelector("html").classList.add('js');
 
+    var fileInput  = document.querySelector( ".picture-user" ),
+        button     = document.querySelector( ".custom-file-upload" ),
+        the_return = document.querySelector(".file-return");
+
+    button.addEventListener( "keydown", function( event ) {
+        if ( event.keyCode == 13 || event.keyCode == 32 ) {
+            fileInput.focus();
+        }
+    });
+    button.addEventListener( "click", function( event ) {
+        fileInput.focus();
+        return false;
+    });
+    fileInput.addEventListener( "change", function( event ) {
+        the_return.innerHTML = this.value;
+    });
+</script>
 </html>
 
 

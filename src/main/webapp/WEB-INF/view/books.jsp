@@ -72,7 +72,7 @@
                         <img class="cover-photo" src="/img/${book.cover}" height="200" width="125">
                     </c:if>
                 </td>
-                <td><a class="btn btn-primary btn-space-down" href="/app/book/${book.id}">Details</a>
+                <td><a class="btn btn-primary btn-space-down detail-btn" href="/app/book/${book.id}">Details</a>
                 <sec:authorize access="hasRole('ADMIN')">
                     <a class="btn btn-danger" href="/app/delete/${book.id}" onclick="return confirm('Are you sure you want to delete ${book.title}?')">Delete</a></td>
                  </sec:authorize>
