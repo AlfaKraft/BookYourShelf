@@ -16,12 +16,15 @@
 <body>
 <jsp:include page="include/header.jsp"/>
 <div class="limiter">
-
     <div class="container-table100">
         <div class="wrap-table100">
             <div class="table100">
     <h1>History</h1>
-    <table>
+                <div class="inputGroup">
+                    <input id="filterBorrowed" name="filterBorrowed" type="checkbox" onclick="filtered()"/>
+                    <label for="filterBorrowed">Currently in your possession</label>
+                </div>
+    <table id="historytable">
         <tr class="table-head ">
             <th>Book title</th>
             <th>Borrowed date</th>
@@ -46,5 +49,8 @@
 
 <jsp:include page="include/footer.jsp"/>
 
+<script src="${pageContext.request.contextPath}/js/filterBorrowed.js">
+
+</script>
 </body>
 </html>
