@@ -391,3 +391,12 @@ input[type="file"] {
     font-weight: bolder;
     width: 40%;
 }
+.face-rec-align{
+    text-align: center;
+}
+.btn-face-rec{
+    float: right;
+}
+#identify{
+
+}
