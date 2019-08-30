@@ -64,7 +64,8 @@
                 </div>
                 <div class="form-group">
                     <form:label for="file-upload" class="custom-file-upload" path="coverImage">Cover upload <img src="/css/img/cloud-computing.png"></form:label>
-                    <form:input id="file-upload" class="btn btn-primary" type="file" path="coverImage"/>
+                    <form:input id="file-upload" class="btn btn-primary cover-img-book" type="file" path="coverImage"/>
+                    <p class="file-return"></p>
                 </div>
                  <input class="btn btn-primary btn-block" type="submit" value="Add">
 
@@ -79,4 +80,24 @@
 
 
 </body>
+<script>
+    document.querySelector("html").classList.add('js');
+
+    var fileInput  = document.querySelector( ".cover-img-book" ),
+        button     = document.querySelector( ".custom-file-upload" ),
+        the_return = document.querySelector(".file-return");
+
+    button.addEventListener( "keydown", function( event ) {
+        if ( event.keyCode == 13 || event.keyCode == 32 ) {
+            fileInput.focus();
+        }
+    });
+    button.addEventListener( "click", function( event ) {
+        fileInput.focus();
+        return false;
+    });
+    fileInput.addEventListener( "change", function( event ) {
+        the_return.innerHTML = this.value;
+    });
+</script>
 </html>

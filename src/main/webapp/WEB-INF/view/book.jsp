@@ -17,7 +17,8 @@
     <div class="container">
         <h1>About your chosen book</h1>
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-2"></div>
+            <div class="col-md-4">
                 <p>Title: <b>${book.title}</b></p>
                 <p>ISBNcode: ${book.isbnCode}</p>
                 <p>Genre: ${book.genre}</p>
@@ -25,7 +26,7 @@
                 <p>Year: ${book.year}</p>
 
                 <c:if test="${book.borrower != null}">
-                    <p>Currently in the hands of: ${book.borrower}</p>
+                    <p>Currently in the hands of: <b>${book.borrower}</b></p>
                 </c:if>
                 <p>Status: ${book.status==true ? "<img width='30px' height='30px' src='/css/img/icons8-book-shelf-64.png' alt='book in shelf' title='This book is in shelf'>" :
                         "<img width='30px' height='30px' src='/css/img/icons8-return-book-64.png' alt='book is taken' title='Book is taken'>"}</p>
@@ -35,8 +36,26 @@
                             <p>Author ${i.index +1}: ${item.authorName}</p>
                         </c:if>
                     </c:forEach>
+                <br>
+                <sec:authorize access="hasRole('USER')">
+                    <div class="book-btn-page">
+
+                        <c:if test="${book.status == true}">
+                            <li><a class="btn btn-primary" href="/app/lendBook/${book.id}">Borrow</a></li>
+                        </c:if>
+
+                        <c:if test="${book.status == false}">
+                            <li><a class="btn btn-primary" href="/app/returnBook/${book.id}">Return</a></li>
+                        </c:if>
+                    </div>
+                </sec:authorize>
+
+                <br>
+
+                <a class="btn btn-outline-primary" href="${pageContext.request.contextPath}/app/books">All books</a>
+
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 book-cover-pos">
                 <c:if test="${book.cover==null || book.cover.length() == 0}">
                     <img src="https://media.istockphoto.com/photos/open-book-picture-id495477978" height="200" width="125">
                 </c:if>
@@ -45,23 +64,12 @@
                 </c:if>
 
             </div>
-        </div>
-        <sec:authorize access="hasRole('USER')">
-            <div class="book-btn-page">
+            <div class="col-md-2">
 
-                <c:if test="${book.status == true}">
-                <li><a class="btn btn-outline-primary" href="/app/lendBook/${book.id}">Borrow</a></li>
-                </c:if>
-
-                <c:if test="${book.status == false}">
-                <li><a class="btn btn-outline-primary" href="/app/returnBook/${book.id}">Return</a></li>
-                </c:if>
             </div>
-        </sec:authorize>
 
-            <br>
+        </div>
 
-                <a class="btn btn-primary" href="${pageContext.request.contextPath}/app/books">All books</a>
 
 
     </div>

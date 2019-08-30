@@ -3,11 +3,15 @@
     .nav_mobile_desk{
         display: none;
     }
+    .book-cover-pos{
+        justify-content: center;
+    }
 }
 @media screen and (min-width: 767px) {
     .nav_mobile_mobile{
         display: none;
     }
+
 }
 @media screen and (max-width: 992px) {
     .table-head{
@@ -24,37 +28,17 @@
         width: auto;
     }
 }
-
-/*
-@media screen and (max-width: 767px) {
-    th {
-        font-size: 14px;
+@media screen and (max-width: 500px){
+    h1{
+        font-size: 24px;
     }
-    td{
-        font-size: 12px;
-    }
-    th.mobile_hide, td.mobile_hide{
-        display: none;
+    .book-cover-pos{
+        margin-top: 10px;
     }
 }
-
-@media screen and (max-width: 800px) {
-    .mobile_hide_tblt{
-        display: none;
+@media screen and (min-width: 1047px){
+    .detail-btn{
+        margin: 0;
     }
-}
-@media screen and (max-width: 430px) {
-    .mobile_hide_btitle{
-        display: none;
-    }
-}
-@media screen and (max-width: 335px) {
-    .cover-photo{
-        width: 100px;
-        height: 175px;
-    }
-}
 
-
-
- */
+}

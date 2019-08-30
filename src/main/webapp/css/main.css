@@ -391,6 +391,7 @@ input[type="file"] {
     font-weight: bolder;
     width: 40%;
 }
+
 .inputGroup {
     background-color: #fff;
     display: block;
@@ -473,7 +474,13 @@ input[type="file"] {
 *,
 *::before,
 *::after {
-    box-sizing: inherit;
+
 }
 
+
+
+.book-cover-pos{
+    display: flex;
+    justify-content: flex-end;
+}
 
